@@ -1,6 +1,7 @@
 package unsa.etf.rpr.domain;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * Bean for person
@@ -42,6 +43,28 @@ public class Person implements Serializable {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Person)) return false;
+        Person person = (Person) o;
+        return getPersonId() == person.getPersonId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getPersonId());
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "personId=" + personId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                '}';
     }
 
 }
