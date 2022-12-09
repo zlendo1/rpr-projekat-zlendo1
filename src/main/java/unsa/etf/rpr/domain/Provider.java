@@ -2,11 +2,7 @@ package unsa.etf.rpr.domain;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Objects;
-
-import static java.time.format.DateTimeFormatter.ofLocalizedDate;
-import static java.time.format.FormatStyle.FULL;
 
 /**
  * Bean for provider
@@ -48,6 +44,28 @@ public class Provider implements Serializable {
 
     public void setContractExpiry(LocalDateTime contractExpiry) {
         this.contractExpiry = contractExpiry;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Provider)) return false;
+        Provider provider = (Provider) o;
+        return getProviderId() == provider.getProviderId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getProviderId());
+    }
+
+    @Override
+    public String toString() {
+        return "Provider{" +
+                "providerId=" + providerId +
+                ", contractStart=" + contractStart +
+                ", contractExpiry=" + contractExpiry +
+                '}';
     }
 
 }
