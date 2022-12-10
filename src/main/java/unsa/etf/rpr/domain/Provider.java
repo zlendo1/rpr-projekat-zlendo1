@@ -9,25 +9,25 @@ import java.util.Objects;
  */
 public class Provider implements Serializable {
 
-    private int providerId;
+    private Person person;
     private LocalDateTime contractStart;
     private LocalDateTime contractExpiry;
 
     public Provider() {
     }
 
-    public Provider(int providerId, LocalDateTime contractStart, LocalDateTime contractExpiry) {
-        this.providerId = providerId;
+    public Provider(Person person, LocalDateTime contractStart, LocalDateTime contractExpiry) {
+        this.person = person;
         this.contractStart = contractStart;
         this.contractExpiry = contractExpiry;
     }
 
-    public int getProviderId() {
-        return providerId;
+    public Person getPerson() {
+        return person;
     }
 
-    public void setProviderId(int providerId) {
-        this.providerId = providerId;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
     public LocalDateTime getContractStart() {
@@ -51,21 +51,20 @@ public class Provider implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Provider)) return false;
         Provider provider = (Provider) o;
-        return getProviderId() == provider.getProviderId();
+        return Objects.equals(getPerson(), provider.getPerson());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getProviderId());
+        return Objects.hash(getPerson());
     }
 
     @Override
     public String toString() {
         return "Provider{" +
-                "providerId=" + providerId +
+                "person=" + person +
                 ", contractStart=" + contractStart +
                 ", contractExpiry=" + contractExpiry +
                 '}';
     }
-
 }
