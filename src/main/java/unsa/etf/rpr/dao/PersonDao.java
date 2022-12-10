@@ -10,14 +10,16 @@ import java.util.List;
 public interface PersonDao extends Dao<Person> {
 
     /**
+     * Search people in DB based on their first names
      * @param firstName First name of a person
-     * @return List of people with the same first name
+     * @return List of people
      */
     List<Person> searchByFirstName(String firstName);
 
     /**
+     * Search people in DB based on their last name
      * @param lastName Last name of a person
-     * @return List of people with the same last name
+     * @return List of people
      */
     List<Person> searchByLastName(String lastName);
 
