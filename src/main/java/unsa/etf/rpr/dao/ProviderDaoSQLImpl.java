@@ -10,34 +10,74 @@ public class ProviderDaoSQLImpl implements ProviderDao {
 
     private Connection connection;
 
+    /**
+     * Establishes connection to the DB
+     *
+     */
     public ProviderDaoSQLImpl() {
     }
 
+
+    /**
+     * Get entity from database coresponding to its primary key
+     *
+     * @param id primary key of entity
+     * @return corresponding entity
+     */
     @Override
     public Provider getById(int id) {
         return null;
     }
 
+    /**
+     * Saves entity into database
+     *
+     * @param item bean for saving into database
+     * @return updated version of the bean
+     */
     @Override
     public Provider add(Provider item) {
         return null;
     }
 
+    /**
+     * Updates entity from database based on its primary key
+     *
+     * @param item bean which we will update (id must be populated)
+     * @return updated version of the bean
+     */
     @Override
     public Provider update(Provider item) {
         return null;
     }
 
+    /**
+     * Hard delete of entity with the corseponding primary key
+     *
+     * @param id primary key of the entity
+     */
     @Override
     public void delete(int id) {
 
     }
 
+    /**
+     * Lists all entites from the database
+     *
+     * @return list of entities from the database
+     */
     @Override
     public List<Provider> getAll() {
         return null;
     }
 
+    /**
+     * Search providers in DB based on their contract validity in a time period
+     *
+     * @param begin Starting datetime (inclusive)
+     * @param end   Ending datetime (inclusive)
+     * @return List of providers
+     */
     @Override
     public List<Provider> getByDateRange(LocalDateTime begin, LocalDateTime end) {
         return null;
