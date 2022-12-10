@@ -2,9 +2,15 @@ package unsa.etf.rpr.dao;
 
 import unsa.etf.rpr.domain.Person;
 
+import java.sql.Connection;
 import java.util.List;
 
 public class PersonDaoSQLImpl implements PersonDao {
+
+    private Connection connection;
+
+    public PersonDaoSQLImpl() {
+    }
 
     @Override
     public Person getById(int id) {
