@@ -40,7 +40,7 @@ public class Subscriber implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Subscriber)) return false;
         Subscriber that = (Subscriber) o;
-        return getPerson().equals(that.getPerson());
+        return Objects.equals(getPerson(), that.getPerson());
     }
 
     @Override
@@ -55,4 +55,5 @@ public class Subscriber implements Serializable {
                 ", preferences='" + preferences + '\'' +
                 '}';
     }
+
 }
