@@ -176,7 +176,29 @@ public class SubscriberDaoSQLImpl implements SubscriberDao {
      * @return List of subscribers
      */
     @Override
-    public List<Subscriber> getByPreference(String preference) {
-        return null;
+    public List<Subscriber> getByPreference(String preference) throws DBHandleException {
+        List<Subscriber> subscriberList = new ArrayList<>();
+
+        String query = "SELECT * FROM subscriber WHERE preferences LIKE Concat('%', ?, '%')";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                subscriberList.add(new Subscriber(
+                        new PersonDaoSQLImpl().getById(resultSet.getInt("subscriber_id")),
+                        resultSet.getString("preferences")
+                ));
+            }
+
+            resultSet.close();
+
+        } catch (Exception e) {
+            throw new DBHandleException(e);
+        }
+
+        return subscriberList;
     }
 }

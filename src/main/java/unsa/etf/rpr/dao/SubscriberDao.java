@@ -1,6 +1,7 @@
 package unsa.etf.rpr.dao;
 
 import unsa.etf.rpr.domain.Subscriber;
+import unsa.etf.rpr.exception.DBHandleException;
 
 import java.util.List;
 
@@ -14,5 +15,5 @@ public interface SubscriberDao extends Dao<Subscriber> {
      * @param preference Exam preference (only one)
      * @return List of subscribers
      */
-    List<Subscriber> getByPreference(String preference);
+    List<Subscriber> getByPreference(String preference) throws DBHandleException;
 }
