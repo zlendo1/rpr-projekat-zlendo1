@@ -191,8 +191,35 @@ public class ExamDaoSQLImpl implements ExamDao {
      * @return List of exams
      */
     @Override
-    public List<Exam> getByProvider(Provider provider) {
-        return null;
+    public List<Exam> getByProvider(Provider provider) throws DBHandleException {
+        List<Exam> subscriptionList = new ArrayList<>();
+
+        String query = "SELECT * FROM exam WHERE provider_id = ?";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setInt(1, provider.getPerson().getPersonId());
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                subscriptionList.add(new Exam(
+                        resultSet.getInt("exam_id"),
+                        new ProviderDaoSQLImpl().getById(resultSet.getInt("provider_id")),
+                        resultSet.getString("course_name"),
+                        resultSet.getTimestamp("exam_time"),
+                        resultSet.getString("answer_sheet")
+                ));
+            }
+
+            resultSet.close();
+
+        } catch (Exception e) {
+            throw new DBHandleException(e);
+        }
+
+        return subscriptionList;
     }
 
     /**
