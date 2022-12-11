@@ -5,6 +5,7 @@ import unsa.etf.rpr.domain.Provider;
 import unsa.etf.rpr.exception.DBHandleException;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProviderDaoSQLImpl implements ProviderDao {
@@ -147,8 +148,31 @@ public class ProviderDaoSQLImpl implements ProviderDao {
      * @return list of entities from the database
      */
     @Override
-    public List<Provider> getAll() {
-        return null;
+    public List<Provider> getAll() throws DBHandleException {
+        List<Provider> providerList = new ArrayList<>();
+
+        String query = "SELECT * FROM provider";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                providerList.add(new Provider(
+                        new PersonDaoSQLImpl().getById(resultSet.getInt("provider_id")),
+                        resultSet.getTimestamp("contract_start"),
+                        resultSet.getTimestamp("contract_expiry")
+                ));
+            }
+
+            resultSet.close();
+
+        } catch (SQLException e) {
+            throw new DBHandleException(e);
+        }
+
+        return providerList;
     }
 
     /**
