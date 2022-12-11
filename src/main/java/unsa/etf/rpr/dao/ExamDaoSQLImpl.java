@@ -3,7 +3,6 @@ package unsa.etf.rpr.dao;
 import unsa.etf.rpr.connector.MyConnection;
 import unsa.etf.rpr.domain.Exam;
 import unsa.etf.rpr.domain.Provider;
-import unsa.etf.rpr.domain.Subscription;
 import unsa.etf.rpr.exception.DBHandleException;
 
 import java.sql.*;
@@ -11,6 +10,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * SQL implementation of ExamDao
+ *
+ */
 public class ExamDaoSQLImpl implements ExamDao {
 
     private final Connection connection;
@@ -28,6 +31,7 @@ public class ExamDaoSQLImpl implements ExamDao {
      *
      * @param id primary key of entity
      * @return corresponding entity
+     * @throws DBHandleException In case of any DB handling error
      */
     @Override
     public Exam getById(int id) throws DBHandleException {
@@ -66,6 +70,7 @@ public class ExamDaoSQLImpl implements ExamDao {
      *
      * @param item bean for saving into database
      * @return updated version of the bean
+     * @throws DBHandleException In case of any DB handling error
      */
     @Override
     public Exam add(Exam item) throws DBHandleException {
@@ -101,6 +106,7 @@ public class ExamDaoSQLImpl implements ExamDao {
      *
      * @param item bean which we will update (id must be populated)
      * @return updated version of the bean
+     * @throws DBHandleException In case of any DB handling error
      */
     @Override
     public Exam update(Exam item) throws DBHandleException {
@@ -130,6 +136,7 @@ public class ExamDaoSQLImpl implements ExamDao {
      * Hard delete of entity with the corseponding primary key
      *
      * @param id primary key of the entity
+     * @throws DBHandleException In case of any DB handling error
      */
     @Override
     public void delete(int id) throws DBHandleException {
@@ -153,6 +160,7 @@ public class ExamDaoSQLImpl implements ExamDao {
      * Lists all entites from the database
      *
      * @return list of entities from the database
+     * @throws DBHandleException In case of any DB handling error
      */
     @Override
     public List<Exam> getAll() throws DBHandleException {
@@ -189,6 +197,7 @@ public class ExamDaoSQLImpl implements ExamDao {
      *
      * @param provider The provider that provided the exams
      * @return List of exams
+     * @throws DBHandleException In case of any DB handling error
      */
     @Override
     public List<Exam> getByProvider(Provider provider) throws DBHandleException {
@@ -227,6 +236,7 @@ public class ExamDaoSQLImpl implements ExamDao {
      *
      * @param courseName Name of the course the exam belongs to
      * @return List of exams
+     * @throws DBHandleException In case of any DB handling error
      */
     @Override
     public List<Exam> getByCourseName(String courseName) throws DBHandleException {
@@ -265,6 +275,7 @@ public class ExamDaoSQLImpl implements ExamDao {
      *
      * @param examTime Date and time of the exam
      * @return List of exams
+     * @throws DBHandleException In case of any DB handling error
      */
     @Override
     public List<Exam> getByExamTime(Date examTime) throws DBHandleException {
