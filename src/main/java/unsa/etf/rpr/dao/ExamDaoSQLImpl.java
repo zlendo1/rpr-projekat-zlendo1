@@ -5,9 +5,7 @@ import unsa.etf.rpr.domain.Exam;
 import unsa.etf.rpr.domain.Provider;
 import unsa.etf.rpr.exception.DBHandleException;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.Date;
 import java.util.List;
 
@@ -68,8 +66,32 @@ public class ExamDaoSQLImpl implements ExamDao {
      * @return updated version of the bean
      */
     @Override
-    public Exam add(Exam item) {
-        return null;
+    public Exam add(Exam item) throws DBHandleException {
+        String insert = "INSERT INTO subscriber(provider_id, course_name, exam_time, answer_sheet) VALUES(?, ?, ?, ?. ?)";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+
+            preparedStatement.setInt(1, item.getProvider().getPerson().getPersonId());
+            preparedStatement.setString(2, item.getCourseName());
+            preparedStatement.setTimestamp(3, (Timestamp) item.getExamTime());
+            preparedStatement.setString(4, item.getAnswerSheet());
+
+            preparedStatement.executeUpdate();
+
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+
+            resultSet.next();
+
+            item.setExamId(resultSet.getInt(1));
+
+            resultSet.close();
+
+            return item;
+
+        } catch (Exception e) {
+            throw new DBHandleException(e);
+        }
     }
 
     /**
