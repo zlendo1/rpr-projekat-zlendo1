@@ -79,7 +79,7 @@ public class ProviderDaoSQLImpl implements ProviderDao {
 
             resultSet.next();
 
-            item.setPerson(new PersonDaoSQLImpl().getById(resultSet.getInt("provider_id")));
+            item.setPerson(new PersonDaoSQLImpl().getById(resultSet.getInt(1)));
 
             resultSet.close();
 

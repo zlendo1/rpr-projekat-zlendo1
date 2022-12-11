@@ -76,7 +76,7 @@ public class SubscriberDaoSQLImpl implements SubscriberDao {
 
             resultSet.next();
 
-            item.setPerson(new PersonDaoSQLImpl().getById(resultSet.getInt("subscriber_id")));
+            item.setPerson(new PersonDaoSQLImpl().getById(resultSet.getInt(1)));
 
             resultSet.close();
 
