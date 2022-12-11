@@ -4,7 +4,7 @@ import unsa.etf.rpr.connector.MyConnection;
 import unsa.etf.rpr.domain.Provider;
 import unsa.etf.rpr.exception.DBHandleException;
 
-import java.sql.Connection;
+import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -28,7 +28,32 @@ public class ProviderDaoSQLImpl implements ProviderDao {
      * @return corresponding entity
      */
     @Override
-    public Provider getById(int id) {
+    public Provider getById(int id) throws DBHandleException {
+        String query = "SELECT * FROM provider WHERE provider_id = ?";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setInt(1, id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                Provider provider = new Provider(
+                        new PersonDaoSQLImpl().getById(resultSet.getInt("provider_id")),
+                        resultSet.getTimestamp("contract_start"),
+                        resultSet.getTimestamp("contract_expiry")
+                );
+
+                resultSet.close();
+
+                return provider;
+            }
+
+        } catch (Exception e) {
+            throw new DBHandleException(e);
+        }
+
         return null;
     }
 
