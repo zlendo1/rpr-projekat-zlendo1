@@ -40,8 +40,8 @@ public class ProviderDaoSQLImpl implements ProviderDao {
             if (resultSet.next()) {
                 Provider provider = new Provider(
                         new PersonDaoSQLImpl().getById(resultSet.getInt("provider_id")),
-                        resultSet.getDate("contract_start"),
-                        resultSet.getDate("contract_expiry")
+                        resultSet.getTimestamp("contract_start"),
+                        resultSet.getTimestamp("contract_expiry")
                 );
 
                 resultSet.close();
@@ -70,8 +70,8 @@ public class ProviderDaoSQLImpl implements ProviderDao {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
 
-            preparedStatement.setDate(1, (Date) item.getContractStart());
-            preparedStatement.setDate(2, (Date) item.getContractExpiry());
+            preparedStatement.setTimestamp(1, (Timestamp) item.getContractStart());
+            preparedStatement.setTimestamp(2, (Timestamp) item.getContractExpiry());
 
             preparedStatement.executeUpdate();
 
@@ -104,8 +104,8 @@ public class ProviderDaoSQLImpl implements ProviderDao {
             PreparedStatement preparedStatement = connection.prepareStatement(update);
 
             preparedStatement.setInt(3, item.getPerson().getPersonId());
-            preparedStatement.setDate(1, (Date) item.getContractStart());
-            preparedStatement.setDate(2, (Date) item.getContractExpiry());
+            preparedStatement.setTimestamp(1, (Timestamp) item.getContractStart());
+            preparedStatement.setTimestamp(2, (Timestamp) item.getContractExpiry());
 
             preparedStatement.executeUpdate();
 
