@@ -8,6 +8,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * SQL implmenetation of SubscriberDao
+ *
+ */
 public class SubscriberDaoSQLImpl implements SubscriberDao {
 
     private final Connection connection;
@@ -25,6 +29,7 @@ public class SubscriberDaoSQLImpl implements SubscriberDao {
      *
      * @param id primary key of entity
      * @return corresponding entity
+     * @throws DBHandleException In case of any DB handling error
      */
     @Override
     public Subscriber getById(int id) throws DBHandleException {
@@ -60,6 +65,7 @@ public class SubscriberDaoSQLImpl implements SubscriberDao {
      *
      * @param item bean for saving into database
      * @return updated version of the bean
+     * @throws DBHandleException In case of any DB handling error
      */
     @Override
     public Subscriber add(Subscriber item) throws DBHandleException {
@@ -92,6 +98,7 @@ public class SubscriberDaoSQLImpl implements SubscriberDao {
      *
      * @param item bean which we will update (id must be populated)
      * @return updated version of the bean
+     * @throws DBHandleException In case of any DB handling error
      */
     @Override
     public Subscriber update(Subscriber item) throws DBHandleException {
@@ -118,6 +125,7 @@ public class SubscriberDaoSQLImpl implements SubscriberDao {
      * Hard delete of entity with the corseponding primary key
      *
      * @param id primary key of the entity
+     * @throws DBHandleException In case of any DB handling error
      */
     @Override
     public void delete(int id) throws DBHandleException {
@@ -141,6 +149,7 @@ public class SubscriberDaoSQLImpl implements SubscriberDao {
      * Lists all entites from the database
      *
      * @return list of entities from the database
+     * @throws DBHandleException In case of any DB handling error
      */
     @Override
     public List<Subscriber> getAll() throws DBHandleException {
@@ -174,6 +183,7 @@ public class SubscriberDaoSQLImpl implements SubscriberDao {
      *
      * @param preference Exam preference (only one)
      * @return List of subscribers
+     * @throws DBHandleException In case of any DB handling error
      */
     @Override
     public List<Subscriber> getByPreference(String preference) throws DBHandleException {
@@ -201,4 +211,5 @@ public class SubscriberDaoSQLImpl implements SubscriberDao {
 
         return subscriberList;
     }
+
 }
