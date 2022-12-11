@@ -41,6 +41,6 @@ public interface Dao<T> {
      * Lists all entites from the database
      * @return list of entities from the database
      */
-    List<T> getAll();
+    List<T> getAll() throws DBHandleException;
 
 }
