@@ -94,7 +94,23 @@ public class SubscriberDaoSQLImpl implements SubscriberDao {
      */
     @Override
     public Subscriber update(Subscriber item) throws DBHandleException {
-        return null;
+        String update = "UPDATE subscriber SET preferences = ? WHERE subscriber_id = ?";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(update);
+
+            preparedStatement.setInt(2, item.getPerson().getPersonId());
+            preparedStatement.setString(1, item.getPreferences());
+
+            preparedStatement.executeUpdate();
+
+            preparedStatement.close();
+
+            return item;
+
+        } catch (SQLException e) {
+            throw new DBHandleException(e);
+        }
     }
 
     /**
