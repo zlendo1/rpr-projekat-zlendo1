@@ -2,6 +2,7 @@ package unsa.etf.rpr.dao;
 
 import unsa.etf.rpr.domain.Exam;
 import unsa.etf.rpr.domain.Provider;
+import unsa.etf.rpr.exception.DBHandleException;
 
 import java.util.Date;
 import java.util.List;
@@ -16,20 +17,20 @@ public interface ExamDao extends Dao<Exam> {
      * @param provider The provider that provided the exams
      * @return List of exams
      */
-    List<Exam> getByProvider(Provider provider);
+    List<Exam> getByProvider(Provider provider) throws DBHandleException;
 
     /**
      * Search for exams in DB by course name
      * @param courseName Name of the course the exam belongs to
      * @return List of exams
      */
-    List<Exam> getByCourseName(String courseName);
+    List<Exam> getByCourseName(String courseName) throws DBHandleException;
 
     /**
      * Search for exams in DB by exam time
      * @param examTime Date and time of the exam
      * @return List of exams
      */
-    List<Exam> getByExamTime(Date examTime);
+    List<Exam> getByExamTime(Date examTime) throws DBHandleException;
 
 }
