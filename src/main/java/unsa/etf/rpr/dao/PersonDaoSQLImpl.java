@@ -4,6 +4,7 @@ import unsa.etf.rpr.domain.Person;
 import unsa.etf.rpr.exception.DBHandleException;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PersonDaoSQLImpl implements PersonDao {
@@ -36,9 +37,11 @@ public class PersonDaoSQLImpl implements PersonDao {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-                Person person = new Person(resultSet.getInt("person_id"),
+                Person person = new Person(
+                        resultSet.getInt("person_id"),
                         resultSet.getString("first_name"),
-                        resultSet.getString("last_name"));
+                        resultSet.getString("last_name")
+                );
 
                 resultSet.close();
 
@@ -76,6 +79,8 @@ public class PersonDaoSQLImpl implements PersonDao {
 
             item.setPersonId(resultSet.getInt(1));
 
+            resultSet.close();
+
             return item;
 
         } catch (SQLException e) {
@@ -102,6 +107,8 @@ public class PersonDaoSQLImpl implements PersonDao {
 
             preparedStatement.executeUpdate();
 
+            preparedStatement.close();
+
             return item;
 
         } catch (SQLException e) {
@@ -115,8 +122,21 @@ public class PersonDaoSQLImpl implements PersonDao {
      * @param id primary key of the entity
      */
     @Override
-    public void delete(int id) {
+    public void delete(int id) throws DBHandleException {
+        String delete = "DELETE FROM person WHERE person_id = ?";
 
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(delete);
+
+            preparedStatement.setInt(1, id);
+
+            preparedStatement.executeUpdate();
+
+            preparedStatement.close();
+
+        } catch (SQLException e) {
+            throw new DBHandleException(e);
+        }
     }
 
     /**
@@ -136,8 +156,31 @@ public class PersonDaoSQLImpl implements PersonDao {
      * @return List of people
      */
     @Override
-    public List<Person> searchByFirstName(String firstName) {
-        return null;
+    public List<Person> searchByFirstName(String firstName) throws DBHandleException {
+        List<Person> personList = new ArrayList<>();
+
+        String query = "SELECT * FROM person WHERE first_name = ?";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                personList.add(new Person(
+                        resultSet.getInt("person_id"),
+                        resultSet.getString("first_name"),
+                        resultSet.getString("last_name"))
+                );
+            }
+
+            resultSet.close();
+
+        } catch (SQLException e) {
+            throw new DBHandleException(e);
+        }
+
+        return personList;
     }
 
     /**
