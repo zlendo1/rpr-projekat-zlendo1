@@ -5,6 +5,7 @@ import unsa.etf.rpr.domain.Subscriber;
 import unsa.etf.rpr.exception.DBHandleException;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SubscriberDaoSQLImpl implements SubscriberDao {
@@ -75,7 +76,7 @@ public class SubscriberDaoSQLImpl implements SubscriberDao {
 
             resultSet.next();
 
-            item.setPerson(new PersonDaoSQLImpl().getById(resultSet.getInt("provider_id")));
+            item.setPerson(new PersonDaoSQLImpl().getById(resultSet.getInt("subscriber_id")));
 
             resultSet.close();
 
@@ -119,8 +120,21 @@ public class SubscriberDaoSQLImpl implements SubscriberDao {
      * @param id primary key of the entity
      */
     @Override
-    public void delete(int id) {
+    public void delete(int id) throws DBHandleException {
+        String delete = "DELETE FROM subscriber WHERE subscriber_id = ?";
 
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(delete);
+
+            preparedStatement.setInt(1, id);
+
+            preparedStatement.executeUpdate();
+
+            preparedStatement.close();
+
+        } catch (SQLException e) {
+            throw new DBHandleException(e);
+        }
     }
 
     /**
@@ -129,8 +143,30 @@ public class SubscriberDaoSQLImpl implements SubscriberDao {
      * @return list of entities from the database
      */
     @Override
-    public List<Subscriber> getAll() {
-        return null;
+    public List<Subscriber> getAll() throws DBHandleException {
+        List<Subscriber> subscriberList = new ArrayList<>();
+
+        String query = "SELECT * FROM subscriber";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                subscriberList.add(new Subscriber(
+                        new PersonDaoSQLImpl().getById(resultSet.getInt("subscriber_id")),
+                        resultSet.getString("preferences")
+                ));
+            }
+
+            resultSet.close();
+
+        } catch (Exception e) {
+            throw new DBHandleException(e);
+        }
+
+        return subscriberList;
     }
 
     /**
