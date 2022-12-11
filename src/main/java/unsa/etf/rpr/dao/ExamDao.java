@@ -3,7 +3,7 @@ package unsa.etf.rpr.dao;
 import unsa.etf.rpr.domain.Exam;
 import unsa.etf.rpr.domain.Provider;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -30,6 +30,6 @@ public interface ExamDao extends Dao<Exam> {
      * @param examTime Date and time of the exam
      * @return List of exams
      */
-    List<Exam> getByExamTime(LocalDateTime examTime);
+    List<Exam> getByExamTime(Date examTime);
 
 }

@@ -6,7 +6,7 @@ import unsa.etf.rpr.domain.Provider;
 import unsa.etf.rpr.exception.DBHandleException;
 
 import java.sql.Connection;
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 public class ExamDaoSQLImpl implements ExamDao {
@@ -103,7 +103,7 @@ public class ExamDaoSQLImpl implements ExamDao {
      * @return List of exams
      */
     @Override
-    public List<Exam> getByExamTime(LocalDateTime examTime) {
+    public List<Exam> getByExamTime(Date examTime) {
         return null;
     }
 

@@ -2,7 +2,7 @@ package unsa.etf.rpr.dao;
 
 import unsa.etf.rpr.domain.Provider;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,6 +16,6 @@ public interface ProviderDao extends Dao<Provider> {
      * @param end Ending datetime (inclusive)
      * @return List of providers
      */
-    List<Provider> getByDateRange(LocalDateTime begin, LocalDateTime end);
+    List<Provider> getByDateRange(Date begin, Date end);
 
 }
