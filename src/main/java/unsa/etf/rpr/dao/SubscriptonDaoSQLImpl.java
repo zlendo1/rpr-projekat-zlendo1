@@ -100,7 +100,25 @@ public class SubscriptonDaoSQLImpl implements SubscriptionDao {
      */
     @Override
     public Subscription update(Subscription item) throws DBHandleException {
-        return null;
+        String update = "UPDATE subscription SET subscriber_id = ?, exam_id = ?, exporation = ? WHERE subscription_id = ?";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(update);
+
+            preparedStatement.setInt(4, item.getSubscriptionId());
+            preparedStatement.setInt(1, item.getSubscriber().getPerson().getPersonId());
+            preparedStatement.setInt(2, item.getExam().getExamId());
+            preparedStatement.setTimestamp(3, (Timestamp) item.getExporation());
+
+            preparedStatement.executeUpdate();
+
+            preparedStatement.close();
+
+            return item;
+
+        } catch (SQLException e) {
+            throw new DBHandleException(e);
+        }
     }
 
     /**
