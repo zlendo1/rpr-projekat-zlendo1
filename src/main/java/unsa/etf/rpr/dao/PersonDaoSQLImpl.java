@@ -8,6 +8,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * SQL implementation of PersonDao
+ *
+ */
 public class PersonDaoSQLImpl implements PersonDao {
 
     private final Connection connection;
@@ -25,6 +29,7 @@ public class PersonDaoSQLImpl implements PersonDao {
      *
      * @param id primary key of entity
      * @return corresponding entity
+     * @throws DBHandleException In case of any DB handling error
      */
     @Override
     public Person getById(int id) throws DBHandleException {
@@ -61,6 +66,7 @@ public class PersonDaoSQLImpl implements PersonDao {
      *
      * @param item bean for saving into database
      * @return updated version of the bean
+     * @throws DBHandleException In case of any DB handling error
      */
     @Override
     public Person add(Person item) throws DBHandleException {
@@ -94,6 +100,7 @@ public class PersonDaoSQLImpl implements PersonDao {
      *
      * @param item bean which we will update (id must be populated)
      * @return updated version of the bean
+     * @throws DBHandleException In case of any DB handling error
      */
     @Override
     public Person update(Person item) throws DBHandleException {
@@ -121,6 +128,7 @@ public class PersonDaoSQLImpl implements PersonDao {
      * Hard delete of entity with the corseponding primary key
      *
      * @param id primary key of the entity
+     * @throws DBHandleException In case of any DB handling error
      */
     @Override
     public void delete(int id) throws DBHandleException {
@@ -144,6 +152,7 @@ public class PersonDaoSQLImpl implements PersonDao {
      * Lists all entites from the database
      *
      * @return list of entities from the database
+     * @throws DBHandleException In case of any DB handling error
      */
     @Override
     public List<Person> getAll() throws DBHandleException {
@@ -178,6 +187,7 @@ public class PersonDaoSQLImpl implements PersonDao {
      *
      * @param firstName First name of a person
      * @return List of people
+     * @throws DBHandleException In case of any DB handling error
      */
     @Override
     public List<Person> getByFirstName(String firstName) throws DBHandleException {
@@ -214,6 +224,7 @@ public class PersonDaoSQLImpl implements PersonDao {
      *
      * @param lastName Last name of a person
      * @return List of people
+     * @throws DBHandleException In case of any DB handling error
      */
     @Override
     public List<Person> getByLastName(String lastName) throws DBHandleException {
