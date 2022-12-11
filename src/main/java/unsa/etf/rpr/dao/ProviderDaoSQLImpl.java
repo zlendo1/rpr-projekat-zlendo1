@@ -8,6 +8,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * SQL implementation of ProviderDao
+ *
+ */
 public class ProviderDaoSQLImpl implements ProviderDao {
 
     private final Connection connection;
@@ -26,6 +30,7 @@ public class ProviderDaoSQLImpl implements ProviderDao {
      *
      * @param id primary key of entity
      * @return corresponding entity
+     * @throws DBHandleException In case of any DB handling error
      */
     @Override
     public Provider getById(int id) throws DBHandleException {
@@ -62,6 +67,7 @@ public class ProviderDaoSQLImpl implements ProviderDao {
      *
      * @param item bean for saving into database
      * @return updated version of the bean
+     * @throws DBHandleException In case of any DB handling error
      */
     @Override
     public Provider add(Provider item) throws DBHandleException {
@@ -95,6 +101,7 @@ public class ProviderDaoSQLImpl implements ProviderDao {
      *
      * @param item bean which we will update (id must be populated)
      * @return updated version of the bean
+     * @throws DBHandleException In case of any DB handling error
      */
     @Override
     public Provider update(Provider item) throws DBHandleException {
@@ -122,6 +129,7 @@ public class ProviderDaoSQLImpl implements ProviderDao {
      * Hard delete of entity with the corseponding primary key
      *
      * @param id primary key of the entity
+     * @throws DBHandleException In case of any DB handling error
      */
     @Override
     public void delete(int id) throws DBHandleException {
@@ -145,6 +153,7 @@ public class ProviderDaoSQLImpl implements ProviderDao {
      * Lists all entites from the database
      *
      * @return list of entities from the database
+     * @throws DBHandleException In case of any DB handling error
      */
     @Override
     public List<Provider> getAll() throws DBHandleException {
@@ -180,6 +189,7 @@ public class ProviderDaoSQLImpl implements ProviderDao {
      * @param begin Starting datetime (inclusive)
      * @param end   Ending datetime (inclusive)
      * @return List of providers
+     * @throws DBHandleException In case of any DB handling error
      */
     @Override
     public List<Provider> getByDateRange(java.util.Date begin, java.util.Date end) throws DBHandleException {
@@ -211,4 +221,5 @@ public class ProviderDaoSQLImpl implements ProviderDao {
 
         return providerList;
     }
+
 }
