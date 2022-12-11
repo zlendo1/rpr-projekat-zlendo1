@@ -1,8 +1,9 @@
 package unsa.etf.rpr.dao;
 
 import unsa.etf.rpr.domain.Person;
+import unsa.etf.rpr.exception.DBHandleException;
 
-import java.sql.Connection;
+import java.sql.*;
 import java.util.List;
 
 public class PersonDaoSQLImpl implements PersonDao {
@@ -13,7 +14,8 @@ public class PersonDaoSQLImpl implements PersonDao {
      * Establishes connection to the DB
      *
      */
-    public PersonDaoSQLImpl() {
+    public PersonDaoSQLImpl() throws DBHandleException {
+        connection = MyConnection.EstablishConnection();
     }
 
     /**
@@ -23,7 +25,30 @@ public class PersonDaoSQLImpl implements PersonDao {
      * @return corresponding entity
      */
     @Override
-    public Person getById(int id) {
+    public Person getById(int id) throws DBHandleException {
+        String query = "SELECT * FROM person WHERE person_id = ?";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setInt(1, id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                Person person = new Person(resultSet.getInt("person_id"),
+                        resultSet.getString("first_name"),
+                        resultSet.getString("last_name"));
+
+                resultSet.close();
+
+                return person;
+            }
+
+        } catch (SQLException e) {
+            throw new DBHandleException(e);
+        }
+
         return null;
     }
 
@@ -34,8 +59,28 @@ public class PersonDaoSQLImpl implements PersonDao {
      * @return updated version of the bean
      */
     @Override
-    public Person add(Person item) {
-        return null;
+    public Person add(Person item) throws DBHandleException {
+        String insert = "INSERT INTO person(first_name, last_name) VALUES(?, ?)";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+
+            preparedStatement.setString(1, item.getFirstName());
+            preparedStatement.setString(2, item.getLastName());
+
+            preparedStatement.executeUpdate();
+
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+
+            resultSet.next();
+
+            item.setPersonId(resultSet.getInt(1));
+
+            return item;
+
+        } catch (SQLException e) {
+            throw new DBHandleException(e);
+        }
     }
 
     /**
