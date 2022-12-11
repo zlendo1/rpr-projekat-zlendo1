@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ExamDaoSQLImpl implements ExamDao {
 
-    private Connection connection;
+    private final Connection connection;
 
     /**
      * Establishes connection to the DB

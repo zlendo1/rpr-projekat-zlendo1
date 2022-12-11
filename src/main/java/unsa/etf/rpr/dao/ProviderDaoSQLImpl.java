@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ProviderDaoSQLImpl implements ProviderDao {
 
-    private Connection connection;
+    private final Connection connection;
 
     /**
      * Establishes connection to the DB

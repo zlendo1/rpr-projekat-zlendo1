@@ -9,7 +9,7 @@ import java.util.List;
 
 public class SubscriberDaoSQLImpl implements SubscriberDao {
 
-    private Connection connection;
+    private final Connection connection;
 
     /**
      * Establishes connection to the DB
