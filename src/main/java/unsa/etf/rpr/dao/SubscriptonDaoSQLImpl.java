@@ -10,6 +10,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * SQL implementation of SubscriptionDao
+ *
+ */
 public class SubscriptonDaoSQLImpl implements SubscriptionDao {
 
     private final Connection connection;
@@ -27,6 +31,7 @@ public class SubscriptonDaoSQLImpl implements SubscriptionDao {
      *
      * @param id primary key of entity
      * @return corresponding entity
+     * @throws DBHandleException In case of any DB handling error
      */
     @Override
     public Subscription getById(int id) throws DBHandleException {
@@ -64,6 +69,7 @@ public class SubscriptonDaoSQLImpl implements SubscriptionDao {
      *
      * @param item bean for saving into database
      * @return updated version of the bean
+     * @throws DBHandleException In case of any DB handling error
      */
     @Override
     public Subscription add(Subscription item) throws DBHandleException {
@@ -98,6 +104,7 @@ public class SubscriptonDaoSQLImpl implements SubscriptionDao {
      *
      * @param item bean which we will update (id must be populated)
      * @return updated version of the bean
+     * @throws DBHandleException In case of any DB handling error
      */
     @Override
     public Subscription update(Subscription item) throws DBHandleException {
@@ -126,6 +133,7 @@ public class SubscriptonDaoSQLImpl implements SubscriptionDao {
      * Hard delete of entity with the corseponding primary key
      *
      * @param id primary key of the entity
+     * @throws DBHandleException In case of any DB handling error
      */
     @Override
     public void delete(int id) throws DBHandleException {
@@ -149,6 +157,7 @@ public class SubscriptonDaoSQLImpl implements SubscriptionDao {
      * Lists all entites from the database
      *
      * @return list of entities from the database
+     * @throws DBHandleException In case of any DB handling error
      */
     @Override
     public List<Subscription> getAll() throws DBHandleException {
@@ -184,6 +193,7 @@ public class SubscriptonDaoSQLImpl implements SubscriptionDao {
      *
      * @param subscriber The subscriber the subscription belongs to
      * @return List of subscriptions
+     * @throws DBHandleException In case of any DB handling error
      */
     @Override
     public List<Subscription> getBySubscriber(Subscriber subscriber) throws DBHandleException {
@@ -221,6 +231,7 @@ public class SubscriptonDaoSQLImpl implements SubscriptionDao {
      *
      * @param exam The exam the subscription belongs to
      * @return List of subscriptions
+     * @throws DBHandleException In case of any DB handling error
      */
     @Override
     public List<Subscription> getByExam(Exam exam) throws DBHandleException {
@@ -257,6 +268,7 @@ public class SubscriptonDaoSQLImpl implements SubscriptionDao {
      * Search subscriotion in DB that have expired
      *
      * @return List of subscriptions
+     * @throws DBHandleException In case of any DB handling error
      */
     @Override
     public List<Subscription> getExpired() throws DBHandleException {
@@ -291,6 +303,7 @@ public class SubscriptonDaoSQLImpl implements SubscriptionDao {
      * Search subscriptions in DB that have not expired yet
      *
      * @return List of subscriptions
+     * @throws DBHandleException In case of any DB handling error
      */
     @Override
     public List<Subscription> getUnexpired() throws DBHandleException {
