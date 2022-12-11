@@ -156,7 +156,7 @@ public class PersonDaoSQLImpl implements PersonDao {
      * @return List of people
      */
     @Override
-    public List<Person> searchByFirstName(String firstName) throws DBHandleException {
+    public List<Person> getByFirstName(String firstName) throws DBHandleException {
         List<Person> personList = new ArrayList<>();
 
         String query = "SELECT * FROM person WHERE first_name = ?";
@@ -192,7 +192,7 @@ public class PersonDaoSQLImpl implements PersonDao {
      * @return List of people
      */
     @Override
-    public List<Person> searchByLastName(String lastName) throws DBHandleException {
+    public List<Person> getByLastName(String lastName) throws DBHandleException {
         List<Person> personList = new ArrayList<>();
 
         String query = "SELECT * FROM person WHERE last_name = ?";

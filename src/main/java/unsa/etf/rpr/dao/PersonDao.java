@@ -1,6 +1,7 @@
 package unsa.etf.rpr.dao;
 
 import unsa.etf.rpr.domain.Person;
+import unsa.etf.rpr.exception.DBHandleException;
 
 import java.util.List;
 
@@ -14,13 +15,13 @@ public interface PersonDao extends Dao<Person> {
      * @param firstName First name of a person
      * @return List of people
      */
-    List<Person> searchByFirstName(String firstName);
+    List<Person> getByFirstName(String firstName) throws DBHandleException;
 
     /**
      * Search people in DB based on their last name
      * @param lastName Last name of a person
      * @return List of people
      */
-    List<Person> searchByLastName(String lastName);
+    List<Person> getByLastName(String lastName) throws DBHandleException;
 
 }
