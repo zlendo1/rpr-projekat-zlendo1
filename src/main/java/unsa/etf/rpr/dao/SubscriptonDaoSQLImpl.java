@@ -6,7 +6,7 @@ import unsa.etf.rpr.domain.Subscriber;
 import unsa.etf.rpr.domain.Subscription;
 import unsa.etf.rpr.exception.DBHandleException;
 
-import java.sql.Connection;
+import java.sql.*;
 import java.util.List;
 
 public class SubscriptonDaoSQLImpl implements SubscriptionDao {
@@ -28,7 +28,33 @@ public class SubscriptonDaoSQLImpl implements SubscriptionDao {
      * @return corresponding entity
      */
     @Override
-    public Subscription getById(int id) {
+    public Subscription getById(int id) throws DBHandleException {
+        String query = "SELECT * FROM subscription WHERE subscription_id = ?";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setInt(1, id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                Subscription subscriber = new Subscription(
+                        resultSet.getInt("subscription_id"),
+                        new SubscriberDaoSQLImpl().getById(resultSet.getInt("subscriber_id")),
+                        new ExamDaoSQLImpl().getById(resultSet.getInt("exam_id")),
+                        resultSet.getTimestamp("exporation")
+                );
+
+                resultSet.close();
+
+                return subscriber;
+            }
+
+        } catch (Exception e) {
+            throw new DBHandleException(e);
+        }
+
         return null;
     }
 
@@ -39,8 +65,31 @@ public class SubscriptonDaoSQLImpl implements SubscriptionDao {
      * @return updated version of the bean
      */
     @Override
-    public Subscription add(Subscription item) {
-        return null;
+    public Subscription add(Subscription item) throws DBHandleException {
+        String insert = "INSERT INTO subscriber(subscriber_id, exam_id, exporation) VALUES(?, ?, ?)";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+
+            preparedStatement.setInt(1, item.getSubscriber().getPerson().getPersonId());
+            preparedStatement.setInt(2, item.getExam().getExamId());
+            preparedStatement.setTimestamp(3, (Timestamp) item.getExporation());
+
+            preparedStatement.executeUpdate();
+
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+
+            resultSet.next();
+
+            item.setSubscriptionId(resultSet.getInt(1));
+
+            resultSet.close();
+
+            return item;
+
+        } catch (Exception e) {
+            throw new DBHandleException(e);
+        }
     }
 
     /**
