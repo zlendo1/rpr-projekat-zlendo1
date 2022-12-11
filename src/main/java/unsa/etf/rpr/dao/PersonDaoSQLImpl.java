@@ -1,5 +1,6 @@
 package unsa.etf.rpr.dao;
 
+import unsa.etf.rpr.connector.MyConnection;
 import unsa.etf.rpr.domain.Person;
 import unsa.etf.rpr.exception.DBHandleException;
 

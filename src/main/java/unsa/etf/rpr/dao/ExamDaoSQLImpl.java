@@ -1,5 +1,6 @@
 package unsa.etf.rpr.dao;
 
+import unsa.etf.rpr.connector.MyConnection;
 import unsa.etf.rpr.domain.Exam;
 import unsa.etf.rpr.domain.Provider;
 import unsa.etf.rpr.exception.DBHandleException;
@@ -49,7 +50,7 @@ public class ExamDaoSQLImpl implements ExamDao {
      * @return updated version of the bean
      */
     @Override
-    public Exam update(Exam item) {
+    public Exam update(Exam item) throws DBHandleException {
         return null;
     }
 

@@ -1,6 +1,8 @@
 package unsa.etf.rpr.dao;
 
+import unsa.etf.rpr.connector.MyConnection;
 import unsa.etf.rpr.domain.Subscriber;
+import unsa.etf.rpr.exception.DBHandleException;
 
 import java.sql.Connection;
 import java.util.List;
@@ -11,8 +13,10 @@ public class SubscriberDaoSQLImpl implements SubscriberDao {
 
     /**
      * Establishes connection to the DB
+     *
      */
-    public SubscriberDaoSQLImpl() {
+    public SubscriberDaoSQLImpl() throws DBHandleException {
+        connection = MyConnection.EstablishConnection();
     }
 
     /**
@@ -44,7 +48,7 @@ public class SubscriberDaoSQLImpl implements SubscriberDao {
      * @return updated version of the bean
      */
     @Override
-    public Subscriber update(Subscriber item) {
+    public Subscriber update(Subscriber item) throws DBHandleException {
         return null;
     }
 

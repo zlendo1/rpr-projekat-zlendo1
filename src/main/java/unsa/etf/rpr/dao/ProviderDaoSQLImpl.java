@@ -1,6 +1,8 @@
 package unsa.etf.rpr.dao;
 
+import unsa.etf.rpr.connector.MyConnection;
 import unsa.etf.rpr.domain.Provider;
+import unsa.etf.rpr.exception.DBHandleException;
 
 import java.sql.Connection;
 import java.time.LocalDateTime;
@@ -14,7 +16,8 @@ public class ProviderDaoSQLImpl implements ProviderDao {
      * Establishes connection to the DB
      *
      */
-    public ProviderDaoSQLImpl() {
+    public ProviderDaoSQLImpl() throws DBHandleException {
+        connection = MyConnection.EstablishConnection();
     }
 
 
@@ -47,7 +50,7 @@ public class ProviderDaoSQLImpl implements ProviderDao {
      * @return updated version of the bean
      */
     @Override
-    public Provider update(Provider item) {
+    public Provider update(Provider item) throws DBHandleException {
         return null;
     }
 
