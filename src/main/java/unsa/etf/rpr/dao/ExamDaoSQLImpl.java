@@ -67,7 +67,7 @@ public class ExamDaoSQLImpl implements ExamDao {
      */
     @Override
     public Exam add(Exam item) throws DBHandleException {
-        String insert = "INSERT INTO subscriber(provider_id, course_name, exam_time, answer_sheet) VALUES(?, ?, ?, ?. ?)";
+        String insert = "INSERT INTO exam(provider_id, course_name, exam_time, answer_sheet) VALUES(?, ?, ?, ?. ?)";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
@@ -102,7 +102,26 @@ public class ExamDaoSQLImpl implements ExamDao {
      */
     @Override
     public Exam update(Exam item) throws DBHandleException {
-        return null;
+        String update = "UPDATE exam SET provider_id = ?, course_name = ?, exam_time = ?, answer_sheet = ? " +
+                "WHERE exam_id = ?";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(update);
+
+            preparedStatement.setInt(1, item.getProvider().getPerson().getPersonId());
+            preparedStatement.setString(2, item.getCourseName());
+            preparedStatement.setTimestamp(3, (Timestamp) item.getExamTime());
+            preparedStatement.setString(4, item.getAnswerSheet());
+
+            preparedStatement.executeUpdate();
+
+            preparedStatement.close();
+
+            return item;
+
+        } catch (Exception e) {
+            throw new DBHandleException(e);
+        }
     }
 
     /**
