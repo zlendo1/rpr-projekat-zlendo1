@@ -164,6 +164,8 @@ public class PersonDaoSQLImpl implements PersonDao {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
+            preparedStatement.setString(1, firstName);
+
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
@@ -190,8 +192,33 @@ public class PersonDaoSQLImpl implements PersonDao {
      * @return List of people
      */
     @Override
-    public List<Person> searchByLastName(String lastName) {
-        return null;
+    public List<Person> searchByLastName(String lastName) throws DBHandleException {
+        List<Person> personList = new ArrayList<>();
+
+        String query = "SELECT * FROM person WHERE last_name = ?";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setString(1, lastName);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                personList.add(new Person(
+                        resultSet.getInt("person_id"),
+                        resultSet.getString("first_name"),
+                        resultSet.getString("last_name"))
+                );
+            }
+
+            resultSet.close();
+
+        } catch (SQLException e) {
+            throw new DBHandleException(e);
+        }
+
+        return personList;
     }
 
 }
