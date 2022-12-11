@@ -6,6 +6,8 @@ import unsa.etf.rpr.domain.Provider;
 import unsa.etf.rpr.exception.DBHandleException;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.Date;
 import java.util.List;
 
@@ -28,7 +30,34 @@ public class ExamDaoSQLImpl implements ExamDao {
      * @return corresponding entity
      */
     @Override
-    public Exam getById(int id) {
+    public Exam getById(int id) throws DBHandleException {
+        String query = "SELECT * FROM exam WHERE exam_id = ?";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setInt(1, id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                Exam exam = new Exam(
+                        resultSet.getInt("exam_id"),
+                        new ProviderDaoSQLImpl().getById(resultSet.getInt("provider_id")),
+                        resultSet.getString("course_name"),
+                        resultSet.getTimestamp("exam_time"),
+                        resultSet.getString("answer_sheet")
+                );
+
+                resultSet.close();
+
+                return exam;
+            }
+
+        } catch (Exception e) {
+            throw new DBHandleException(e);
+        }
+
         return null;
     }
 
