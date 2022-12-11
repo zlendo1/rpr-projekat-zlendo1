@@ -1,7 +1,7 @@
 package unsa.etf.rpr.domain;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -12,13 +12,13 @@ public class Exam implements Serializable {
     private int examId;
     private Provider provider;
     private String courseName;
-    private LocalDateTime examTime;
+    private Date examTime;
     private String answerSheet;
 
     public Exam() {
     }
 
-    public Exam(int examId, Provider provider, String courseName, LocalDateTime examTime, String answerSheet) {
+    public Exam(int examId, Provider provider, String courseName, Date examTime, String answerSheet) {
         this.examId = examId;
         this.provider = provider;
         this.courseName = courseName;
@@ -50,11 +50,11 @@ public class Exam implements Serializable {
         this.courseName = courseName;
     }
 
-    public LocalDateTime getExamTime() {
+    public Date getExamTime() {
         return examTime;
     }
 
-    public void setExamTime(LocalDateTime examTime) {
+    public void setExamTime(Date examTime) {
         this.examTime = examTime;
     }
 

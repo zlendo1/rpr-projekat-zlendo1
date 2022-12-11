@@ -1,7 +1,7 @@
 package unsa.etf.rpr.domain;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -10,13 +10,13 @@ import java.util.Objects;
 public class Provider implements Serializable {
 
     private Person person;
-    private LocalDateTime contractStart;
-    private LocalDateTime contractExpiry;
+    private Date contractStart;
+    private Date contractExpiry;
 
     public Provider() {
     }
 
-    public Provider(Person person, LocalDateTime contractStart, LocalDateTime contractExpiry) {
+    public Provider(Person person, Date contractStart, Date contractExpiry) {
         this.person = person;
         this.contractStart = contractStart;
         this.contractExpiry = contractExpiry;
@@ -30,19 +30,19 @@ public class Provider implements Serializable {
         this.person = person;
     }
 
-    public LocalDateTime getContractStart() {
+    public Date getContractStart() {
         return contractStart;
     }
 
-    public void setContractStart(LocalDateTime contractStart) {
+    public void setContractStart(Date contractStart) {
         this.contractStart = contractStart;
     }
 
-    public LocalDateTime getContractExpiry() {
+    public Date getContractExpiry() {
         return contractExpiry;
     }
 
-    public void setContractExpiry(LocalDateTime contractExpiry) {
+    public void setContractExpiry(Date contractExpiry) {
         this.contractExpiry = contractExpiry;
     }
 

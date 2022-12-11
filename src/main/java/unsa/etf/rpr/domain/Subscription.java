@@ -1,7 +1,7 @@
 package unsa.etf.rpr.domain;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -12,12 +12,12 @@ public class Subscription implements Serializable {
     private int subscriptionId;
     private Subscriber subscriber;
     private Exam exam;
-    private LocalDateTime exporation;
+    private Date exporation;
 
     public Subscription() {
     }
 
-    public Subscription(int subscriptionId, Subscriber subscriber, Exam exam, LocalDateTime exporation) {
+    public Subscription(int subscriptionId, Subscriber subscriber, Exam exam, Date exporation) {
         this.subscriptionId = subscriptionId;
         this.subscriber = subscriber;
         this.exam = exam;
@@ -48,11 +48,11 @@ public class Subscription implements Serializable {
         this.exam = exam;
     }
 
-    public LocalDateTime getExporation() {
+    public Date getExporation() {
         return exporation;
     }
 
-    public void setExporation(LocalDateTime exporation) {
+    public void setExporation(Date exporation) {
         this.exporation = exporation;
     }
 
