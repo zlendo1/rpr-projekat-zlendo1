@@ -146,8 +146,31 @@ public class PersonDaoSQLImpl implements PersonDao {
      * @return list of entities from the database
      */
     @Override
-    public List<Person> getAll() {
-        return null;
+    public List<Person> getAll() throws DBHandleException {
+        List<Person> personList = new ArrayList<>();
+
+        String query = "SELECT * FROM person";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                personList.add(new Person(
+                        resultSet.getInt("person_id"),
+                        resultSet.getString("first_name"),
+                        resultSet.getString("last_name"))
+                );
+            }
+
+            resultSet.close();
+
+        } catch (SQLException e) {
+            throw new DBHandleException(e);
+        }
+
+        return personList;
     }
 
     /**
