@@ -130,8 +130,21 @@ public class ExamDaoSQLImpl implements ExamDao {
      * @param id primary key of the entity
      */
     @Override
-    public void delete(int id) {
+    public void delete(int id) throws DBHandleException {
+        String delete = "DELETE FROM exam WHERE exam_id = ?";
 
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(delete);
+
+            preparedStatement.setInt(1, id);
+
+            preparedStatement.executeUpdate();
+
+            preparedStatement.close();
+
+        } catch (SQLException e) {
+            throw new DBHandleException(e);
+        }
     }
 
     /**
