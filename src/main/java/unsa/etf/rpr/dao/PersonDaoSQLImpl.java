@@ -90,8 +90,23 @@ public class PersonDaoSQLImpl implements PersonDao {
      * @return updated version of the bean
      */
     @Override
-    public Person update(Person item) {
-        return null;
+    public Person update(Person item) throws DBHandleException {
+        String update = "UPDATE person SET first_name = ?, last_name = ? WHERE person_id = ?";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(update);
+
+            preparedStatement.setInt(3, item.getPersonId());
+            preparedStatement.setString(1, item.getFirstName());
+            preparedStatement.setString(2, item.getLastName());
+
+            preparedStatement.executeUpdate();
+
+            return item;
+
+        } catch (SQLException e) {
+            throw new DBHandleException(e);
+        }
     }
 
     /**
