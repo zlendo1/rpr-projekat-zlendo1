@@ -2,6 +2,7 @@ package unsa.etf.rpr.dao;
 
 import unsa.etf.rpr.domain.Exam;
 import unsa.etf.rpr.domain.Provider;
+import unsa.etf.rpr.exception.DBHandleException;
 
 import java.sql.Connection;
 import java.time.LocalDateTime;
@@ -15,7 +16,8 @@ public class ExamDaoSQLImpl implements ExamDao {
      * Establishes connection to the DB
      *
      */
-    public ExamDaoSQLImpl() {
+    public ExamDaoSQLImpl() throws DBHandleException {
+        connection = MyConnection.EstablishConnection();
     }
 
     /**
