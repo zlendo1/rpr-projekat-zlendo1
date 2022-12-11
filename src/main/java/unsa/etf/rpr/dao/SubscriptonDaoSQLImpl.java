@@ -7,6 +7,7 @@ import unsa.etf.rpr.domain.Subscription;
 import unsa.etf.rpr.exception.DBHandleException;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SubscriptonDaoSQLImpl implements SubscriptionDao {
@@ -150,8 +151,32 @@ public class SubscriptonDaoSQLImpl implements SubscriptionDao {
      * @return list of entities from the database
      */
     @Override
-    public List<Subscription> getAll() {
-        return null;
+    public List<Subscription> getAll() throws DBHandleException {
+        List<Subscription> subscriptionList = new ArrayList<>();
+
+        String query = "SELECT * FROM subscription";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                subscriptionList.add(new Subscription(
+                        resultSet.getInt("subscription_id"),
+                        new SubscriberDaoSQLImpl().getById(resultSet.getInt("subscriber_id")),
+                        new ExamDaoSQLImpl().getById(resultSet.getInt("exam_id")),
+                        resultSet.getTimestamp("exporation")
+                ));
+            }
+
+            resultSet.close();
+
+        } catch (Exception e) {
+            throw new DBHandleException(e);
+        }
+
+        return subscriptionList;
     }
 
     /**
