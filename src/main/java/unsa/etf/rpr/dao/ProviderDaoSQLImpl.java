@@ -65,7 +65,6 @@ public class ProviderDaoSQLImpl implements ProviderDao {
      */
     @Override
     public Provider add(Provider item) throws DBHandleException {
-
         String insert = "INSERT INTO provider(contract_start, contract_expiry) VALUES(?, ?)";
 
         try {
@@ -86,7 +85,7 @@ public class ProviderDaoSQLImpl implements ProviderDao {
 
             return item;
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new DBHandleException(e);
         }
     }
@@ -168,7 +167,7 @@ public class ProviderDaoSQLImpl implements ProviderDao {
 
             resultSet.close();
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new DBHandleException(e);
         }
 
@@ -206,7 +205,7 @@ public class ProviderDaoSQLImpl implements ProviderDao {
 
             resultSet.close();
 
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw new DBHandleException(e);
         }
 
