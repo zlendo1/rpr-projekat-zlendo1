@@ -5,7 +5,6 @@ import unsa.etf.rpr.domain.Provider;
 import unsa.etf.rpr.exception.DBHandleException;
 
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class ProviderDaoSQLImpl implements ProviderDao {
@@ -41,8 +40,8 @@ public class ProviderDaoSQLImpl implements ProviderDao {
             if (resultSet.next()) {
                 Provider provider = new Provider(
                         new PersonDaoSQLImpl().getById(resultSet.getInt("provider_id")),
-                        resultSet.getTimestamp("contract_start"),
-                        resultSet.getTimestamp("contract_expiry")
+                        resultSet.getDate("contract_start"),
+                        resultSet.getDate("contract_expiry")
                 );
 
                 resultSet.close();
@@ -64,8 +63,31 @@ public class ProviderDaoSQLImpl implements ProviderDao {
      * @return updated version of the bean
      */
     @Override
-    public Provider add(Provider item) {
-        return null;
+    public Provider add(Provider item) throws DBHandleException {
+
+        String insert = "INSERT INTO person(contract_start, contract_expiry) VALUES(?, ?)";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+
+            preparedStatement.setDate(1, (Date) item.getContractStart());
+            preparedStatement.setDate(2, (Date) item.getContractExpiry());
+
+            preparedStatement.executeUpdate();
+
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+
+            resultSet.next();
+
+            item.setPerson(new PersonDaoSQLImpl().getById(resultSet.getInt("provider_id")));
+
+            resultSet.close();
+
+            return item;
+
+        } catch (SQLException e) {
+            throw new DBHandleException(e);
+        }
     }
 
     /**
@@ -107,8 +129,7 @@ public class ProviderDaoSQLImpl implements ProviderDao {
      * @return List of providers
      */
     @Override
-    public List<Provider> getByDateRange(LocalDateTime begin, LocalDateTime end) {
+    public List<Provider> getByDateRange(java.util.Date begin, java.util.Date end) {
         return null;
     }
-
 }
