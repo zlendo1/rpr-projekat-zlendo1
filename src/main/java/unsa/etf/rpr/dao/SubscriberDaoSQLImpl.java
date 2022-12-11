@@ -4,7 +4,7 @@ import unsa.etf.rpr.connector.MyConnection;
 import unsa.etf.rpr.domain.Subscriber;
 import unsa.etf.rpr.exception.DBHandleException;
 
-import java.sql.Connection;
+import java.sql.*;
 import java.util.List;
 
 public class SubscriberDaoSQLImpl implements SubscriberDao {
@@ -26,7 +26,31 @@ public class SubscriberDaoSQLImpl implements SubscriberDao {
      * @return corresponding entity
      */
     @Override
-    public Subscriber getById(int id) {
+    public Subscriber getById(int id) throws DBHandleException {
+        String query = "SELECT * FROM subscriber WHERE subscriber_id = ?";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setInt(1, id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                Subscriber subscriber = new Subscriber(
+                        new PersonDaoSQLImpl().getById(resultSet.getInt("subscriber_id")),
+                        resultSet.getString("preferences")
+                );
+
+                resultSet.close();
+
+                return subscriber;
+            }
+
+        } catch (Exception e) {
+            throw new DBHandleException(e);
+        }
+
         return null;
     }
 
@@ -37,8 +61,29 @@ public class SubscriberDaoSQLImpl implements SubscriberDao {
      * @return updated version of the bean
      */
     @Override
-    public Subscriber add(Subscriber item) {
-        return null;
+    public Subscriber add(Subscriber item) throws DBHandleException {
+        String insert = "INSERT INTO subscriber(preferences) VALUES(?)";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
+
+            preparedStatement.setString(1, item.getPreferences());
+
+            preparedStatement.executeUpdate();
+
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+
+            resultSet.next();
+
+            item.setPerson(new PersonDaoSQLImpl().getById(resultSet.getInt("provider_id")));
+
+            resultSet.close();
+
+            return item;
+
+        } catch (Exception e) {
+            throw new DBHandleException(e);
+        }
     }
 
     /**
