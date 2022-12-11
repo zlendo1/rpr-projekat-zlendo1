@@ -1,6 +1,7 @@
 package unsa.etf.rpr.dao;
 
 import unsa.etf.rpr.domain.Provider;
+import unsa.etf.rpr.exception.DBHandleException;
 
 import java.util.Date;
 import java.util.List;
@@ -16,6 +17,6 @@ public interface ProviderDao extends Dao<Provider> {
      * @param end Ending datetime (inclusive)
      * @return List of providers
      */
-    List<Provider> getByDateRange(Date begin, Date end);
+    List<Provider> getByDateRange(Date begin, Date end) throws DBHandleException;
 
 }

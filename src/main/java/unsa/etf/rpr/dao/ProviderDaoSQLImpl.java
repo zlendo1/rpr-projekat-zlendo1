@@ -183,7 +183,33 @@ public class ProviderDaoSQLImpl implements ProviderDao {
      * @return List of providers
      */
     @Override
-    public List<Provider> getByDateRange(java.util.Date begin, java.util.Date end) {
-        return null;
+    public List<Provider> getByDateRange(java.util.Date begin, java.util.Date end) throws DBHandleException {
+        List<Provider> providerList = new ArrayList<>();
+
+        String query = "SELECT * FROM provider WHERE contract_start >= ? AND contract_expiry <= ?";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setTimestamp(1, (Timestamp) begin);
+            preparedStatement.setTimestamp(2, (Timestamp) end);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                providerList.add(new Provider(
+                        new PersonDaoSQLImpl().getById(resultSet.getInt("provider_id")),
+                        resultSet.getTimestamp("contract_start"),
+                        resultSet.getTimestamp("contract_expiry")
+                ));
+            }
+
+            resultSet.close();
+
+        } catch (SQLException e) {
+            throw new DBHandleException(e);
+        }
+
+        return providerList;
     }
 }
