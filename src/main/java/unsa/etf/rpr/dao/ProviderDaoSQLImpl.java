@@ -65,7 +65,7 @@ public class ProviderDaoSQLImpl implements ProviderDao {
     @Override
     public Provider add(Provider item) throws DBHandleException {
 
-        String insert = "INSERT INTO person(contract_start, contract_expiry) VALUES(?, ?)";
+        String insert = "INSERT INTO provider(contract_start, contract_expiry) VALUES(?, ?)";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
@@ -98,7 +98,24 @@ public class ProviderDaoSQLImpl implements ProviderDao {
      */
     @Override
     public Provider update(Provider item) throws DBHandleException {
-        return null;
+        String update = "UPDATE provider SET contract_start = ?, contract_expiry = ? WHERE provider_id = ?";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(update);
+
+            preparedStatement.setInt(3, item.getPerson().getPersonId());
+            preparedStatement.setDate(1, (Date) item.getContractStart());
+            preparedStatement.setDate(2, (Date) item.getContractExpiry());
+
+            preparedStatement.executeUpdate();
+
+            preparedStatement.close();
+
+            return item;
+
+        } catch (SQLException e) {
+            throw new DBHandleException(e);
+        }
     }
 
     /**
