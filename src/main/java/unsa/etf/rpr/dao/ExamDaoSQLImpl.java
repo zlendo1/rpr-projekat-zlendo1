@@ -3,9 +3,11 @@ package unsa.etf.rpr.dao;
 import unsa.etf.rpr.connector.MyConnection;
 import unsa.etf.rpr.domain.Exam;
 import unsa.etf.rpr.domain.Provider;
+import unsa.etf.rpr.domain.Subscription;
 import unsa.etf.rpr.exception.DBHandleException;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -153,8 +155,33 @@ public class ExamDaoSQLImpl implements ExamDao {
      * @return list of entities from the database
      */
     @Override
-    public List<Exam> getAll() {
-        return null;
+    public List<Exam> getAll() throws DBHandleException {
+        List<Exam> subscriptionList = new ArrayList<>();
+
+        String query = "SELECT * FROM exam";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                subscriptionList.add(new Exam(
+                        resultSet.getInt("exam_id"),
+                        new ProviderDaoSQLImpl().getById(resultSet.getInt("provider_id")),
+                        resultSet.getString("course_name"),
+                        resultSet.getTimestamp("exam_time"),
+                        resultSet.getString("answer_sheet")
+                ));
+            }
+
+            resultSet.close();
+
+        } catch (Exception e) {
+            throw new DBHandleException(e);
+        }
+
+        return subscriptionList;
     }
 
     /**
