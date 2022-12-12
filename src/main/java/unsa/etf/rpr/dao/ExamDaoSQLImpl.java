@@ -23,7 +23,7 @@ public class ExamDaoSQLImpl implements ExamDao {
      *
      */
     public ExamDaoSQLImpl() throws DBHandleException {
-        connection = MyConnection.EstablishConnection();
+        connection = MyConnection.getInstance().getConnection();
     }
 
     /**

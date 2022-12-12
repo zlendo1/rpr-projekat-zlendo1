@@ -23,7 +23,7 @@ public class SubscriptonDaoSQLImpl implements SubscriptionDao {
      *
      */
     public SubscriptonDaoSQLImpl() throws DBHandleException {
-        connection = MyConnection.EstablishConnection();
+        connection = MyConnection.getInstance().getConnection();
     }
 
     /**

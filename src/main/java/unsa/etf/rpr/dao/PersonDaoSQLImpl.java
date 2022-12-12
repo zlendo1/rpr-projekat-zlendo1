@@ -21,7 +21,7 @@ public class PersonDaoSQLImpl implements PersonDao {
      *
      */
     public PersonDaoSQLImpl() throws DBHandleException {
-        connection = MyConnection.EstablishConnection();
+        connection = MyConnection.getInstance().getConnection();
     }
 
     /**

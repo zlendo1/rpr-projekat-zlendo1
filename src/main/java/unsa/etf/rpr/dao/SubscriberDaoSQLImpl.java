@@ -21,7 +21,7 @@ public class SubscriberDaoSQLImpl implements SubscriberDao {
      *
      */
     public SubscriberDaoSQLImpl() throws DBHandleException {
-        connection = MyConnection.EstablishConnection();
+        connection = MyConnection.getInstance().getConnection();
     }
 
     /**

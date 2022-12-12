@@ -21,7 +21,7 @@ public class ProviderDaoSQLImpl implements ProviderDao {
      *
      */
     public ProviderDaoSQLImpl() throws DBHandleException {
-        connection = MyConnection.EstablishConnection();
+        connection = MyConnection.getInstance().getConnection();
     }
 
 
