@@ -25,7 +25,9 @@ public class MyConnection {
      * @throws DBHandleException In case of file reading error or connection establishment
      */
     private MyConnection() throws DBHandleException {
-        try (InputStream inputStream = new FileInputStream("config.properties")) {
+        try {
+            InputStream inputStream = new FileInputStream("config.properties");
+
             Properties properties = new Properties();
 
             properties.load(inputStream);
