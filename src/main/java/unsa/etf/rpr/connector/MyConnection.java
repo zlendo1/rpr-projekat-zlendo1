@@ -8,15 +8,34 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Properties;
 
+/**
+ * The class that lets us establish only one connection to the database at a time
+ *
+ */
 public class MyConnection {
 
+    private static Connection connection = null;    // The observant viewer will recognise that this is,
+                                                    // infact, implemented with the singleton design pattern in mind.
+
+    /**
+     * Static method that establishes a connection to the database only if none is established beforehand
+     * and promply returns the same connection.
+     * If a connection was established beforehand, returns the older connection.
+     *
+     * @return Connection to our database
+     * @throws DBHandleException In case of file reading error or connection establishment
+     */
     public static Connection EstablishConnection() throws DBHandleException {
+        if (connection != null) {
+            return connection;
+        }
+
         try (InputStream inputStream = new FileInputStream("config.properties")) {
             Properties properties = new Properties();
 
             properties.load(inputStream);
 
-            return DriverManager.getConnection(
+            connection = DriverManager.getConnection(
                     properties.getProperty("db.url"),
                     properties.getProperty("db.user"),
                     properties.getProperty("db.password")
@@ -25,6 +44,8 @@ public class MyConnection {
         } catch (Exception e) {
             throw new DBHandleException(e);
         }
+
+        return connection;
     }
 
 }
