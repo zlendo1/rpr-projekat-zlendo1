@@ -2,10 +2,10 @@ package unsa.etf.rpr.connector;
 
 import unsa.etf.rpr.exception.DBHandleException;
 
-import java.io.InputStream;
-import java.io.FileInputStream;
+import java.io.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Properties;
 
 /**
@@ -25,12 +25,16 @@ public class MyConnection {
      * @throws DBHandleException In case of file reading error or connection establishment
      */
     private MyConnection() throws DBHandleException {
+        File myFile = new File("config.properties");
+
         try {
-            InputStream inputStream = new FileInputStream("config.properties");
+            myFile.createNewFile(); // Only creates a new file if one does not exist (exception security reasons)
+
+            InputStream inputStream = new FileInputStream(myFile);
 
             Properties properties = new Properties();
-
             properties.load(inputStream);
+            inputStream.close();
 
             connection = DriverManager.getConnection(
                     properties.getProperty("db.url"),
@@ -38,7 +42,7 @@ public class MyConnection {
                     properties.getProperty("db.password")
             );
 
-        } catch (Exception e) {
+        } catch (SQLException | IOException e) {
             throw new DBHandleException(e);
         }
     }
