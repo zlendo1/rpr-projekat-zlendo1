@@ -273,7 +273,34 @@ public class UserDaoSQLImpl implements UserDao {
      */
     @Override
     public User getByUsername(String username) throws DBHandleException {
-        return null;
+        User user = null;
+
+        String query = "SELECT * FROM user WHERE username = ?";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setString(1, username);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                user = new User(
+                        resultSet.getInt("user_id"),
+                        resultSet.getString("username"),
+                        resultSet.getString("password"),
+                        resultSet.getString("first_name"),
+                        resultSet.getString("last_name")
+                );
+            }
+
+            resultSet.close();
+
+        } catch (SQLException e) {
+            throw new DBHandleException(e);
+        }
+
+        return user;
     }
 
     /**
