@@ -6,6 +6,7 @@ import java.util.Objects;
 
 /**
  * Bean for subscription
+ *
  */
 public class Exam implements Serializable {
 

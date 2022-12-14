@@ -6,6 +6,7 @@ import java.util.Objects;
 
 /**
  * Bean for provider
+ *
  */
 public class Provider implements Serializable {
 

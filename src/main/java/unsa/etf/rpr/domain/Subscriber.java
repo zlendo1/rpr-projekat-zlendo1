@@ -5,6 +5,7 @@ import java.util.Objects;
 
 /**
  * Bean for subscriber
+ *
  */
 public class Subscriber implements Serializable {
 
