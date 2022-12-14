@@ -53,7 +53,7 @@ public class MyConnection {
      * @throws DBHandleException In case of file reading error or connection establishment
      */
     public static MyConnection getInstance() throws DBHandleException {
-        if (instance != null) {
+        if (instance == null) {
             instance = new MyConnection();
         }
 
