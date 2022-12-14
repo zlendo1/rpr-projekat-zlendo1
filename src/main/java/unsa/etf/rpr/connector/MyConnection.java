@@ -24,7 +24,7 @@ public class MyConnection {
      * @throws DBHandleException In case of file reading error or connection establishment
      */
     private MyConnection() throws DBHandleException {
-        File myFile = new File("config.properties");
+        File myFile = new File("src/main/java/unsa/etf/rpr/connector/config.properties");
 
         try {
             myFile.createNewFile(); // Only creates a new file if one does not exist (exception security reasons)
