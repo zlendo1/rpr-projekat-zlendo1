@@ -9,6 +9,8 @@ import java.util.Objects;
 public class Person implements Serializable {
 
     private int personId;
+    private String username;
+    private String password;
     private String firstName;
     private String lastName;
 
