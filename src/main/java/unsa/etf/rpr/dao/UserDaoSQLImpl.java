@@ -312,7 +312,34 @@ public class UserDaoSQLImpl implements UserDao {
      */
     @Override
     public List<User> getByPassword(String password) throws DBHandleException {
-        return null;
+        List<User> userList = new ArrayList<>();
+
+        String query = "SELECT * FROM user WHERE password = ?";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setString(1, password);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                userList.add(new User(
+                        resultSet.getInt("user_id"),
+                        resultSet.getString("username"),
+                        resultSet.getString("password"),
+                        resultSet.getString("first_name"),
+                        resultSet.getString("last_name"))
+                );
+            }
+
+            resultSet.close();
+
+        } catch (SQLException e) {
+            throw new DBHandleException(e);
+        }
+
+        return userList;
     }
 
 }
