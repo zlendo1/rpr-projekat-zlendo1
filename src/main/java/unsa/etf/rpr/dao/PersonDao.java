@@ -29,4 +29,22 @@ public interface PersonDao extends Dao<Person> {
      */
     List<Person> getByLastName(String lastName) throws DBHandleException;
 
+    /**
+     * Search people in DB based on their username
+     *
+     * @param username Username of a user
+     * @return A user object
+     * @throws DBHandleException In case of any DB handling error
+     */
+    Person getByUsername(String username) throws DBHandleException;
+
+    /**
+     * Search user in DB based on their password
+     *
+     * @param password Password of a user
+     * @return List of users
+     * @throws DBHandleException In case of any DB handling error
+     */
+    List<Person> getByPassword(String password) throws DBHandleException;
+
 }
