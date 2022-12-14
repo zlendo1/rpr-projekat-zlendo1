@@ -17,8 +17,10 @@ public class Person implements Serializable {
     public Person() {
     }
 
-    public Person(int personId, String firstName, String lastName) {
+    public Person(int personId, String username, String password, String firstName, String lastName) {
         this.personId = personId;
+        this.username = username;
+        this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
     }
@@ -29,6 +31,22 @@ public class Person implements Serializable {
 
     public void setPersonId(int personId) {
         this.personId = personId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getFirstName() {
@@ -64,9 +82,9 @@ public class Person implements Serializable {
     public String toString() {
         return "Person{" +
                 "personId=" + personId +
+                ", username='" + username + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 '}';
     }
-
 }
