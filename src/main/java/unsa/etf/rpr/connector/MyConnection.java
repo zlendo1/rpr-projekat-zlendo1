@@ -15,7 +15,6 @@ import java.util.Properties;
 public class MyConnection {
 
     private final Connection connection;
-
     private static MyConnection instance = null;    // The observant viewer will notice that this was
                                                     // implemented using the singleton design pattern.
 
