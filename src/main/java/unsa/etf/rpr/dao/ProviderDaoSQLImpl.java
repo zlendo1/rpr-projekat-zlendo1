@@ -45,7 +45,7 @@ public class ProviderDaoSQLImpl implements ProviderDao {
 
             if (resultSet.next()) {
                 Provider provider = new Provider(
-                        new PersonDaoSQLImpl().getById(resultSet.getInt("provider_id")),
+                        new UserDaoSQLImpl().getById(resultSet.getInt("provider_id")),
                         resultSet.getTimestamp("contract_start"),
                         resultSet.getTimestamp("contract_expiry")
                 );
@@ -85,7 +85,7 @@ public class ProviderDaoSQLImpl implements ProviderDao {
 
             resultSet.next();
 
-            item.setPerson(new PersonDaoSQLImpl().getById(resultSet.getInt(1)));
+            item.setUser(new UserDaoSQLImpl().getById(resultSet.getInt(1)));
 
             resultSet.close();
 
@@ -110,7 +110,7 @@ public class ProviderDaoSQLImpl implements ProviderDao {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(update);
 
-            preparedStatement.setInt(3, item.getPerson().getPersonId());
+            preparedStatement.setInt(3, item.getUser().getUserId());
             preparedStatement.setTimestamp(1, (Timestamp) item.getContractStart());
             preparedStatement.setTimestamp(2, (Timestamp) item.getContractExpiry());
 
@@ -168,7 +168,7 @@ public class ProviderDaoSQLImpl implements ProviderDao {
 
             while (resultSet.next()) {
                 providerList.add(new Provider(
-                        new PersonDaoSQLImpl().getById(resultSet.getInt("provider_id")),
+                        new UserDaoSQLImpl().getById(resultSet.getInt("provider_id")),
                         resultSet.getTimestamp("contract_start"),
                         resultSet.getTimestamp("contract_expiry")
                 ));
@@ -207,7 +207,7 @@ public class ProviderDaoSQLImpl implements ProviderDao {
 
             while (resultSet.next()) {
                 providerList.add(new Provider(
-                        new PersonDaoSQLImpl().getById(resultSet.getInt("provider_id")),
+                        new UserDaoSQLImpl().getById(resultSet.getInt("provider_id")),
                         resultSet.getTimestamp("contract_start"),
                         resultSet.getTimestamp("contract_expiry")
                 ));

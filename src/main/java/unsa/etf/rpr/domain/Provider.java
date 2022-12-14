@@ -9,25 +9,25 @@ import java.util.Objects;
  */
 public class Provider implements Serializable {
 
-    private Person person;
+    private User user;
     private Date contractStart;
     private Date contractExpiry;
 
     public Provider() {
     }
 
-    public Provider(Person person, Date contractStart, Date contractExpiry) {
-        this.person = person;
+    public Provider(User user, Date contractStart, Date contractExpiry) {
+        this.user = user;
         this.contractStart = contractStart;
         this.contractExpiry = contractExpiry;
     }
 
-    public Person getPerson() {
-        return person;
+    public User getUser() {
+        return user;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Date getContractStart() {
@@ -51,20 +51,21 @@ public class Provider implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Provider)) return false;
         Provider provider = (Provider) o;
-        return Objects.equals(getPerson(), provider.getPerson());
+        return Objects.equals(getUser(), provider.getUser());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getPerson());
+        return Objects.hash(getUser());
     }
 
     @Override
     public String toString() {
         return "Provider{" +
-                "person=" + person +
+                "user=" + user +
                 ", contractStart=" + contractStart +
                 ", contractExpiry=" + contractExpiry +
                 '}';
     }
+
 }

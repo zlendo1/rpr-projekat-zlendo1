@@ -78,7 +78,7 @@ public class SubscriptonDaoSQLImpl implements SubscriptionDao {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
 
-            preparedStatement.setInt(1, item.getSubscriber().getPerson().getPersonId());
+            preparedStatement.setInt(1, item.getSubscriber().getUser().getUserId());
             preparedStatement.setInt(2, item.getExam().getExamId());
             preparedStatement.setTimestamp(3, (Timestamp) item.getExporation());
 
@@ -114,7 +114,7 @@ public class SubscriptonDaoSQLImpl implements SubscriptionDao {
             PreparedStatement preparedStatement = connection.prepareStatement(update);
 
             preparedStatement.setInt(4, item.getSubscriptionId());
-            preparedStatement.setInt(1, item.getSubscriber().getPerson().getPersonId());
+            preparedStatement.setInt(1, item.getSubscriber().getUser().getUserId());
             preparedStatement.setInt(2, item.getExam().getExamId());
             preparedStatement.setTimestamp(3, (Timestamp) item.getExporation());
 
@@ -204,7 +204,7 @@ public class SubscriptonDaoSQLImpl implements SubscriptionDao {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
-            preparedStatement.setInt(1, subscriber.getPerson().getPersonId());
+            preparedStatement.setInt(1, subscriber.getUser().getUserId());
 
             ResultSet resultSet = preparedStatement.executeQuery();
 

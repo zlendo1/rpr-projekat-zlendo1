@@ -44,7 +44,7 @@ public class SubscriberDaoSQLImpl implements SubscriberDao {
 
             if (resultSet.next()) {
                 Subscriber subscriber = new Subscriber(
-                        new PersonDaoSQLImpl().getById(resultSet.getInt("subscriber_id")),
+                        new UserDaoSQLImpl().getById(resultSet.getInt("subscriber_id")),
                         resultSet.getString("preferences")
                 );
 
@@ -82,7 +82,7 @@ public class SubscriberDaoSQLImpl implements SubscriberDao {
 
             resultSet.next();
 
-            item.setPerson(new PersonDaoSQLImpl().getById(resultSet.getInt(1)));
+            item.setUser(new UserDaoSQLImpl().getById(resultSet.getInt(1)));
 
             resultSet.close();
 
@@ -107,7 +107,7 @@ public class SubscriberDaoSQLImpl implements SubscriberDao {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(update);
 
-            preparedStatement.setInt(2, item.getPerson().getPersonId());
+            preparedStatement.setInt(2, item.getUser().getUserId());
             preparedStatement.setString(1, item.getPreferences());
 
             preparedStatement.executeUpdate();
@@ -164,7 +164,7 @@ public class SubscriberDaoSQLImpl implements SubscriberDao {
 
             while (resultSet.next()) {
                 subscriberList.add(new Subscriber(
-                        new PersonDaoSQLImpl().getById(resultSet.getInt("subscriber_id")),
+                        new UserDaoSQLImpl().getById(resultSet.getInt("subscriber_id")),
                         resultSet.getString("preferences")
                 ));
             }
@@ -198,7 +198,7 @@ public class SubscriberDaoSQLImpl implements SubscriberDao {
 
             while (resultSet.next()) {
                 subscriberList.add(new Subscriber(
-                        new PersonDaoSQLImpl().getById(resultSet.getInt("subscriber_id")),
+                        new UserDaoSQLImpl().getById(resultSet.getInt("subscriber_id")),
                         resultSet.getString("preferences")
                 ));
             }

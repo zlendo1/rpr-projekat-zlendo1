@@ -1,7 +1,7 @@
 package unsa.etf.rpr.dao;
 
 import unsa.etf.rpr.connector.MyConnection;
-import unsa.etf.rpr.domain.Person;
+import unsa.etf.rpr.domain.User;
 import unsa.etf.rpr.exception.DBHandleException;
 
 import java.sql.*;
@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * SQL implementation of PersonDao
+ * SQL implementation of UserDao
  *
  */
-public class PersonDaoSQLImpl implements PersonDao {
+public class UserDaoSQLImpl implements UserDao {
 
     private final Connection connection;
 
@@ -20,7 +20,7 @@ public class PersonDaoSQLImpl implements PersonDao {
      * Establishes connection to the DB
      *
      */
-    public PersonDaoSQLImpl() throws DBHandleException {
+    public UserDaoSQLImpl() throws DBHandleException {
         connection = MyConnection.getInstance().getConnection();
     }
 
@@ -32,8 +32,8 @@ public class PersonDaoSQLImpl implements PersonDao {
      * @throws DBHandleException In case of any DB handling error
      */
     @Override
-    public Person getById(int id) throws DBHandleException {
-        String query = "SELECT * FROM person WHERE person_id = ?";
+    public User getById(int id) throws DBHandleException {
+        String query = "SELECT * FROM user WHERE user_id = ?";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -43,15 +43,17 @@ public class PersonDaoSQLImpl implements PersonDao {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-                Person person = new Person(
-                        resultSet.getInt("person_id"),
+                User user = new User(
+                        resultSet.getInt("user_id"),
+                        resultSet.getString("username"),
+                        resultSet.getString("password"),
                         resultSet.getString("first_name"),
                         resultSet.getString("last_name")
                 );
 
                 resultSet.close();
 
-                return person;
+                return user;
             }
 
         } catch (SQLException e) {
@@ -69,8 +71,8 @@ public class PersonDaoSQLImpl implements PersonDao {
      * @throws DBHandleException In case of any DB handling error
      */
     @Override
-    public Person add(Person item) throws DBHandleException {
-        String insert = "INSERT INTO person(first_name, last_name) VALUES(?, ?)";
+    public User add(User item) throws DBHandleException {
+        String insert = "INSERT INTO user(first_name, last_name) VALUES(?, ?)";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
@@ -84,7 +86,7 @@ public class PersonDaoSQLImpl implements PersonDao {
 
             resultSet.next();
 
-            item.setPersonId(resultSet.getInt(1));
+            item.setUserId(resultSet.getInt(1));
 
             resultSet.close();
 
@@ -103,13 +105,13 @@ public class PersonDaoSQLImpl implements PersonDao {
      * @throws DBHandleException In case of any DB handling error
      */
     @Override
-    public Person update(Person item) throws DBHandleException {
-        String update = "UPDATE person SET first_name = ?, last_name = ? WHERE person_id = ?";
+    public User update(User item) throws DBHandleException {
+        String update = "UPDATE user SET first_name = ?, last_name = ? WHERE user_id = ?";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(update);
 
-            preparedStatement.setInt(3, item.getPersonId());
+            preparedStatement.setInt(3, item.getUserId());
             preparedStatement.setString(1, item.getFirstName());
             preparedStatement.setString(2, item.getLastName());
 
@@ -132,7 +134,7 @@ public class PersonDaoSQLImpl implements PersonDao {
      */
     @Override
     public void delete(int id) throws DBHandleException {
-        String delete = "DELETE FROM person WHERE person_id = ?";
+        String delete = "DELETE FROM user WHERE user_id = ?";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(delete);
@@ -155,10 +157,10 @@ public class PersonDaoSQLImpl implements PersonDao {
      * @throws DBHandleException In case of any DB handling error
      */
     @Override
-    public List<Person> getAll() throws DBHandleException {
-        List<Person> personList = new ArrayList<>();
+    public List<User> getAll() throws DBHandleException {
+        List<User> userList = new ArrayList<>();
 
-        String query = "SELECT * FROM person";
+        String query = "SELECT * FROM user";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -166,8 +168,10 @@ public class PersonDaoSQLImpl implements PersonDao {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                personList.add(new Person(
-                        resultSet.getInt("person_id"),
+                userList.add(new User(
+                        resultSet.getInt("user_id"),
+                        resultSet.getString("username"),
+                        resultSet.getString("password"),
                         resultSet.getString("first_name"),
                         resultSet.getString("last_name"))
                 );
@@ -179,21 +183,21 @@ public class PersonDaoSQLImpl implements PersonDao {
             throw new DBHandleException(e);
         }
 
-        return personList;
+        return userList;
     }
 
     /**
-     * Search people in DB based on their first names
+     * Search users in DB based on their first names
      *
-     * @param firstName First name of a person
-     * @return List of people
+     * @param firstName First name of a user
+     * @return List of users
      * @throws DBHandleException In case of any DB handling error
      */
     @Override
-    public List<Person> getByFirstName(String firstName) throws DBHandleException {
-        List<Person> personList = new ArrayList<>();
+    public List<User> getByFirstName(String firstName) throws DBHandleException {
+        List<User> userList = new ArrayList<>();
 
-        String query = "SELECT * FROM person WHERE first_name = ?";
+        String query = "SELECT * FROM user WHERE first_name = ?";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -203,8 +207,10 @@ public class PersonDaoSQLImpl implements PersonDao {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                personList.add(new Person(
-                        resultSet.getInt("person_id"),
+                userList.add(new User(
+                        resultSet.getInt("user_id"),
+                        resultSet.getString("username"),
+                        resultSet.getString("password"),
                         resultSet.getString("first_name"),
                         resultSet.getString("last_name"))
                 );
@@ -216,21 +222,21 @@ public class PersonDaoSQLImpl implements PersonDao {
             throw new DBHandleException(e);
         }
 
-        return personList;
+        return userList;
     }
 
     /**
-     * Search people in DB based on their last name
+     * Search users in DB based on their last name
      *
-     * @param lastName Last name of a person
-     * @return List of people
+     * @param lastName Last name of a user
+     * @return List of users
      * @throws DBHandleException In case of any DB handling error
      */
     @Override
-    public List<Person> getByLastName(String lastName) throws DBHandleException {
-        List<Person> personList = new ArrayList<>();
+    public List<User> getByLastName(String lastName) throws DBHandleException {
+        List<User> userList = new ArrayList<>();
 
-        String query = "SELECT * FROM person WHERE last_name = ?";
+        String query = "SELECT * FROM user WHERE last_name = ?";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -240,8 +246,10 @@ public class PersonDaoSQLImpl implements PersonDao {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                personList.add(new Person(
-                        resultSet.getInt("person_id"),
+                userList.add(new User(
+                        resultSet.getInt("user_id"),
+                        resultSet.getString("username"),
+                        resultSet.getString("password"),
                         resultSet.getString("first_name"),
                         resultSet.getString("last_name"))
                 );
@@ -253,7 +261,31 @@ public class PersonDaoSQLImpl implements PersonDao {
             throw new DBHandleException(e);
         }
 
-        return personList;
+        return userList;
+    }
+
+    /**
+     * Search users in DB based on their username
+     *
+     * @param username Username of a user
+     * @return A user object
+     * @throws DBHandleException In case of any DB handling error
+     */
+    @Override
+    public User getByUsername(String username) throws DBHandleException {
+        return null;
+    }
+
+    /**
+     * Search user in DB based on their password
+     *
+     * @param password Password of a user
+     * @return List of users
+     * @throws DBHandleException In case of any DB handling error
+     */
+    @Override
+    public List<User> getByPassword(String password) throws DBHandleException {
+        return null;
     }
 
 }

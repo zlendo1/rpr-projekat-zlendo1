@@ -4,33 +4,33 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * Bean for person
+ * Bean for user
  */
-public class Person implements Serializable {
+public class User implements Serializable {
 
-    private int personId;
+    private int userId;
     private String username;
     private String password;
     private String firstName;
     private String lastName;
 
-    public Person() {
+    public User() {
     }
 
-    public Person(int personId, String username, String password, String firstName, String lastName) {
-        this.personId = personId;
+    public User(int userId, String username, String password, String firstName, String lastName) {
+        this.userId = userId;
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
-    public int getPersonId() {
-        return personId;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setPersonId(int personId) {
-        this.personId = personId;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {
@@ -68,20 +68,20 @@ public class Person implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Person)) return false;
-        Person person = (Person) o;
-        return getPersonId() == person.getPersonId();
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return getUserId() == user.getUserId();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getPersonId());
+        return Objects.hash(getUserId());
     }
 
     @Override
     public String toString() {
-        return "Person{" +
-                "personId=" + personId +
+        return "User{" +
+                "userId=" + userId +
                 ", username='" + username + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +

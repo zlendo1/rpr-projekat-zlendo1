@@ -8,23 +8,23 @@ import java.util.Objects;
  */
 public class Subscriber implements Serializable {
 
-    private Person person;
+    private User user;
     private String preferences;
 
     public Subscriber() {
     }
 
-    public Subscriber(Person person, String preferences) {
-        this.person = person;
+    public Subscriber(User user, String preferences) {
+        this.user = user;
         this.preferences = preferences;
     }
 
-    public Person getPerson() {
-        return person;
+    public User getUser() {
+        return user;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getPreferences() {
@@ -40,18 +40,18 @@ public class Subscriber implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Subscriber)) return false;
         Subscriber that = (Subscriber) o;
-        return Objects.equals(getPerson(), that.getPerson());
+        return Objects.equals(getUser(), that.getUser());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getPerson());
+        return Objects.hash(getUser());
     }
 
     @Override
     public String toString() {
         return "Subscriber{" +
-                "person=" + person +
+                "user=" + user +
                 ", preferences='" + preferences + '\'' +
                 '}';
     }
