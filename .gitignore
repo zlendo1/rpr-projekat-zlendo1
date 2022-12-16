@@ -3,7 +3,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 .idea/
-src/main/java/unsa/etf/rpr/connector/config.properties
+src/main/resources/db_properties
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
