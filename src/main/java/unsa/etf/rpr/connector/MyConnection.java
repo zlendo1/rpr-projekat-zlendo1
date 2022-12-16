@@ -24,16 +24,9 @@ public class MyConnection {
      * @throws DBHandleException In case of file reading error or connection establishment
      */
     private MyConnection() throws DBHandleException {
-        File myFile = new File("src/main/java/unsa/etf/rpr/connector/config.properties");
-
         try {
-            myFile.createNewFile(); // Only creates a new file if one does not exist (exception security reasons)
-
-            InputStream inputStream = new FileInputStream(myFile);
-
             Properties properties = new Properties();
-            properties.load(inputStream);
-            inputStream.close();
+            properties.load(getClass().getResourceAsStream("db_properties/config.properties"));
 
             connection = DriverManager.getConnection(
                     properties.getProperty("db.url"),
