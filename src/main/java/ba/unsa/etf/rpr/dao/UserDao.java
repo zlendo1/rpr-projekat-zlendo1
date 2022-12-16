@@ -1,7 +1,7 @@
-package unsa.etf.rpr.dao;
+package ba.unsa.etf.rpr.dao;
 
-import unsa.etf.rpr.domain.User;
-import unsa.etf.rpr.exception.DBHandleException;
+import ba.unsa.etf.rpr.domain.User;
+import ba.unsa.etf.rpr.exception.DBHandleException;
 
 import java.util.List;
 

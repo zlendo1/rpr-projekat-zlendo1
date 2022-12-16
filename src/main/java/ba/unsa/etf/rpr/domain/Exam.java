@@ -1,4 +1,4 @@
-package unsa.etf.rpr.domain;
+package ba.unsa.etf.rpr.domain;
 
 import java.io.Serializable;
 import java.util.Date;

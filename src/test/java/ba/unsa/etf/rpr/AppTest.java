@@ -1,4 +1,4 @@
-package unsa.etf.rpr;
+package ba.unsa.etf.rpr;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;

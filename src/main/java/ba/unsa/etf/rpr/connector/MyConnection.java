@@ -1,6 +1,6 @@
-package unsa.etf.rpr.connector;
+package ba.unsa.etf.rpr.connector;
 
-import unsa.etf.rpr.exception.DBHandleException;
+import ba.unsa.etf.rpr.exception.DBHandleException;
 
 import java.io.*;
 import java.sql.Connection;

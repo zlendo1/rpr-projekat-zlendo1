@@ -1,4 +1,4 @@
-package unsa.etf.rpr.exception;
+package ba.unsa.etf.rpr.exception;
 
 /**
  * My exception class for handling dao exceptions

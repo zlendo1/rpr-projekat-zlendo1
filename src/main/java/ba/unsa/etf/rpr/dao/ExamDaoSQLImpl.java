@@ -1,9 +1,9 @@
-package unsa.etf.rpr.dao;
+package ba.unsa.etf.rpr.dao;
 
-import unsa.etf.rpr.connector.MyConnection;
-import unsa.etf.rpr.domain.Exam;
-import unsa.etf.rpr.domain.Provider;
-import unsa.etf.rpr.exception.DBHandleException;
+import ba.unsa.etf.rpr.exception.DBHandleException;
+import ba.unsa.etf.rpr.connector.MyConnection;
+import ba.unsa.etf.rpr.domain.Exam;
+import ba.unsa.etf.rpr.domain.Provider;
 
 import java.sql.*;
 import java.util.ArrayList;
