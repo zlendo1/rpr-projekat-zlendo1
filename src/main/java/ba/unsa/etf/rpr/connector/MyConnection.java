@@ -25,13 +25,8 @@ public class MyConnection {
      */
     private MyConnection() throws DBHandleException {
         try {
-            InputStream inputStream = getClass().getClassLoader().getResourceAsStream("/db_properties/config.properties");
-
             Properties properties = new Properties();
-            properties.load(inputStream);
-
-            assert inputStream != null;
-            inputStream.close();
+            properties.load(ClassLoader.getSystemResource("db_properties/config.properties").openStream());
 
             connection = DriverManager.getConnection(
                     properties.getProperty("db.url"),
