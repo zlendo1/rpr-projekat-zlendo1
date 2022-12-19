@@ -7,7 +7,7 @@ import java.util.Objects;
  * Bean for user
  *
  */
-public class User implements Serializable {
+public class User implements Serializable, Idable {
 
     private int id;
     private String username;

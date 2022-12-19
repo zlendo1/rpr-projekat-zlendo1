@@ -8,7 +8,7 @@ import java.util.Objects;
  * Bean for subscription
  *
  */
-public class Exam implements Serializable {
+public class Exam implements Serializable, Idable {
 
     private int id;
     private Provider provider;
