@@ -9,7 +9,7 @@ import java.util.Objects;
  */
 public class User implements Serializable {
 
-    private int userId;
+    private int id;
     private String username;
     private String password;
     private String firstName;
@@ -18,20 +18,20 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(int userId, String username, String password, String firstName, String lastName) {
-        this.userId = userId;
+    public User(int id, String username, String password, String firstName, String lastName) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getId() {
+        return id;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -71,18 +71,18 @@ public class User implements Serializable {
         if (this == o) return true;
         if (!(o instanceof User)) return false;
         User user = (User) o;
-        return getUserId() == user.getUserId();
+        return getId() == user.getId();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getUserId());
+        return Objects.hash(getId());
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "userId=" + userId +
+                "id=" + id +
                 ", username='" + username + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +

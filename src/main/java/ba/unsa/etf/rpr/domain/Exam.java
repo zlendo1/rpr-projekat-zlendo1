@@ -10,7 +10,7 @@ import java.util.Objects;
  */
 public class Exam implements Serializable {
 
-    private int examId;
+    private int id;
     private Provider provider;
     private String courseName;
     private Date examTime;
@@ -19,20 +19,20 @@ public class Exam implements Serializable {
     public Exam() {
     }
 
-    public Exam(int examId, Provider provider, String courseName, Date examTime, String answerSheet) {
-        this.examId = examId;
+    public Exam(int id, Provider provider, String courseName, Date examTime, String answerSheet) {
+        this.id = id;
         this.provider = provider;
         this.courseName = courseName;
         this.examTime = examTime;
         this.answerSheet = answerSheet;
     }
 
-    public int getExamId() {
-        return examId;
+    public int getId() {
+        return id;
     }
 
-    public void setExamId(int examId) {
-        this.examId = examId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Provider getProvider() {
@@ -72,18 +72,18 @@ public class Exam implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Exam)) return false;
         Exam exam = (Exam) o;
-        return getExamId() == exam.getExamId();
+        return getId() == exam.getId();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getExamId());
+        return Objects.hash(getId());
     }
 
     @Override
     public String toString() {
         return "Exam{" +
-                "examId=" + examId +
+                "id=" + id +
                 ", provider=" + provider +
                 ", courseName='" + courseName + '\'' +
                 ", examTime=" + examTime +
