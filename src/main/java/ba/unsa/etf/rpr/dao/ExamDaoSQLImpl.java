@@ -79,7 +79,7 @@ public class ExamDaoSQLImpl implements ExamDao {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(insert, Statement.RETURN_GENERATED_KEYS);
 
-            preparedStatement.setInt(1, item.getProvider().getUser().getUserId());
+            preparedStatement.setInt(1, item.getProvider().getUser().getId());
             preparedStatement.setString(2, item.getCourseName());
             preparedStatement.setTimestamp(3, (Timestamp) item.getExamTime());
             preparedStatement.setString(4, item.getAnswerSheet());
@@ -90,7 +90,7 @@ public class ExamDaoSQLImpl implements ExamDao {
 
             resultSet.next();
 
-            item.setExamId(resultSet.getInt(1));
+            item.setId(resultSet.getInt(1));
 
             resultSet.close();
 
@@ -116,7 +116,7 @@ public class ExamDaoSQLImpl implements ExamDao {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(update);
 
-            preparedStatement.setInt(1, item.getProvider().getUser().getUserId());
+            preparedStatement.setInt(1, item.getProvider().getUser().getId());
             preparedStatement.setString(2, item.getCourseName());
             preparedStatement.setTimestamp(3, (Timestamp) item.getExamTime());
             preparedStatement.setString(4, item.getAnswerSheet());
@@ -208,7 +208,7 @@ public class ExamDaoSQLImpl implements ExamDao {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
-            preparedStatement.setInt(1, provider.getUser().getUserId());
+            preparedStatement.setInt(1, provider.getUser().getId());
 
             ResultSet resultSet = preparedStatement.executeQuery();
 

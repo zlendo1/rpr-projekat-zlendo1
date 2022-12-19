@@ -86,7 +86,7 @@ public class UserDaoSQLImpl implements UserDao {
 
             resultSet.next();
 
-            item.setUserId(resultSet.getInt(1));
+            item.setId(resultSet.getInt(1));
 
             resultSet.close();
 
@@ -111,7 +111,7 @@ public class UserDaoSQLImpl implements UserDao {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(update);
 
-            preparedStatement.setInt(3, item.getUserId());
+            preparedStatement.setInt(3, item.getId());
             preparedStatement.setString(1, item.getFirstName());
             preparedStatement.setString(2, item.getLastName());
 
