@@ -1,14 +1,20 @@
 package ba.unsa.etf.rpr.dao;
 
+import ba.unsa.etf.rpr.connector.MyConnection;
 import ba.unsa.etf.rpr.domain.Idable;
 import ba.unsa.etf.rpr.exception.DBHandleException;
 
 import java.sql.Connection;
 import java.util.List;
 
-public class AbstractDao <T extends Idable> implements Dao<T> {
-    private Connection connection;
+public abstract class AbstractDao <T extends Idable> implements Dao<T> {
+    private final Connection connection;
     private String tableName;
+
+    public AbstractDao(String tableName) throws DBHandleException {
+        this.tableName = tableName;
+        this.connection = MyConnection.getInstance().getConnection();
+    }
 
     /**
      * Get entity from database coresponding to its primary key
