@@ -32,7 +32,7 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
      * @return Bean object
      * @throws DBHandleException In case of errors while working with ResultSet
      */
-    public abstract T RowToObject(ResultSet resultSet) throws DBHandleException;
+    public abstract T rowToObject(ResultSet resultSet) throws DBHandleException;
 
     /**
      * Get row utilising a Map object from a bean object.
@@ -41,7 +41,7 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
      * @param object Bean object which we want converted
      * @return Map object containing bean
      */
-    public abstract Map<String, Object> ObjectToRow(T object);
+    public abstract Map<String, Object> objectToRow(T object);
 
     /**
      * Get entity from database coresponding to its primary key.
