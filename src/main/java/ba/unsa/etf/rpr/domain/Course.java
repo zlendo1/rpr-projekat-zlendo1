@@ -2,6 +2,10 @@ package ba.unsa.etf.rpr.domain;
 
 import java.util.Objects;
 
+/**
+ * Bean for course
+ *
+ */
 public class Course implements Idable{
     private int id;
     private String professor;
