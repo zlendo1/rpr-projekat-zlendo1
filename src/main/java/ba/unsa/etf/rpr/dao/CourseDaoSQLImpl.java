@@ -1,7 +1,6 @@
 package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Course;
-import ba.unsa.etf.rpr.domain.User;
 import ba.unsa.etf.rpr.exception.DBHandleException;
 
 import java.sql.PreparedStatement;
@@ -12,6 +11,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * SQL implementation of course DAO.
+ *
+ */
 public class CourseDaoSQLImpl extends AbstractDao<Course> implements CourseDao{
 
     public CourseDaoSQLImpl() throws DBHandleException {
