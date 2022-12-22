@@ -9,13 +9,13 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Dao interface for Exam bean
+ * Dao interface for Exam bean.
  *
  */
 public interface ExamDao extends Dao<Exam> {
 
     /**
-     * Search for exams in DB by user
+     * Search for exams in DB by user.
      *
      * @param user The user that provided the exams
      * @return List of exams
@@ -24,7 +24,7 @@ public interface ExamDao extends Dao<Exam> {
     List<Exam> getByUser(User user) throws DBHandleException;
 
     /**
-     * Search for exams in DB by course
+     * Search for exams in DB by course.
      *
      * @param course The course the exam belongs to
      * @return List of exams
@@ -33,7 +33,7 @@ public interface ExamDao extends Dao<Exam> {
     List<Exam> getByCourse(Course course) throws DBHandleException;
 
     /**
-     * Search for exams in DB by exam time
+     * Search for exams in DB by exam time.
      *
      * @param examTime Date and time of the exam
      * @return List of exams

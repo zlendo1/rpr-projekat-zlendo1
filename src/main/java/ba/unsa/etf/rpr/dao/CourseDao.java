@@ -5,10 +5,13 @@ import ba.unsa.etf.rpr.exception.DBHandleException;
 
 import java.util.List;
 
+/**
+ * Dao interface for Course bean.
+ */
 public interface CourseDao extends Dao<Course> {
 
     /**
-     * Search for courses in DB by its name
+     * Search for courses in DB by its name.
      *
      * @param name Course name
      * @return List of courses
@@ -16,7 +19,7 @@ public interface CourseDao extends Dao<Course> {
     List<Course> searchByName(String name) throws DBHandleException;
 
     /**
-     * Search for courses in DB by its professor's name
+     * Search for courses in DB by its professor's name.
      *
      * @param name A professor's full name
      * @return List of courses

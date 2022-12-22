@@ -6,13 +6,13 @@ import ba.unsa.etf.rpr.exception.DBHandleException;
 import java.util.List;
 
 /**
- * Dao interface for User bean
+ * Dao interface for User bean.
  *
  */
 public interface UserDao extends Dao<User> {
 
     /**
-     * Search users in DB based on their first names
+     * Search users in DB based on their first names.
      *
      * @param firstName First name of a user
      * @return List of users
@@ -21,7 +21,7 @@ public interface UserDao extends Dao<User> {
     List<User> getByFirstName(String firstName) throws DBHandleException;
 
     /**
-     * Search users in DB based on their last name
+     * Search users in DB based on their last name.
      *
      * @param lastName Last name of a user
      * @return List of users
@@ -30,7 +30,7 @@ public interface UserDao extends Dao<User> {
     List<User> getByLastName(String lastName) throws DBHandleException;
 
     /**
-     * Search users in DB based on their username
+     * Search users in DB based on their username.
      *
      * @param username Username of a user
      * @return A user object
@@ -39,7 +39,7 @@ public interface UserDao extends Dao<User> {
     User getByUsername(String username) throws DBHandleException;
 
     /**
-     * Search user in DB based on their password
+     * Search user in DB based on their password.
      *
      * @param password Password of a user
      * @return List of users
