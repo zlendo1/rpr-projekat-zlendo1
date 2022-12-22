@@ -104,7 +104,28 @@ public class ExamDaoSQLImpl extends AbstractDao<Exam> implements ExamDao {
      */
     @Override
     public List<Exam> getByCourse(Course course) throws DBHandleException {
-        return null;
+        List<Exam> examList = new ArrayList<>();
+
+        String query = "SELECT * FROM exam WHERE course_id = ?";
+
+        try {
+            PreparedStatement preparedStatement = getConnection().prepareStatement(query);
+
+            preparedStatement.setInt(1, course.getId());
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                examList.add(rowToObject(resultSet));
+            }
+
+            resultSet.close();
+
+        } catch (SQLException e) {
+            throw new DBHandleException(e);
+        }
+
+        return examList;
     }
 
     /**
