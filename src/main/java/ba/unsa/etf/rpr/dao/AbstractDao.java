@@ -6,6 +6,7 @@ import ba.unsa.etf.rpr.exception.DBHandleException;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.util.AbstractMap;
 import java.util.List;
 import java.util.Map;
 
@@ -98,6 +99,33 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
     @Override
     public List<T> getAll() throws DBHandleException {
         return null;
+    }
+
+    private Map.Entry<String, String> prepareUpdateParts(Map<String, Object> row) {
+        StringBuilder columns = new StringBuilder();
+        StringBuilder questions = new StringBuilder();
+
+        int i = 0;
+
+        for (Map.Entry<String, Object> entry : row.entrySet()) {
+            ++i;
+
+            String column = entry.getKey();
+
+            if (column.equals("id")) {
+                continue;
+            }
+
+            columns.append(column);
+            questions.append("?");
+
+            if (i != row.size()) {
+                columns.append(",");
+                questions.append(",");
+            }
+        }
+
+        return new AbstractMap.SimpleEntry<String, String>(columns.toString(), questions.toString());
     }
 
 }
