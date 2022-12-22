@@ -9,6 +9,11 @@ import java.sql.ResultSet;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Abstract DAO class which will be extended by the appropriate bean and DB implementation.
+ *
+ * @param <T> Bean class for which we are implementing the DAO
+ */
 public abstract class AbstractDao <T extends Idable> implements Dao<T> {
     private final Connection connection;
     private final String tableName;
@@ -18,12 +23,27 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
         this.connection = MyConnection.getInstance().getConnection();
     }
 
+    /**
+     * Converts a ResultSet object containing a single row inside
+     * into the appropriate bean.
+     *
+     * @param resultSet Contains the row we want to extract
+     * @return Bean object
+     * @throws DBHandleException In case of errors while working with ResultSet
+     */
     public abstract T RowToObject(ResultSet resultSet) throws DBHandleException;
 
+    /**
+     * Get row utilising a Map object from a bean object.
+     * The keys are the names of the bean's attributes.
+     *
+     * @param object Bean object which we want converted
+     * @return Map object containing bean
+     */
     public abstract Map<String, Object> ObjectToRow(T object);
 
     /**
-     * Get entity from database coresponding to its primary key
+     * Get entity from database coresponding to its primary key.
      *
      * @param id primary key of entity
      * @return corresponding entity
@@ -35,7 +55,7 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
     }
 
     /**
-     * Saves entity into database
+     * Saves entity into database.
      *
      * @param item bean for saving into database
      * @return updated version of the bean
@@ -47,7 +67,7 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
     }
 
     /**
-     * Updates entity from database based on its primary key
+     * Updates entity from database based on its primary key.
      *
      * @param item bean which we will update (id must be populated)
      * @return updated version of the bean
@@ -59,7 +79,7 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
     }
 
     /**
-     * Hard delete of entity with the corseponding primary key
+     * Hard delete of entity with the corseponding primary key.
      *
      * @param id primary key of the entity
      * @throws DBHandleException In case of any DB handling error
@@ -70,7 +90,7 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
     }
 
     /**
-     * Lists all entites from the database
+     * Lists all entites from the database.
      *
      * @return list of entities from the database
      * @throws DBHandleException In case of any DB handling error
