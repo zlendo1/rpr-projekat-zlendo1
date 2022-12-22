@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class CourseDaoSQLImpl extends AbstractDao<Course> implements CourseDao{
 
@@ -43,7 +44,13 @@ public class CourseDaoSQLImpl extends AbstractDao<Course> implements CourseDao{
      */
     @Override
     public Map<String, Object> objectToRow(Course object) {
-        return null;
+        Map<String, Object> row = new TreeMap<>();
+
+        row.put("id", object.getId());
+        row.put("name", object.getName());
+        row.put("professor", object.getProfessor());
+
+        return row;
     }
 
     /**
