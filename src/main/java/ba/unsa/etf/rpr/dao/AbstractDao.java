@@ -89,9 +89,11 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
         Map.Entry<String, String> columns = prepareInsertParts(row);
 
         StringBuilder builder = new StringBuilder();
-        builder.append("INSERT INTO ").append(tableName);
-        builder.append(" (").append(columns.getKey()).append(") ");
-        builder.append("VALUES (").append(columns.getValue()).append(")");
+
+        builder.append("INSERT INTO ")
+                .append(tableName)
+                .append(" (").append(columns.getKey()).append(") ")
+                .append("VALUES (").append(columns.getValue()).append(")");
 
         try {
             PreparedStatement preparedStatement =
@@ -133,7 +135,41 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
      */
     @Override
     public T update(T item) throws DBHandleException {
-        return null;
+        Map<String, Object> row = objectToRow(item);
+        String updateColumns = prepareUpdateParts(row);
+
+        StringBuilder builder = new StringBuilder();
+
+        builder.append("UPDATE ")
+                .append(tableName)
+                .append(" SET ")
+                .append(updateColumns)
+                .append(" WHERE id = ?");
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(builder.toString());
+
+            int i = 1;
+
+            for (Map.Entry<String, Object> entry: row.entrySet()) {
+                if (entry.getKey().equals("id")) {
+                    continue;
+                }
+
+                preparedStatement.setObject(i++, entry.getValue());
+            }
+
+            preparedStatement.setObject(i, item.getId());
+
+            preparedStatement.executeUpdate();
+
+            preparedStatement.close();
+
+            return item;
+
+        } catch (Exception e) {
+            throw new DBHandleException(e);
+        }
     }
 
     /**
@@ -159,7 +195,7 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
     }
 
     /**
-     * Prepares a CSV of columns and question marks for insertion statements
+     * Prepares a CSV of columns and question marks for insertion statement
      *
      * @param row Map containing column names as keys
      * @return CSV of columns and question marks
@@ -197,7 +233,7 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
      * @param row Map containing column names as key values
      * @return String of columns for preparation
      */
-    private String prepareUpdateStatement(Map<String, Object> row) {
+    private String prepareUpdateParts(Map<String, Object> row) {
         StringBuilder columns = new StringBuilder();
 
         int i = 0;
