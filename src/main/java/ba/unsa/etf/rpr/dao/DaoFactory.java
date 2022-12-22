@@ -3,7 +3,7 @@ package ba.unsa.etf.rpr.dao;
 import ba.unsa.etf.rpr.exception.DBHandleException;
 
 /**
- * Singleton factory for Dao objects
+ * Singleton factory for Dao objects.
  *
  */
 public class DaoFactory {
