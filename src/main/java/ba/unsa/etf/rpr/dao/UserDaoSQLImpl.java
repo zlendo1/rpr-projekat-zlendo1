@@ -7,6 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * SQL implementation of UserDao
@@ -29,7 +30,7 @@ public class UserDaoSQLImpl extends AbstractDao<User> implements UserDao {
     public User rowToObject(ResultSet resultSet) throws DBHandleException {
         try {
             return new User(
-                    resultSet.getInt("user_id"),
+                    resultSet.getInt("id"),
                     resultSet.getString("username"),
                     resultSet.getString("password"),
                     resultSet.getString("first_name"),
@@ -50,7 +51,15 @@ public class UserDaoSQLImpl extends AbstractDao<User> implements UserDao {
      */
     @Override
     public Map<String, Object> objectToRow(User object) {
-        return null;
+        Map<String, Object> row = new TreeMap<>();
+
+        row.put("id", object.getId());
+        row.put("username", object.getUsername());
+        row.put("password", object.getPassword());
+        row.put("first_name", object.getFirstName());
+        row.put("last_name", object.getLastName());
+
+        return row;
     }
 
     /**
@@ -75,7 +84,7 @@ public class UserDaoSQLImpl extends AbstractDao<User> implements UserDao {
 
             while (resultSet.next()) {
                 userList.add(new User(
-                        resultSet.getInt("user_id"),
+                        resultSet.getInt("id"),
                         resultSet.getString("username"),
                         resultSet.getString("password"),
                         resultSet.getString("first_name"),
@@ -115,7 +124,7 @@ public class UserDaoSQLImpl extends AbstractDao<User> implements UserDao {
 
             while (resultSet.next()) {
                 userList.add(new User(
-                        resultSet.getInt("user_id"),
+                        resultSet.getInt("id"),
                         resultSet.getString("username"),
                         resultSet.getString("password"),
                         resultSet.getString("first_name"),
@@ -155,7 +164,7 @@ public class UserDaoSQLImpl extends AbstractDao<User> implements UserDao {
 
             if (resultSet.next()) {
                 user = new User(
-                        resultSet.getInt("user_id"),
+                        resultSet.getInt("id"),
                         resultSet.getString("username"),
                         resultSet.getString("password"),
                         resultSet.getString("first_name"),
@@ -194,7 +203,7 @@ public class UserDaoSQLImpl extends AbstractDao<User> implements UserDao {
 
             while (resultSet.next()) {
                 userList.add(new User(
-                        resultSet.getInt("user_id"),
+                        resultSet.getInt("id"),
                         resultSet.getString("username"),
                         resultSet.getString("password"),
                         resultSet.getString("first_name"),
