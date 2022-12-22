@@ -1,10 +1,13 @@
 package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.domain.Course;
+import ba.unsa.etf.rpr.domain.User;
 import ba.unsa.etf.rpr.exception.DBHandleException;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -30,6 +33,7 @@ public class CourseDaoSQLImpl extends AbstractDao<Course> implements CourseDao{
                     resultSet.getString("name"),
                     resultSet.getString("professor")
             );
+
         } catch (SQLException e) {
             throw new DBHandleException(e);
         }
@@ -61,7 +65,32 @@ public class CourseDaoSQLImpl extends AbstractDao<Course> implements CourseDao{
      */
     @Override
     public List<Course> searchByName(String name) throws DBHandleException {
-        return null;
+        List<Course> courseList = new ArrayList<>();
+
+        String query = "SELECT * FROM course WHERE name = ?";
+
+        try {
+            PreparedStatement preparedStatement = getConnection().prepareStatement(query);
+
+            preparedStatement.setString(1, name);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                courseList.add(new Course(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("professor")
+                ));
+            }
+
+            resultSet.close();
+
+        } catch (SQLException e) {
+            throw new DBHandleException(e);
+        }
+
+        return courseList;
     }
 
     /**
