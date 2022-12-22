@@ -22,6 +22,41 @@ public class ExamDaoSQLImpl extends AbstractDao<Exam> implements ExamDao {
     }
 
     /**
+     * Extracts a bean from a ResultSet object.
+     *
+     * @param resultSet Contains the row we want to extract
+     * @return Bean object
+     * @throws DBHandleException In case of errors while working with ResultSet
+     */
+    @Override
+    public Exam rowToObject(ResultSet resultSet) throws DBHandleException {
+        try {
+            return new Exam(
+                    resultSet.getInt("id"),
+                    DaoFactory.userDao().getById(resultSet.getInt("user_id")),
+                    DaoFactory.courseDao().getById(resultSet.getInt("course_id")),
+                    resultSet.getTimestamp("exam_time"),
+                    resultSet.getString("answer_sheet")
+            );
+
+        } catch (SQLException e) {
+            throw new DBHandleException(e);
+        }
+    }
+
+    /**
+     * Get row utilising a Map object from a bean object.
+     * The keys are the names of the bean's attributes.
+     *
+     * @param object Bean object which we want converted
+     * @return Map object containing bean
+     */
+    @Override
+    public Map<String, Object> objectToRow(Exam object) {
+        return null;
+    }
+
+    /**
      * Search for exams in DB by user.
      *
      * @param user The user that provided the exams
@@ -66,14 +101,7 @@ public class ExamDaoSQLImpl extends AbstractDao<Exam> implements ExamDao {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                subscriptionList.add(new Exam(
-                        resultSet.getInt("id"),
-                        DaoFactory.userDao().getById(resultSet.getInt("user_id")),
-                        DaoFactory.courseDao().getById(resultSet.getInt("course_id")),
-                        resultSet.getTimestamp("exam_time"),
-                        resultSet.getString("answer_sheet")
-                        )
-                );
+                subscriptionList.add(rowToObject(resultSet));
             }
 
             resultSet.close();
@@ -85,27 +113,4 @@ public class ExamDaoSQLImpl extends AbstractDao<Exam> implements ExamDao {
         return subscriptionList;
     }
 
-    /**
-     * Extracts a bean from a ResultSet object.
-     *
-     * @param resultSet Contains the row we want to extract
-     * @return Bean object
-     * @throws DBHandleException In case of errors while working with ResultSet
-     */
-    @Override
-    public Exam rowToObject(ResultSet resultSet) throws DBHandleException {
-        return null;
-    }
-
-    /**
-     * Get row utilising a Map object from a bean object.
-     * The keys are the names of the bean's attributes.
-     *
-     * @param object Bean object which we want converted
-     * @return Map object containing bean
-     */
-    @Override
-    public Map<String, Object> objectToRow(Exam object) {
-        return null;
-    }
 }
