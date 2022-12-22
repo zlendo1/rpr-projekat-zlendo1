@@ -11,44 +11,46 @@ import java.util.Objects;
 public class Exam implements Serializable, Idable {
 
     private int id;
-    private Provider provider;
-    private String courseName;
+    private User user;
+    private Course course;
     private Date examTime;
     private String answerSheet;
 
     public Exam() {
     }
 
-    public Exam(int id, Provider provider, String courseName, Date examTime, String answerSheet) {
+    public Exam(int id, User user, Course course, Date examTime, String answerSheet) {
         this.id = id;
-        this.provider = provider;
-        this.courseName = courseName;
+        this.user = user;
+        this.course = course;
         this.examTime = examTime;
         this.answerSheet = answerSheet;
     }
 
+    @Override
     public int getId() {
         return id;
     }
 
+    @Override
     public void setId(int id) {
         this.id = id;
     }
 
-    public Provider getProvider() {
-        return provider;
+    public User getUser() {
+        return user;
     }
 
-    public void setProvider(Provider provider) {
-        this.provider = provider;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public String getCourseName() {
-        return courseName;
+    public Course getCourse() {
+        return course;
     }
 
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     public Date getExamTime() {
@@ -84,8 +86,8 @@ public class Exam implements Serializable, Idable {
     public String toString() {
         return "Exam{" +
                 "id=" + id +
-                ", provider=" + provider +
-                ", courseName='" + courseName + '\'' +
+                ", user=" + user +
+                ", course=" + course +
                 ", examTime=" + examTime +
                 ", answerSheet='" + answerSheet + '\'' +
                 '}';
