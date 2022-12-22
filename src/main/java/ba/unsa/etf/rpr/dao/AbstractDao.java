@@ -5,7 +5,9 @@ import ba.unsa.etf.rpr.domain.Idable;
 import ba.unsa.etf.rpr.exception.DBHandleException;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.util.List;
+import java.util.Map;
 
 public abstract class AbstractDao <T extends Idable> implements Dao<T> {
     private final Connection connection;
@@ -15,6 +17,10 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
         this.tableName = tableName;
         this.connection = MyConnection.getInstance().getConnection();
     }
+
+    public abstract T RowToObject(ResultSet resultSet) throws DBHandleException;
+
+    public abstract Map<String, Object> ObjectToRow(T object);
 
     /**
      * Get entity from database coresponding to its primary key
