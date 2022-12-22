@@ -5,10 +5,7 @@ import ba.unsa.etf.rpr.domain.Exam;
 import ba.unsa.etf.rpr.domain.Idable;
 import ba.unsa.etf.rpr.exception.DBHandleException;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.AbstractMap;
 import java.util.List;
 import java.util.Map;
@@ -88,7 +85,43 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
      */
     @Override
     public T add(T item) throws DBHandleException {
-        return null;
+        Map<String, Object> row = objectToRow(item);
+        Map.Entry<String, String> columns = prepareInsertParts(row);
+
+        StringBuilder builder = new StringBuilder();
+        builder.append("INSERT INTO ").append(tableName);
+        builder.append(" (").append(columns.getKey()).append(") ");
+        builder.append("VALUES (").append(columns.getValue()).append(")");
+
+        try {
+            PreparedStatement preparedStatement =
+                    connection.prepareStatement(builder.toString(),Statement.RETURN_GENERATED_KEYS);
+
+            int i = 1;
+
+            for (Map.Entry<String, Object> entry: row.entrySet()) {
+                if (entry.getKey().equals("id")) {
+                    continue;
+                }
+
+                preparedStatement.setObject(i++, entry.getValue());
+            }
+
+            preparedStatement.executeUpdate();
+
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+
+            resultSet.next();
+
+            item.setId(resultSet.getInt(1));
+
+            resultSet.close();
+
+            return item;
+
+        } catch (Exception e) {
+            throw new DBHandleException(e);
+        }
     }
 
     /**
