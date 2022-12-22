@@ -57,9 +57,8 @@ public class MyConnection {
      * Getter for the Connection object.
      *
      * @return Connection object to the database
-     * @throws DBHandleException In case of file reading error or connection establishment
      */
-    public Connection getConnection() throws DBHandleException {
+    public Connection getConnection() {
         return connection;
     }
 
