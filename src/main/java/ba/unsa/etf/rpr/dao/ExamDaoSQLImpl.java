@@ -71,7 +71,7 @@ public class ExamDaoSQLImpl extends AbstractDao<Exam> implements ExamDao {
      */
     @Override
     public List<Exam> getByUser(User user) throws DBHandleException {
-        List<Exam> subscriptionList = new ArrayList<>();
+        List<Exam> examList = new ArrayList<>();
 
         String query = "SELECT * FROM exam WHERE user_id = ?";
 
@@ -83,7 +83,7 @@ public class ExamDaoSQLImpl extends AbstractDao<Exam> implements ExamDao {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                subscriptionList.add(rowToObject(resultSet));
+                examList.add(rowToObject(resultSet));
             }
 
             resultSet.close();
@@ -92,7 +92,7 @@ public class ExamDaoSQLImpl extends AbstractDao<Exam> implements ExamDao {
             throw new DBHandleException(e);
         }
 
-        return subscriptionList;
+        return examList;
     }
 
     /**
@@ -116,7 +116,7 @@ public class ExamDaoSQLImpl extends AbstractDao<Exam> implements ExamDao {
      */
     @Override
     public List<Exam> getByExamTime(Date examTime) throws DBHandleException {
-        List<Exam> subscriptionList = new ArrayList<>();
+        List<Exam> examList = new ArrayList<>();
 
         String query = "SELECT * FROM exam WHERE exam_time = ?";
 
@@ -128,7 +128,7 @@ public class ExamDaoSQLImpl extends AbstractDao<Exam> implements ExamDao {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                subscriptionList.add(rowToObject(resultSet));
+                examList.add(rowToObject(resultSet));
             }
 
             resultSet.close();
@@ -137,7 +137,7 @@ public class ExamDaoSQLImpl extends AbstractDao<Exam> implements ExamDao {
             throw new DBHandleException(e);
         }
 
-        return subscriptionList;
+        return examList;
     }
 
 }
