@@ -52,7 +52,7 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
      */
     @Override
     public T getById(int id) throws DBHandleException {
-        String query = "SELECT * FROM " + this.tableName + " WHERE exam_id = ?";
+        String query = "SELECT * FROM " + this.tableName + " WHERE id = ?";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(query);
@@ -180,7 +180,20 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
      */
     @Override
     public void delete(int id) throws DBHandleException {
+        String delete = "DELETE FROM " + tableName +" WHERE id = ?";
 
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(delete);
+
+            preparedStatement.setInt(1, id);
+
+            preparedStatement.executeUpdate();
+
+            preparedStatement.close();
+
+        } catch (SQLException e) {
+            throw new DBHandleException(e);
+        }
     }
 
     /**
