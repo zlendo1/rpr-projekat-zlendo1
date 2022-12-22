@@ -128,6 +128,28 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
         return new AbstractMap.SimpleEntry<String, String>(columns.toString(), questions.toString());
     }
 
+    private String prepareUpdateStatement(Map<String, Object> row) {
+        StringBuilder columns = new StringBuilder();
 
+        int i = 0;
+
+        for (Map.Entry<String, Object> entry : row.entrySet()) {
+            ++i;
+
+            String column = entry.getKey();
+
+            if (column.equals("id")) {
+                continue;
+            }
+
+            columns.append(column);
+
+            if (i != row.size()) {
+                columns.append(",");
+            }
+        }
+
+        return columns.toString();
+    }
 
 }
