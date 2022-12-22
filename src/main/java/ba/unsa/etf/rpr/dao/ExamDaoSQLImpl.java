@@ -71,7 +71,28 @@ public class ExamDaoSQLImpl extends AbstractDao<Exam> implements ExamDao {
      */
     @Override
     public List<Exam> getByUser(User user) throws DBHandleException {
-        return null;
+        List<Exam> subscriptionList = new ArrayList<>();
+
+        String query = "SELECT * FROM exam WHERE user_id = ?";
+
+        try {
+            PreparedStatement preparedStatement = getConnection().prepareStatement(query);
+
+            preparedStatement.setInt(1, user.getId());
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                subscriptionList.add(rowToObject(resultSet));
+            }
+
+            resultSet.close();
+
+        } catch (SQLException e) {
+            throw new DBHandleException(e);
+        }
+
+        return subscriptionList;
     }
 
     /**
@@ -112,7 +133,7 @@ public class ExamDaoSQLImpl extends AbstractDao<Exam> implements ExamDao {
 
             resultSet.close();
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new DBHandleException(e);
         }
 
