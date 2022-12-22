@@ -96,12 +96,37 @@ public class CourseDaoSQLImpl extends AbstractDao<Course> implements CourseDao{
     /**
      * Search for courses in DB by its professor's name.
      *
-     * @param name A professor's full name
+     * @param professor A professor's full name
      * @return List of courses
      */
     @Override
-    public List<Course> searchByProfessor(String name) throws DBHandleException {
-        return null;
+    public List<Course> searchByProfessor(String professor) throws DBHandleException {
+        List<Course> courseList = new ArrayList<>();
+
+        String query = "SELECT * FROM course WHERE professor = ?";
+
+        try {
+            PreparedStatement preparedStatement = getConnection().prepareStatement(query);
+
+            preparedStatement.setString(1, professor);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                courseList.add(new Course(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("professor")
+                ));
+            }
+
+            resultSet.close();
+
+        } catch (SQLException e) {
+            throw new DBHandleException(e);
+        }
+
+        return courseList;
     }
 
 }
