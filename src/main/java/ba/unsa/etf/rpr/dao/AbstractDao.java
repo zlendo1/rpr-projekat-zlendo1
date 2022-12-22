@@ -24,6 +24,10 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
         this.connection = MyConnection.getInstance().getConnection();
     }
 
+    public Connection getConnection() {
+        return connection;
+    }
+
     /**
      * Extracts a bean from a ResultSet object.
      *
