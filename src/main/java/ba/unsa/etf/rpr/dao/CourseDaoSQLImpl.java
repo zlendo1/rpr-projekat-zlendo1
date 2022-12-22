@@ -14,7 +14,7 @@ public class CourseDaoSQLImpl extends AbstractDao<Course> implements CourseDao{
     }
 
     /**
-     * Extracts a bean from a ResultSet object
+     * Extracts a bean from a ResultSet object.
      *
      * @param resultSet Contains the row we want to extract
      * @return Bean object

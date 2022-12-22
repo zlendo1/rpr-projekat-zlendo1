@@ -25,7 +25,7 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
     }
 
     /**
-     * Extracts a bean from a ResultSet object
+     * Extracts a bean from a ResultSet object.
      *
      * @param resultSet Contains the row we want to extract
      * @return Bean object
@@ -227,7 +227,7 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
     }
 
     /**
-     * Prepares a CSV of columns and question marks for insertion statement
+     * Prepares a CSV of columns and question marks for insertion statement.
      *
      * @param row Map containing column names as keys
      * @return CSV of columns and question marks
@@ -260,7 +260,7 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
     }
 
     /**
-     * Prepare columns for update statement
+     * Prepare columns for update statement.
      *
      * @param row Map containing column names as key values
      * @return String of columns for preparation
