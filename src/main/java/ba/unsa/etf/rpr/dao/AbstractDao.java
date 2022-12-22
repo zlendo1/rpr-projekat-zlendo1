@@ -1,11 +1,14 @@
 package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.connector.MyConnection;
+import ba.unsa.etf.rpr.domain.Exam;
 import ba.unsa.etf.rpr.domain.Idable;
 import ba.unsa.etf.rpr.exception.DBHandleException;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.AbstractMap;
 import java.util.List;
 import java.util.Map;
@@ -52,7 +55,28 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
      */
     @Override
     public T getById(int id) throws DBHandleException {
-        return null;
+        String query = "SELECT * FROM " + this.tableName + " WHERE exam_id = ?";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            preparedStatement.setInt(1, id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                T result = rowToObject(resultSet);
+
+                resultSet.close();
+
+                return result;
+            } else {
+                throw new DBHandleException("Object not found");
+            }
+
+        } catch (SQLException e) {
+            throw new DBHandleException(e);
+        }
     }
 
     /**
