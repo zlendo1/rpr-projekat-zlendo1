@@ -4,6 +4,7 @@ import ba.unsa.etf.rpr.domain.Course;
 import ba.unsa.etf.rpr.exception.DBHandleException;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +23,15 @@ public class CourseDaoSQLImpl extends AbstractDao<Course> implements CourseDao{
      */
     @Override
     public Course rowToObject(ResultSet resultSet) throws DBHandleException {
-        return null;
+        try {
+            return new Course(
+                    resultSet.getInt("id"),
+                    resultSet.getString("name"),
+                    resultSet.getString("professor")
+            );
+        } catch (SQLException e) {
+            throw new DBHandleException(e);
+        }
     }
 
     /**
