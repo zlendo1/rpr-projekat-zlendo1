@@ -21,7 +21,7 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
 
     public AbstractDao(String tableName) throws DBHandleException {
         this.tableName = tableName;
-        this.connection = MyConnection.getInstance().getConnection();
+        this.connection = MyConnection.getConnection();
     }
 
     public Connection getConnection() {
