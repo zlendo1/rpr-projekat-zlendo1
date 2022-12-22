@@ -101,6 +101,12 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
         return null;
     }
 
+    /**
+     * Prepares a CSV of columns and question marks for insertion statements
+     *
+     * @param row Map containing column names as keys
+     * @return CSV of columns and question marks
+     */
     private Map.Entry<String, String> prepareInsertParts(Map<String, Object> row) {
         StringBuilder columns = new StringBuilder();
         StringBuilder questions = new StringBuilder();
@@ -128,6 +134,12 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
         return new AbstractMap.SimpleEntry<String, String>(columns.toString(), questions.toString());
     }
 
+    /**
+     * Prepare columns for update statement
+     *
+     * @param row Map containing column names as key values
+     * @return String of columns for preparation
+     */
     private String prepareUpdateStatement(Map<String, Object> row) {
         StringBuilder columns = new StringBuilder();
 
@@ -142,7 +154,7 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
                 continue;
             }
 
-            columns.append(column);
+            columns.append(column).append(" = ?");
 
             if (i != row.size()) {
                 columns.append(",");
