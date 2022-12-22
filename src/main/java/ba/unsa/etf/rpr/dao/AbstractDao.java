@@ -101,7 +101,7 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
         return null;
     }
 
-    private Map.Entry<String, String> prepareUpdateParts(Map<String, Object> row) {
+    private Map.Entry<String, String> prepareInsertParts(Map<String, Object> row) {
         StringBuilder columns = new StringBuilder();
         StringBuilder questions = new StringBuilder();
 
@@ -127,5 +127,7 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
 
         return new AbstractMap.SimpleEntry<String, String>(columns.toString(), questions.toString());
     }
+
+
 
 }
