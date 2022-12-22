@@ -34,8 +34,10 @@ public class MyConnection {
                     properties.getProperty("db.password")
             );
 
-        } catch (SQLException | IOException e) {
+        } catch (SQLException e) {
             throw new DBHandleException(e);
+        } catch (IOException e) {
+            throw new DBHandleException("Necessary properties file not found", e);
         }
     }
 
