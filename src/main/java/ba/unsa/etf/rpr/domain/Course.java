@@ -8,13 +8,15 @@ import java.util.Objects;
  */
 public class Course implements Idable{
     private int id;
+    private String name;
     private String professor;
 
     public Course() {
     }
 
-    public Course(int id, String professor) {
+    public Course(int id, String name, String professor) {
         this.id = id;
+        this.name = name;
         this.professor = professor;
     }
 
@@ -26,6 +28,14 @@ public class Course implements Idable{
     @Override
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getProfessor() {
