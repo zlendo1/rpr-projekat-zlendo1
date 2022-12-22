@@ -9,7 +9,7 @@ import java.util.List;
 
 public abstract class AbstractDao <T extends Idable> implements Dao<T> {
     private final Connection connection;
-    private String tableName;
+    private final String tableName;
 
     public AbstractDao(String tableName) throws DBHandleException {
         this.tableName = tableName;
