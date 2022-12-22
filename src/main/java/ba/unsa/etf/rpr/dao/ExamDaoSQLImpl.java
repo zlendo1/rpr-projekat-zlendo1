@@ -1,10 +1,9 @@
 package ba.unsa.etf.rpr.dao;
 
+import ba.unsa.etf.rpr.exception.DBHandleException;
+import ba.unsa.etf.rpr.domain.Exam;
 import ba.unsa.etf.rpr.domain.Course;
 import ba.unsa.etf.rpr.domain.User;
-import ba.unsa.etf.rpr.exception.DBHandleException;
-import ba.unsa.etf.rpr.connector.MyConnection;
-import ba.unsa.etf.rpr.domain.Exam;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -60,7 +59,7 @@ public class ExamDaoSQLImpl extends AbstractDao<Exam> implements ExamDao {
         String query = "SELECT * FROM exam WHERE exam_time = ?";
 
         try {
-            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            PreparedStatement preparedStatement = getConnection().prepareStatement(query);
 
             preparedStatement.setTimestamp(1, (Timestamp) examTime);
 
@@ -69,11 +68,12 @@ public class ExamDaoSQLImpl extends AbstractDao<Exam> implements ExamDao {
             while (resultSet.next()) {
                 subscriptionList.add(new Exam(
                         resultSet.getInt("id"),
-                        new ProviderDaoSQLImpl().getById(resultSet.getInt("provider_id")),
-                        resultSet.getString("course_name"),
+                        DaoFactory.userDao().getById(resultSet.getInt("user_id")),
+                        DaoFactory.courseDao().getById(resultSet.getInt("course_id")),
                         resultSet.getTimestamp("exam_time"),
                         resultSet.getString("answer_sheet")
-                ));
+                        )
+                );
             }
 
             resultSet.close();
