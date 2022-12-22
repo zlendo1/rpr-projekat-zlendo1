@@ -9,21 +9,25 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 /**
- * The class that lets us establish only one connection to the database at a time.
+ * Singleton wrapper for Connection.
+ * Basically limits us to opening up only one connection to the DB at a time.
  *
  */
 public class MyConnection {
 
-    private final Connection connection;
-    private static MyConnection instance = null;    // The observant viewer will notice that this was
-                                                    // implemented using the singleton design pattern.
+    private static Connection connection = null;
 
     /**
-     * Constructor that establishes a connection to my database.
+     * Getter for the Connection object.
+     * Will only construct a new object if one does not already exist.
      *
-     * @throws DBHandleException In case of file reading error or connection establishment
+     * @return Connection object to the database
      */
-    private MyConnection() throws DBHandleException {
+    public static Connection getConnection() throws DBHandleException {
+        if (connection != null) {
+            return connection;
+        }
+
         try {
             Properties properties = new Properties();
             properties.load(ClassLoader.getSystemResource("db_properties/config.properties").openStream());
@@ -39,28 +43,7 @@ public class MyConnection {
         } catch (IOException e) {
             throw new DBHandleException("Necessary properties file not found", e);
         }
-    }
 
-    /**
-     * Static method that returns an instance of the class in accordance to the singleton design pattern.
-     *
-     * @return Connection to our database
-     * @throws DBHandleException In case of file reading error or connection establishment
-     */
-    public static MyConnection getInstance() throws DBHandleException {
-        if (instance == null) {
-            instance = new MyConnection();
-        }
-
-        return instance;
-    }
-
-    /**
-     * Getter for the Connection object.
-     *
-     * @return Connection object to the database
-     */
-    public Connection getConnection() {
         return connection;
     }
 
