@@ -6,10 +6,8 @@ import ba.unsa.etf.rpr.domain.Course;
 import ba.unsa.etf.rpr.domain.User;
 
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
 /**
  * SQL implementation of ExamDao
@@ -53,7 +51,15 @@ public class ExamDaoSQLImpl extends AbstractDao<Exam> implements ExamDao {
      */
     @Override
     public Map<String, Object> objectToRow(Exam object) {
-        return null;
+        Map<String, Object> row = new TreeMap<>();
+
+        row.put("id", object.getId());
+        row.put("user_id", object.getUser().getId());
+        row.put("course_id", object.getCourse().getId());
+        row.put("exam_time", object.getExamTime());
+        row.put("answer_sheet", object.getAnswerSheet());
+
+        return row;
     }
 
     /**
