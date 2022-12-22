@@ -1,6 +1,5 @@
 package ba.unsa.etf.rpr.dao;
 
-import ba.unsa.etf.rpr.connector.MyConnection;
 import ba.unsa.etf.rpr.domain.User;
 import ba.unsa.etf.rpr.exception.DBHandleException;
 
@@ -17,6 +16,41 @@ public class UserDaoSQLImpl extends AbstractDao<User> implements UserDao {
 
     public UserDaoSQLImpl() throws DBHandleException {
         super("user");
+    }
+
+    /**
+     * Extracts a bean from a ResultSet object.
+     *
+     * @param resultSet Contains the row we want to extract
+     * @return Bean object
+     * @throws DBHandleException In case of errors while working with ResultSet
+     */
+    @Override
+    public User rowToObject(ResultSet resultSet) throws DBHandleException {
+        try {
+            return new User(
+                    resultSet.getInt("user_id"),
+                    resultSet.getString("username"),
+                    resultSet.getString("password"),
+                    resultSet.getString("first_name"),
+                    resultSet.getString("last_name")
+                );
+
+        } catch (SQLException e) {
+            throw new DBHandleException(e);
+        }
+    }
+
+    /**
+     * Get row utilising a Map object from a bean object.
+     * The keys are the names of the bean's attributes.
+     *
+     * @param object Bean object which we want converted
+     * @return Map object containing bean
+     */
+    @Override
+    public Map<String, Object> objectToRow(User object) {
+        return null;
     }
 
     /**
@@ -45,7 +79,8 @@ public class UserDaoSQLImpl extends AbstractDao<User> implements UserDao {
                         resultSet.getString("username"),
                         resultSet.getString("password"),
                         resultSet.getString("first_name"),
-                        resultSet.getString("last_name"))
+                        resultSet.getString("last_name")
+                        )
                 );
             }
 
@@ -84,7 +119,8 @@ public class UserDaoSQLImpl extends AbstractDao<User> implements UserDao {
                         resultSet.getString("username"),
                         resultSet.getString("password"),
                         resultSet.getString("first_name"),
-                        resultSet.getString("last_name"))
+                        resultSet.getString("last_name")
+                        )
                 );
             }
 
@@ -162,7 +198,8 @@ public class UserDaoSQLImpl extends AbstractDao<User> implements UserDao {
                         resultSet.getString("username"),
                         resultSet.getString("password"),
                         resultSet.getString("first_name"),
-                        resultSet.getString("last_name"))
+                        resultSet.getString("last_name")
+                        )
                 );
             }
 
@@ -173,30 +210,6 @@ public class UserDaoSQLImpl extends AbstractDao<User> implements UserDao {
         }
 
         return userList;
-    }
-
-    /**
-     * Extracts a bean from a ResultSet object.
-     *
-     * @param resultSet Contains the row we want to extract
-     * @return Bean object
-     * @throws DBHandleException In case of errors while working with ResultSet
-     */
-    @Override
-    public User rowToObject(ResultSet resultSet) throws DBHandleException {
-        return null;
-    }
-
-    /**
-     * Get row utilising a Map object from a bean object.
-     * The keys are the names of the bean's attributes.
-     *
-     * @param object Bean object which we want converted
-     * @return Map object containing bean
-     */
-    @Override
-    public Map<String, Object> objectToRow(User object) {
-        return null;
     }
 
 }
