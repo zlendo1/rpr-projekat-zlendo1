@@ -1,12 +1,12 @@
 package ba.unsa.etf.rpr.dao;
 
 import ba.unsa.etf.rpr.connector.MyConnection;
-import ba.unsa.etf.rpr.domain.Exam;
 import ba.unsa.etf.rpr.domain.Idable;
 import ba.unsa.etf.rpr.exception.DBHandleException;
 
 import java.sql.*;
 import java.util.AbstractMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -25,8 +25,7 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
     }
 
     /**
-     * Converts a ResultSet object containing a single row inside
-     * into the appropriate bean.
+     * Extracts a bean from a ResultSet object
      *
      * @param resultSet Contains the row we want to extract
      * @return Bean object
@@ -121,7 +120,7 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
 
             return item;
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new DBHandleException(e);
         }
     }
@@ -167,7 +166,7 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
 
             return item;
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new DBHandleException(e);
         }
     }
@@ -204,7 +203,27 @@ public abstract class AbstractDao <T extends Idable> implements Dao<T> {
      */
     @Override
     public List<T> getAll() throws DBHandleException {
-        return null;
+        List<T> list = new ArrayList<>();
+
+        String query = "SELECT * FROM " + tableName;
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                T object = rowToObject(resultSet);
+                list.add(object);
+            }
+
+            resultSet.close();
+
+        } catch (SQLException e) {
+            throw new DBHandleException(e);
+        }
+
+        return list;
     }
 
     /**
