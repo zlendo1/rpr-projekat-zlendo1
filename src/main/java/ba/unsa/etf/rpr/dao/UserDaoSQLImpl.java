@@ -83,14 +83,7 @@ public class UserDaoSQLImpl extends AbstractDao<User> implements UserDao {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                userList.add(new User(
-                        resultSet.getInt("id"),
-                        resultSet.getString("username"),
-                        resultSet.getString("password"),
-                        resultSet.getString("first_name"),
-                        resultSet.getString("last_name")
-                        )
-                );
+                userList.add(rowToObject(resultSet));
             }
 
             resultSet.close();
@@ -123,14 +116,7 @@ public class UserDaoSQLImpl extends AbstractDao<User> implements UserDao {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                userList.add(new User(
-                        resultSet.getInt("id"),
-                        resultSet.getString("username"),
-                        resultSet.getString("password"),
-                        resultSet.getString("first_name"),
-                        resultSet.getString("last_name")
-                        )
-                );
+                userList.add(rowToObject(resultSet));
             }
 
             resultSet.close();
@@ -163,13 +149,7 @@ public class UserDaoSQLImpl extends AbstractDao<User> implements UserDao {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-                user = new User(
-                        resultSet.getInt("id"),
-                        resultSet.getString("username"),
-                        resultSet.getString("password"),
-                        resultSet.getString("first_name"),
-                        resultSet.getString("last_name")
-                );
+                user = rowToObject(resultSet);
             }
 
             resultSet.close();
@@ -202,14 +182,7 @@ public class UserDaoSQLImpl extends AbstractDao<User> implements UserDao {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                userList.add(new User(
-                        resultSet.getInt("id"),
-                        resultSet.getString("username"),
-                        resultSet.getString("password"),
-                        resultSet.getString("first_name"),
-                        resultSet.getString("last_name")
-                        )
-                );
+                userList.add(rowToObject(resultSet));
             }
 
             resultSet.close();
