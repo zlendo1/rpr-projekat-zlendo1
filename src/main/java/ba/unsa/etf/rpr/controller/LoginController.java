@@ -5,7 +5,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
+/**
+ * Controller class for the login scene.
+ *
+ */
 public class LoginController {
+
     public TextField usernameField;
     public PasswordField passwordField;
     public Button cancelButton;
@@ -20,4 +25,5 @@ public class LoginController {
 
     public void continueButtonAction(ActionEvent actionEvent) {
     }
+
 }
