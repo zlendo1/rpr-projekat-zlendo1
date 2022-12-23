@@ -28,7 +28,7 @@
     <RowConstraints vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <TextField fx:id="usernameField" onAction="#usernameFieldAction" promptText="Username">
+      <TextField fx:id="usernameField" promptText="Username">
          <GridPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </GridPane.margin>
@@ -46,47 +46,47 @@
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>
       </ButtonBar>
-      <TextField fx:id="firstNameField" onAction="#firstNameFieldAction" promptText="First name" GridPane.rowIndex="6">
+      <TextField fx:id="firstNameField" promptText="First name" GridPane.rowIndex="6">
          <GridPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="lastNameField" onAction="#lastNameFieldAction" promptText="Last name" GridPane.rowIndex="8">
+      <TextField fx:id="lastNameField" promptText="Last name" GridPane.rowIndex="8">
          <GridPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </GridPane.margin>
       </TextField>
-      <Text fx:id="usernameErrorField" fill="RED" onDragDetected="#usernameErrorFieldAction" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="1">
+      <Text fx:id="usernameErrorField" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </Text>
-      <Text fx:id="passwordErrorField" fill="RED" onDragDetected="#passwordErrorFieldAction" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="3">
+      <Text fx:id="passwordErrorField" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </Text>
-      <Text fx:id="confirmPasswordErrorField" fill="RED" onDragDetected="#confirmPasswordErrorFieldAction" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="5">
+      <Text fx:id="confirmPasswordErrorField" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </Text>
-      <Text fx:id="firstNameErrorField" fill="RED" onDragDetected="#firstNameErrorFieldAction" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="7">
+      <Text fx:id="firstNameErrorField" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="7">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </Text>
-      <Text fx:id="lastNameErrorField" fill="RED" onDragDetected="#lastNameErrorFieldAction" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="9">
+      <Text fx:id="lastNameErrorField" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="9">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </Text>
-      <PasswordField fx:id="passwordField" onAction="#passwordFieldAction" promptText="Password" GridPane.rowIndex="2">
+      <PasswordField fx:id="passwordField" promptText="Password" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </GridPane.margin>
       </PasswordField>
-      <PasswordField fx:id="confirmPasswordField" onAction="#confirmPasswordFieldAction" promptText="Confirm password" GridPane.rowIndex="4">
+      <PasswordField fx:id="confirmPasswordField" promptText="Confirm password" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </GridPane.margin>
