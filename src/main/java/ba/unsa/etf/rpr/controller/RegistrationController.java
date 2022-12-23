@@ -27,36 +27,6 @@ public class RegistrationController {
     public Button registerButton;
     public Button registerAndLoginButton;
 
-    public void usernameFieldAction(ActionEvent actionEvent) {
-    }
-
-    public void passwordFieldAction(ActionEvent actionEvent) {
-    }
-
-    public void confirmPasswordFieldAction(ActionEvent actionEvent) {
-    }
-
-    public void firstNameFieldAction(ActionEvent actionEvent) {
-    }
-
-    public void lastNameFieldAction(ActionEvent actionEvent) {
-    }
-
-    public void usernameErrorFieldAction(MouseEvent mouseEvent) {
-    }
-
-    public void passwordErrorFieldAction(MouseEvent mouseEvent) {
-    }
-
-    public void confirmPasswordErrorFieldAction(MouseEvent mouseEvent) {
-    }
-
-    public void firstNameErrorFieldAction(MouseEvent mouseEvent) {
-    }
-
-    public void lastNameErrorFieldAction(MouseEvent mouseEvent) {
-    }
-
     public void cancelButtonAction(ActionEvent actionEvent) {
     }
 
