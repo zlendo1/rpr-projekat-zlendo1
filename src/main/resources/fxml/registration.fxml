@@ -1,14 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="ba.unsa.etf.rpr.controller.RegistrationController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<GridPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints vgrow="SOMETIMES" />
+      <RowConstraints vgrow="SOMETIMES" />
+      <RowConstraints vgrow="SOMETIMES" />
+      <RowConstraints vgrow="SOMETIMES" />
+      <RowConstraints vgrow="SOMETIMES" />
+      <RowConstraints vgrow="SOMETIMES" />
+      <RowConstraints vgrow="SOMETIMES" />
+      <RowConstraints vgrow="SOMETIMES" />
+    <RowConstraints vgrow="SOMETIMES" />
+      <RowConstraints vgrow="SOMETIMES" />
+    <RowConstraints vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <TextField fx:id="usernameField" onAction="#usernameFieldAction" promptText="Username">
+         <GridPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </GridPane.margin>
+      </TextField>
+      <ButtonBar prefWidth="400.0" GridPane.rowIndex="10">
+        <buttons>
+          <Button fx:id="cancelButton" cancelButton="true" mnemonicParsing="false" onAction="#cancelButtonAction" text="Cancel" />
+            <Button fx:id="registerButton" mnemonicParsing="false" onAction="#registerButtonAction" text="Register" />
+            <Button fx:id="registerAndLoginButton" defaultButton="true" mnemonicParsing="false" onAction="#registerAndLoginButtonAction" text="Register and login" />
+        </buttons>
+         <GridPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </GridPane.margin>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </ButtonBar>
+      <TextField fx:id="firstNameField" onAction="#firstNameFieldAction" promptText="First name" GridPane.rowIndex="6">
+         <GridPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </GridPane.margin>
+      </TextField>
+      <TextField fx:id="lastNameField" onAction="#lastNameFieldAction" promptText="Last name" GridPane.rowIndex="8">
+         <GridPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </GridPane.margin>
+      </TextField>
+      <Text fx:id="usernameErrorField" fill="RED" onDragDetected="#usernameErrorFieldAction" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </GridPane.margin>
+      </Text>
+      <Text fx:id="passwordErrorField" fill="RED" onDragDetected="#passwordErrorFieldAction" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </GridPane.margin>
+      </Text>
+      <Text fx:id="confirmPasswordErrorField" fill="RED" onDragDetected="#confirmPasswordErrorFieldAction" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="5">
+         <GridPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </GridPane.margin>
+      </Text>
+      <Text fx:id="firstNameErrorField" fill="RED" onDragDetected="#firstNameErrorFieldAction" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="7">
+         <GridPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </GridPane.margin>
+      </Text>
+      <Text fx:id="lastNameErrorField" fill="RED" onDragDetected="#lastNameErrorFieldAction" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="9">
+         <GridPane.margin>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </GridPane.margin>
+      </Text>
+      <PasswordField fx:id="passwordField" onAction="#passwordFieldAction" promptText="Password" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </GridPane.margin>
+      </PasswordField>
+      <PasswordField fx:id="confirmPasswordField" onAction="#confirmPasswordFieldAction" promptText="Confirm password" GridPane.rowIndex="4">
+         <GridPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </GridPane.margin>
+      </PasswordField>
+   </children>
+</GridPane>
