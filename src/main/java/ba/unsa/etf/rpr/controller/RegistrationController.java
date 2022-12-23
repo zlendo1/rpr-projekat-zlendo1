@@ -7,7 +7,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
+/**
+ * Controller class for the registration scene.
+ *
+ */
 public class RegistrationController {
+
     public TextField usernameField;
     public PasswordField passwordField;
     public PasswordField confirmPasswordField;
