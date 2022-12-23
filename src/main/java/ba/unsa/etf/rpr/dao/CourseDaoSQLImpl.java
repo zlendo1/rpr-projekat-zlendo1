@@ -80,11 +80,7 @@ public class CourseDaoSQLImpl extends AbstractDao<Course> implements CourseDao{
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                courseList.add(new Course(
-                        resultSet.getInt("id"),
-                        resultSet.getString("name"),
-                        resultSet.getString("professor")
-                ));
+                courseList.add(rowToObject(resultSet));
             }
 
             resultSet.close();
@@ -116,11 +112,7 @@ public class CourseDaoSQLImpl extends AbstractDao<Course> implements CourseDao{
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                courseList.add(new Course(
-                        resultSet.getInt("id"),
-                        resultSet.getString("name"),
-                        resultSet.getString("professor")
-                ));
+                courseList.add(rowToObject(resultSet));
             }
 
             resultSet.close();
