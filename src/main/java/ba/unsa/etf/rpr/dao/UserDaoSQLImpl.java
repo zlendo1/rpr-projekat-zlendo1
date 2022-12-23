@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * SQL implementation of UserDao
+ * SQL implementation of UserDao.
  *
  */
 public class UserDaoSQLImpl extends AbstractDao<User> implements UserDao {

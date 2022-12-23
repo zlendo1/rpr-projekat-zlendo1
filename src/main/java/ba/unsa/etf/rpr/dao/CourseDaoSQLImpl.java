@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * SQL implementation of course DAO.
+ * SQL implementation of CourseDao.
  *
  */
 public class CourseDaoSQLImpl extends AbstractDao<Course> implements CourseDao{

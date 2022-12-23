@@ -10,7 +10,7 @@ import java.util.*;
 import java.util.Date;
 
 /**
- * SQL implementation of ExamDao
+ * SQL implementation of ExamDao.
  *
  */
 public class ExamDaoSQLImpl extends AbstractDao<Exam> implements ExamDao {
