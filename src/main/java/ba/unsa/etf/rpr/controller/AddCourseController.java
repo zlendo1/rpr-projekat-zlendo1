@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.controller;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
@@ -17,6 +18,10 @@ public class AddCourseController {
     public Text professorErrorField;
     public Button addButton;
     public Button cancelButton;
+
+    @FXML
+    public void initialize() {
+    }
 
     public void addButtonAction(ActionEvent actionEvent) {
     }
