@@ -16,17 +16,15 @@ public class AddCourseController {
     public TextField professorField;
     public Text courseNameErrorField;
     public Text professorErrorField;
-    public Button addButton;
-    public Button cancelButton;
 
     @FXML
     public void initialize() {
     }
 
-    public void addButtonAction(ActionEvent actionEvent) {
+    public void add(ActionEvent actionEvent) {
     }
 
-    public void cancelButtonAction(ActionEvent actionEvent) {
+    public void cancel(ActionEvent actionEvent) {
     }
 
 }
