@@ -24,21 +24,18 @@ public class RegistrationController {
     public Text confirmPasswordErrorField;
     public Text firstNameErrorField;
     public Text lastNameErrorField;
-    public Button cancelButton;
-    public Button registerButton;
-    public Button registerAndLoginButton;
 
     @FXML
     public void initialize() {
     }
 
-    public void cancelButtonAction(ActionEvent actionEvent) {
+    public void cancel(ActionEvent actionEvent) {
     }
 
-    public void registerButtonAction(ActionEvent actionEvent) {
+    public void register(ActionEvent actionEvent) {
     }
 
-    public void registerAndLoginButtonAction(ActionEvent actionEvent) {
+    public void registerAndLogin(ActionEvent actionEvent) {
     }
 
 }
