@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.controller;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -26,6 +27,10 @@ public class RegistrationController {
     public Button cancelButton;
     public Button registerButton;
     public Button registerAndLoginButton;
+
+    @FXML
+    public void initialize() {
+    }
 
     public void cancelButtonAction(ActionEvent actionEvent) {
     }
