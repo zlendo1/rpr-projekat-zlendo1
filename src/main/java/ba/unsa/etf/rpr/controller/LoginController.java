@@ -14,21 +14,18 @@ public class LoginController {
 
     public TextField usernameField;
     public PasswordField passwordField;
-    public Button cancelButton;
-    public Button registerButton;
-    public Button continueButton;
 
     @FXML
     public void initialize() {
     }
 
-    public void cancelButtonAction(ActionEvent actionEvent) {
+    public void cancel(ActionEvent actionEvent) {
     }
 
-    public void registerButtonAction(ActionEvent actionEvent) {
+    public void register(ActionEvent actionEvent) {
     }
 
-    public void continueButtonAction(ActionEvent actionEvent) {
+    public void login(ActionEvent actionEvent) {
     }
 
 }
