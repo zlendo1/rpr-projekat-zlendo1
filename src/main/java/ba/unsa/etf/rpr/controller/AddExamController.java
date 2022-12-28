@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.controller;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
@@ -19,6 +20,10 @@ public class AddExamController {
     public DatePicker examTimeField;
     public Button cancelButton;
     public Button addButton;
+
+    @FXML
+    public void initialize() {
+    }
 
     public void cancelButtonAction(ActionEvent actionEvent) {
     }
