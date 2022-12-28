@@ -30,8 +30,8 @@
       </TextField>
       <ButtonBar prefWidth="400.0" GridPane.rowIndex="10">
         <buttons>
-          <Button fx:id="cancelButton" cancelButton="true" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
-            <Button fx:id="registerButton" mnemonicParsing="false" onAction="#register" text="Register" />
+          <Button cancelButton="true" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
+            <Button mnemonicParsing="false" onAction="#register" text="Register" />
             <Button defaultButton="true" mnemonicParsing="false" onAction="#registerAndLogin" text="Register and login" />
         </buttons>
          <GridPane.margin>
