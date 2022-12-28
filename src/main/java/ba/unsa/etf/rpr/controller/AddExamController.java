@@ -18,17 +18,15 @@ public class AddExamController {
     public Text examTimeFieldError;
     public Text answerSheetFieldError;
     public DatePicker examTimeField;
-    public Button cancelButton;
-    public Button addButton;
 
     @FXML
     public void initialize() {
     }
 
-    public void cancelButtonAction(ActionEvent actionEvent) {
+    public void cancel(ActionEvent actionEvent) {
     }
 
-    public void addButtonAction(ActionEvent actionEvent) {
+    public void add(ActionEvent actionEvent) {
     }
 
 }
