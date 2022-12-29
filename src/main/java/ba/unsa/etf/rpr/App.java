@@ -1,6 +1,6 @@
 package ba.unsa.etf.rpr;
 
-import ba.unsa.etf.rpr.controller.SceneLoader;
+import ba.unsa.etf.rpr.auxiliary.SceneLoader;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

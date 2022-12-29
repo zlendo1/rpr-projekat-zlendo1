@@ -1,4 +1,4 @@
-package ba.unsa.etf.rpr.controller;
+package ba.unsa.etf.rpr.auxiliary;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

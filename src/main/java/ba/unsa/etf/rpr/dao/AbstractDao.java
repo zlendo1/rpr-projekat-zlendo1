@@ -1,6 +1,6 @@
 package ba.unsa.etf.rpr.dao;
 
-import ba.unsa.etf.rpr.connector.MyConnection;
+import ba.unsa.etf.rpr.auxiliary.MyConnection;
 import ba.unsa.etf.rpr.domain.Idable;
 import ba.unsa.etf.rpr.exception.DBHandleException;
 

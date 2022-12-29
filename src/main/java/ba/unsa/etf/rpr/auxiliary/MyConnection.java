@@ -1,4 +1,4 @@
-package ba.unsa.etf.rpr.connector;
+package ba.unsa.etf.rpr.auxiliary;
 
 import ba.unsa.etf.rpr.exception.DBHandleException;
 
