@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.controller;
 
+import ba.unsa.etf.rpr.business.ExamManager;
 import ba.unsa.etf.rpr.domain.Course;
 import ba.unsa.etf.rpr.domain.User;
 import javafx.event.ActionEvent;
@@ -16,6 +17,7 @@ import java.util.Date;
  */
 public class HomeController {
 
+    // GUI objects
     public TextField courseNameSearch;
     public DatePicker examTimeSearch;
     public TableColumn<User, String> usernameColumn;
@@ -23,6 +25,9 @@ public class HomeController {
     public TableColumn<Course, String> professorColumn;
     public TableColumn<Course, Date> examTimeColumn;
     public TableColumn<Course, String> answerSheetColumn;
+
+    // Manager objects
+    private final ExamManager manager = new ExamManager();
 
     @FXML
     public void initialize() {
