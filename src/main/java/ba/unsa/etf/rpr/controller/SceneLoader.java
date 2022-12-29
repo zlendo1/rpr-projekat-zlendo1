@@ -28,7 +28,7 @@ public class SceneLoader {
      */
     public static void load(Stage stage, String fileName, String titleName, boolean resizable) throws IOException {
         Parent root = FXMLLoader.load(
-                ClassLoader.getSystemResource("/fxml/" + fileName + ".fxml")
+                ClassLoader.getSystemResource("fxml/" + fileName + ".fxml")
         );
 
         stage.setTitle(titleName);
