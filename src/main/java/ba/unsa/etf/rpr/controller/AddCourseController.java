@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.controller;
 
+import ba.unsa.etf.rpr.business.CourseManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -12,10 +13,14 @@ import javafx.scene.text.Text;
  */
 public class AddCourseController {
 
+    // GUI objects
     public TextField courseNameField;
     public TextField professorField;
     public Text courseNameErrorField;
     public Text professorErrorField;
+
+    // Manager objects
+    private final CourseManager manager = new CourseManager();
 
     @FXML
     public void initialize() {
