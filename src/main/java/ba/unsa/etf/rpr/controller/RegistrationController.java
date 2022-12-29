@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.controller;
 
+import ba.unsa.etf.rpr.business.UserManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -14,6 +15,7 @@ import javafx.scene.text.Text;
  */
 public class RegistrationController {
 
+    // GUI objects
     public TextField usernameField;
     public PasswordField passwordField;
     public PasswordField confirmPasswordField;
@@ -24,6 +26,9 @@ public class RegistrationController {
     public Text confirmPasswordErrorField;
     public Text firstNameErrorField;
     public Text lastNameErrorField;
+
+    // Manager objects
+    private final UserManager manager = new UserManager();
 
     @FXML
     public void initialize() {
