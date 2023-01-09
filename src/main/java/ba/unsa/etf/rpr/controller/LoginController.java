@@ -1,13 +1,18 @@
 package ba.unsa.etf.rpr.controller;
 
+import ba.unsa.etf.rpr.auxiliary.AlertThrower;
 import ba.unsa.etf.rpr.auxiliary.SceneLoader;
 import ba.unsa.etf.rpr.business.UserManager;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 /**
  * Controller class for the login scene.
@@ -33,6 +38,13 @@ public class LoginController {
     }
 
     public void register(ActionEvent actionEvent) {
+        Stage stage = (Stage) usernameField.getScene().getWindow();
+
+        try {
+            SceneLoader.load(stage, "registration", "Register", false);
+        } catch (IOException e) {
+            AlertThrower.throwAlert(e, Alert.AlertType.ERROR);
+        }
     }
 
     public void login(ActionEvent actionEvent) {
