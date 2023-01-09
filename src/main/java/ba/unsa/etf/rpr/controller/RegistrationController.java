@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.controller;
 
+import ba.unsa.etf.rpr.auxiliary.AlertThrower;
 import ba.unsa.etf.rpr.auxiliary.SceneLoader;
 import ba.unsa.etf.rpr.business.UserManager;
 import javafx.event.ActionEvent;
@@ -44,7 +45,7 @@ public class RegistrationController {
         try {
             SceneLoader.load(stage, "login", "Login", false);
         } catch (IOException e) {
-            new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
+            AlertThrower.throwAlert(e, Alert.AlertType.ERROR);
         }
     }
 
