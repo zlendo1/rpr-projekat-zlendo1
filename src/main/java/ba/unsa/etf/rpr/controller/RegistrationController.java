@@ -42,7 +42,7 @@ public class RegistrationController {
         Stage stage = (Stage) usernameField.getScene().getWindow();
 
         try {
-            SceneLoader.load(stage, "/fxml/login.fxml", "Login", false);
+            SceneLoader.load(stage, "login", "Login", false);
         } catch (IOException e) {
             new Alert(Alert.AlertType.NONE, e.getMessage(), ButtonType.OK).show();
         }
