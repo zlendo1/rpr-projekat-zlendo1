@@ -1,6 +1,8 @@
 package ba.unsa.etf.rpr.controller;
 
+import ba.unsa.etf.rpr.auxiliary.SceneLoader;
 import ba.unsa.etf.rpr.business.UserManager;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -26,6 +28,8 @@ public class LoginController {
     }
 
     public void cancel(ActionEvent actionEvent) {
+        Platform.exit();
+        System.exit(0);
     }
 
     public void register(ActionEvent actionEvent) {
