@@ -29,6 +29,13 @@ public class HomeController {
     // Manager objects
     private final ExamManager manager = new ExamManager();
 
+    // User bean
+    private User user;
+
+    public HomeController(User user) {
+        this.user = user;
+    }
+
     @FXML
     public void initialize() {
     }

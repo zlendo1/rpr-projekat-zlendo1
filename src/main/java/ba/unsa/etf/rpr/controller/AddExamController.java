@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.controller;
 
 import ba.unsa.etf.rpr.business.ExamManager;
+import ba.unsa.etf.rpr.domain.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
@@ -22,6 +23,13 @@ public class AddExamController {
 
     // Manager objects
     private final ExamManager manager = new ExamManager();
+
+    // User bean
+    private User user;
+
+    public AddExamController(User user) {
+        this.user = user;
+    }
 
     @FXML
     public void initialize() {

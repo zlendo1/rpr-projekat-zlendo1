@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.controller;
 
 import ba.unsa.etf.rpr.business.CourseManager;
+import ba.unsa.etf.rpr.domain.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -20,6 +21,13 @@ public class AddCourseController {
 
     // Manager objects
     private final CourseManager manager = new CourseManager();
+
+    // User bean
+    private User user;
+
+    public AddCourseController(User user) {
+        this.user = user;
+    }
 
     @FXML
     public void initialize() {
