@@ -3,6 +3,7 @@ package ba.unsa.etf.rpr.controller;
 import ba.unsa.etf.rpr.auxiliary.AlertThrower;
 import ba.unsa.etf.rpr.auxiliary.SceneLoader;
 import ba.unsa.etf.rpr.business.UserManager;
+import ba.unsa.etf.rpr.domain.User;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -41,13 +42,28 @@ public class LoginController {
         Stage stage = (Stage) usernameField.getScene().getWindow();
 
         try {
-            SceneLoader.load(stage, "registration", "Register", false);
+            SceneLoader.load(stage, "registration", "Register", new RegistrationController(), false);
         } catch (IOException e) {
             AlertThrower.throwAlert(e, Alert.AlertType.ERROR);
         }
     }
 
     public void login(ActionEvent actionEvent) {
+        User user = manager.findUser(usernameField.getText(), passwordField.getText());
+
+        if (user == null) {
+            errorField.setText("User does not exist");
+
+            return;
+        }
+
+        Stage stage = (Stage) usernameField.getScene().getWindow();
+
+        try {
+            SceneLoader.load(stage, "home", "Home", new HomeController(user), true);
+        } catch (IOException e) {
+            AlertThrower.throwAlert(e, Alert.AlertType.ERROR);
+        }
     }
 
 }
