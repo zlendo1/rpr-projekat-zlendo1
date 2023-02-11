@@ -43,7 +43,7 @@ public class RegistrationController {
         Stage stage = (Stage) usernameField.getScene().getWindow();
 
         try {
-            SceneLoader.load(stage, "login", "Login", false);
+            SceneLoader.load(stage, "login", "Login", new LoginController(), false);
         } catch (IOException e) {
             AlertThrower.throwAlert(e, Alert.AlertType.ERROR);
         }
