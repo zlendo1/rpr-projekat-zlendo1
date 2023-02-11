@@ -1,7 +1,6 @@
 package ba.unsa.etf.rpr.auxiliary;
 
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -26,13 +25,15 @@ public class SceneLoader {
      * @param resizable Boolean value for resizeability
      * @throws IOException In case the fileName is formated incorrectly or the file does not exist
      */
-    public static void load(Stage stage, String fileName, String titleName, boolean resizable) throws IOException {
-        Parent root = FXMLLoader.load(
+    public static void load(Stage stage, String fileName, String titleName, Object controller, boolean resizable) throws IOException {
+        FXMLLoader loader = new FXMLLoader(
                 ClassLoader.getSystemResource("fxml/" + fileName + ".fxml")
         );
 
+        loader.setController(controller);
+
         stage.setTitle(titleName);
-        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.setScene(new Scene(loader.load(), USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
         stage.setResizable(resizable);
 
         stage.show();
