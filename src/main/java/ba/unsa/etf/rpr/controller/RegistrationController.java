@@ -7,7 +7,6 @@ import ba.unsa.etf.rpr.domain.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
@@ -70,9 +69,32 @@ public class RegistrationController {
         }
 
         manager.createUser(usernameField.getText(), passwordField.getText(), firstNameField.getText(), lastNameField.getText());
+
+        Stage stage = (Stage) usernameField.getScene().getWindow();
+
+        try {
+            SceneLoader.load(stage, "login", "Login", new LoginController(), false);
+        } catch (IOException e) {
+            AlertThrower.throwAlert(e, Alert.AlertType.ERROR);
+        }
     }
 
     public void registerAndLogin(ActionEvent actionEvent) {
+        if (manager.existsUser(usernameField.getText())) {
+            usernameErrorField.setText("Username occupied");
+
+            return;
+        }
+
+        User user = manager.createUser(usernameField.getText(), passwordField.getText(), firstNameField.getText(), lastNameField.getText());
+
+        Stage stage = (Stage) usernameField.getScene().getWindow();
+
+        try {
+            SceneLoader.load(stage, "home", "Home", new HomeController(user), true);
+        } catch (IOException e) {
+            AlertThrower.throwAlert(e, Alert.AlertType.ERROR);
+        }
     }
 
     private void addEmptyFieldError(TextField textField, Text errorField, String message) {
