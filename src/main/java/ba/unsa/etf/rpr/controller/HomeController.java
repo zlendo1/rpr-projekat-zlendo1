@@ -1,18 +1,18 @@
 package ba.unsa.etf.rpr.controller;
 
+import ba.unsa.etf.rpr.auxiliary.AlertThrower;
+import ba.unsa.etf.rpr.auxiliary.SceneLoader;
 import ba.unsa.etf.rpr.business.ExamManager;
-import ba.unsa.etf.rpr.domain.Course;
 import ba.unsa.etf.rpr.domain.Exam;
 import ba.unsa.etf.rpr.domain.User;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -36,7 +36,7 @@ public class HomeController {
     private final ExamManager manager = new ExamManager();
 
     // User bean
-    private User user;
+    private final User user;
 
     public HomeController(User user) {
         this.user = user;
@@ -52,17 +52,37 @@ public class HomeController {
 
         List<Exam> examList = manager.searchExam(null, null);
 
-        table.setItems(FXCollections.observableList(examList));
+        updateTable(examList);
     }
 
     public void searchExams(ActionEvent actionEvent) {
+        List<Exam> examList = manager.searchExam(courseNameSearch.getText(), new Date(examTimeSearch.getValue().toEpochDay()));
 
+        updateTable(examList);
     }
 
     public void addExam(ActionEvent actionEvent) {
+        Stage stage = (Stage) table.getScene().getWindow();
+
+        try {
+            SceneLoader.load(stage, "addExam", "Add exam", new AddExamController(user), false);
+        } catch (IOException e) {
+            AlertThrower.throwAlert(e, Alert.AlertType.ERROR);
+        }
     }
 
     public void addCourse(ActionEvent actionEvent) {
+        Stage stage = (Stage) table.getScene().getWindow();
+
+        try {
+            SceneLoader.load(stage, "addCourse", "Add course", new AddCourseController(user), false);
+        } catch (IOException e) {
+            AlertThrower.throwAlert(e, Alert.AlertType.ERROR);
+        }
+    }
+
+    private void updateTable(List<Exam> examList) {
+        table.setItems(FXCollections.observableList(examList));
     }
 
 }
