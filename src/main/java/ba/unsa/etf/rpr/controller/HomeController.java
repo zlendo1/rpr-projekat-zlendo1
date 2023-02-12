@@ -40,22 +40,23 @@ public class HomeController {
 
     public HomeController(User user) {
         this.user = user;
-    }
-
-    @FXML
-    public void initialize() {
-        List<Exam> examList = manager.searchExam(null, null);
 
         usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
         courseNameColumn.setCellValueFactory(new PropertyValueFactory<>("courseName"));
         professorColumn.setCellValueFactory(new PropertyValueFactory<>("professor"));
         examTimeColumn.setCellValueFactory(new PropertyValueFactory<>("examTime"));
         answerSheetColumn.setCellValueFactory(new PropertyValueFactory<>("answerSheet"));
+    }
+
+    @FXML
+    public void initialize() {
+        List<Exam> examList = manager.searchExam(null, null);
 
         table.setItems(FXCollections.observableList(examList));
     }
 
     public void searchExams(ActionEvent actionEvent) {
+
     }
 
     public void addExam(ActionEvent actionEvent) {
