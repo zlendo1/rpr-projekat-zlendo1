@@ -26,4 +26,16 @@ public class UserManager {
         return null;
     }
 
+    public boolean existsUser(String username) {
+        try {
+            User user = DaoFactory.userDao().getByUsername(username);
+
+            return user != null;
+        } catch (DBHandleException e) {
+            AlertThrower.throwAlert(e, Alert.AlertType.ERROR);
+        }
+
+        return false;
+    }
+
 }
