@@ -1,5 +1,8 @@
 package ba.unsa.etf.rpr.domain;
 
+import javafx.beans.property.StringProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -91,6 +94,26 @@ public class Exam implements Serializable, Idable {
                 ", examTime=" + examTime +
                 ", answerSheet='" + answerSheet + '\'' +
                 '}';
+    }
+
+    public StringProperty usernameProperty() {
+        return new SimpleStringProperty(user.getUsername());
+    }
+
+    public StringProperty courseNameProperty() {
+        return new SimpleStringProperty(course.getName());
+    }
+
+    public StringProperty professorProperty() {
+        return new SimpleStringProperty(course.getProfessor());
+    }
+
+    public StringProperty examTimeProperty() {
+        return new SimpleStringProperty(examTime.toString());
+    }
+
+    public StringProperty answerSheetProperty() {
+        return new SimpleStringProperty(answerSheet);
     }
 
 }
