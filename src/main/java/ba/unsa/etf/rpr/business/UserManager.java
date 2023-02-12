@@ -38,4 +38,21 @@ public class UserManager {
         return false;
     }
 
+    public User createUser(String username, String password, String firstName, String lastName) {
+        User newUser = new User();
+
+        newUser.setUsername(username);
+        newUser.setPassword(password);
+        newUser.setFirstName(firstName);
+        newUser.setLastName(lastName);
+
+        try {
+            return DaoFactory.userDao().add(newUser);
+        } catch (DBHandleException e) {
+            AlertThrower.throwAlert(e, Alert.AlertType.ERROR);
+        }
+
+        return null;
+    }
+
 }

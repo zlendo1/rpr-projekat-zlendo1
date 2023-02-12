@@ -3,6 +3,7 @@ package ba.unsa.etf.rpr.controller;
 import ba.unsa.etf.rpr.auxiliary.AlertThrower;
 import ba.unsa.etf.rpr.auxiliary.SceneLoader;
 import ba.unsa.etf.rpr.business.UserManager;
+import ba.unsa.etf.rpr.domain.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -62,6 +63,13 @@ public class RegistrationController {
     }
 
     public void register(ActionEvent actionEvent) {
+        if (manager.existsUser(usernameField.getText())) {
+            usernameErrorField.setText("Username occupied");
+
+            return;
+        }
+
+        manager.createUser(usernameField.getText(), passwordField.getText(), firstNameField.getText(), lastNameField.getText());
     }
 
     public void registerAndLogin(ActionEvent actionEvent) {
