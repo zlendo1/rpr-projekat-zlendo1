@@ -39,6 +39,10 @@ public class UserManager {
     }
 
     public User createUser(String username, String password, String firstName, String lastName) {
+        if (username.isEmpty() || password.isEmpty() || firstName.isEmpty() || lastName.isEmpty()) {
+            return null;
+        }
+
         User newUser = new User();
 
         newUser.setUsername(username);
