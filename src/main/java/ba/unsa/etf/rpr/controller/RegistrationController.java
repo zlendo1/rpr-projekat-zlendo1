@@ -69,6 +69,12 @@ public class RegistrationController {
             return;
         }
 
+        if (!usernameField.getText().isEmpty() || !passwordField.getText().isEmpty() ||
+            !confirmPasswordErrorField.getText().isEmpty() || !firstNameErrorField.getText().isEmpty() ||
+            !lastNameErrorField.getText().isEmpty()) {
+            return;
+        }
+
         manager.createUser(usernameField.getText(), passwordField.getText(), firstNameField.getText(), lastNameField.getText());
     }
 
