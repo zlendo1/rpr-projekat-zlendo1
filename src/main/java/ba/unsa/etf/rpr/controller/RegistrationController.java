@@ -37,6 +37,18 @@ public class RegistrationController {
 
     @FXML
     public void initialize() {
+        addEmptyFieldError(usernameField, usernameErrorField, "Username field must not be empty");
+        addEmptyFieldError(passwordField, passwordErrorField, "Password field must not be empty");
+        addEmptyFieldError(firstNameField, firstNameErrorField, "First name field must not be empty");
+        addEmptyFieldError(lastNameField, lastNameErrorField, "Last name field must not be empty");
+
+        confirmPasswordField.textProperty().addListener(
+                (observable, oldValue, newValue) -> {
+                    if (!newValue.equals(passwordField.getText())) {
+                        confirmPasswordErrorField.setText("Password confirmation must match password");
+                    }
+                }
+        );
     }
 
     public void cancel(ActionEvent actionEvent) {
@@ -53,6 +65,16 @@ public class RegistrationController {
     }
 
     public void registerAndLogin(ActionEvent actionEvent) {
+    }
+
+    private void addEmptyFieldError(TextField textField, Text errorField, String message) {
+        textField.textProperty().addListener(
+                (observable, oldValue, newValue) -> {
+                    if (newValue.isEmpty()) {
+                        errorField.setText(message);
+                    }
+                }
+        );
     }
 
 }
