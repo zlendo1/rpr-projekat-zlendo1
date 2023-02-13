@@ -63,6 +63,7 @@ public class Course implements Idable{
     public String toString() {
         return "Course{" +
                 "id=" + id +
+                ", name='" + name + '\'' +
                 ", professor='" + professor + '\'' +
                 '}';
     }
