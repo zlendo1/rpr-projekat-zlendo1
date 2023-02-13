@@ -55,6 +55,13 @@ public class AddExamController {
     }
 
     public void cancel(ActionEvent actionEvent) {
+        Stage stage = (Stage) courseNameField.getScene().getWindow();
+
+        try {
+            SceneLoader.load(stage, "home", "Home", new HomeController(user), true);
+        } catch (IOException e) {
+            AlertThrower.throwAlert(e, Alert.AlertType.ERROR);
+        }
     }
 
     public void add(ActionEvent actionEvent) {
