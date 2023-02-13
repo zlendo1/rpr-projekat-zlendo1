@@ -3,6 +3,7 @@ package ba.unsa.etf.rpr.controller;
 import ba.unsa.etf.rpr.auxiliary.AlertThrower;
 import ba.unsa.etf.rpr.auxiliary.SceneLoader;
 import ba.unsa.etf.rpr.business.ExamManager;
+import ba.unsa.etf.rpr.domain.Exam;
 import ba.unsa.etf.rpr.domain.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -66,7 +67,11 @@ public class AddExamController {
     }
 
     public void add(ActionEvent actionEvent) {
-        manager.createExam(courseNameField.getText(), new Date(examTimeField.getValue().toEpochDay()), answerSheetField.getText());
+        Exam exam = manager.createExam(courseNameField.getText(), new Date(examTimeField.getValue().toEpochDay()), answerSheetField.getText());
+
+        if (exam == null) {
+            return;
+        }
 
         Stage stage = (Stage) courseNameField.getScene().getWindow();
 
