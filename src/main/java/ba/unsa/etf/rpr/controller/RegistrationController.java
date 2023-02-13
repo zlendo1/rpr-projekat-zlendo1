@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-import static ba.unsa.etf.rpr.auxiliary.AlertThrower.addEmptyFieldError;
+import static ba.unsa.etf.rpr.auxiliary.AlertThrower.addEmptyTextFieldError;
 
 /**
  * Controller class for the registration scene.
@@ -39,10 +39,10 @@ public class RegistrationController {
 
     @FXML
     public void initialize() {
-        addEmptyFieldError(usernameField, usernameErrorField, "Username field must not be empty");
-        addEmptyFieldError(passwordField, passwordErrorField, "Password field must not be empty");
-        addEmptyFieldError(firstNameField, firstNameErrorField, "First name field must not be empty");
-        addEmptyFieldError(lastNameField, lastNameErrorField, "Last name field must not be empty");
+        addEmptyTextFieldError(usernameField, usernameErrorField, "Username field must not be empty");
+        addEmptyTextFieldError(passwordField, passwordErrorField, "Password field must not be empty");
+        addEmptyTextFieldError(firstNameField, firstNameErrorField, "First name field must not be empty");
+        addEmptyTextFieldError(lastNameField, lastNameErrorField, "Last name field must not be empty");
 
         confirmPasswordField.textProperty().addListener(
                 (observable, oldValue, newValue) -> {
