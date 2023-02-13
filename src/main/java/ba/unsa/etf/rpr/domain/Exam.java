@@ -96,24 +96,16 @@ public class Exam implements Serializable, Idable {
                 '}';
     }
 
-    public StringProperty usernameProperty() {
-        return new SimpleStringProperty(user.getUsername());
+    public String getUsername() {
+        return user.getUsername();
     }
 
-    public StringProperty courseNameProperty() {
-        return new SimpleStringProperty(course.getName());
+    public String getCourseName() {
+        return course.getName();
     }
 
-    public StringProperty professorProperty() {
-        return new SimpleStringProperty(course.getProfessor());
-    }
-
-    public StringProperty examTimeProperty() {
-        return new SimpleStringProperty(examTime.toString());
-    }
-
-    public StringProperty answerSheetProperty() {
-        return new SimpleStringProperty(answerSheet);
+    public String getProfessor() {
+        return course.getProfessor();
     }
 
 }
