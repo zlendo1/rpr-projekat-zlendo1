@@ -33,7 +33,7 @@ public class ExamDaoSQLImpl extends AbstractDao<Exam> implements ExamDao {
                     resultSet.getInt("id"),
                     DaoFactory.userDao().getById(resultSet.getInt("user_id")),
                     DaoFactory.courseDao().getById(resultSet.getInt("course_id")),
-                    resultSet.getTimestamp("exam_time"),
+                    resultSet.getDate("exam_time"),
                     resultSet.getString("answer_sheet")
             );
 
@@ -144,7 +144,7 @@ public class ExamDaoSQLImpl extends AbstractDao<Exam> implements ExamDao {
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(query);
 
-            preparedStatement.setTimestamp(1, (Timestamp) examTime);
+            preparedStatement.setDate(1, (java.sql.Date) examTime);
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
