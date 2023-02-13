@@ -62,12 +62,6 @@ public class RegistrationController {
     }
 
     public void register(ActionEvent actionEvent) {
-        if (manager.existsUser(usernameField.getText())) {
-            usernameErrorField.setText("Username occupied");
-
-            return;
-        }
-
         manager.createUser(usernameField.getText(), passwordField.getText(), firstNameField.getText(), lastNameField.getText());
 
         Stage stage = (Stage) usernameField.getScene().getWindow();
@@ -80,12 +74,6 @@ public class RegistrationController {
     }
 
     public void registerAndLogin(ActionEvent actionEvent) {
-        if (manager.existsUser(usernameField.getText())) {
-            usernameErrorField.setText("Username occupied");
-
-            return;
-        }
-
         User user = manager.createUser(usernameField.getText(), passwordField.getText(), firstNameField.getText(), lastNameField.getText());
 
         Stage stage = (Stage) usernameField.getScene().getWindow();

@@ -5,6 +5,7 @@ import ba.unsa.etf.rpr.dao.DaoFactory;
 import ba.unsa.etf.rpr.domain.User;
 import ba.unsa.etf.rpr.exception.DBHandleException;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 /**
  * Business layer manager for User.
@@ -41,6 +42,10 @@ public class UserManager {
     public User createUser(String username, String password, String firstName, String lastName) {
         if (username.isEmpty() || password.isEmpty() || firstName.isEmpty() || lastName.isEmpty()) {
             return null;
+        }
+
+        if (existsUser(username)) {
+            new Alert(Alert.AlertType.ERROR, "Username occupied", ButtonType.OK);
         }
 
         User newUser = new User();
