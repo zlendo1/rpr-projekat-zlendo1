@@ -3,6 +3,7 @@ package ba.unsa.etf.rpr.controller;
 import ba.unsa.etf.rpr.auxiliary.AlertThrower;
 import ba.unsa.etf.rpr.auxiliary.SceneLoader;
 import ba.unsa.etf.rpr.business.CourseManager;
+import ba.unsa.etf.rpr.domain.Course;
 import ba.unsa.etf.rpr.domain.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -44,6 +45,19 @@ public class AddCourseController {
     }
 
     public void add(ActionEvent actionEvent) {
+        Course course = manager.createCourse(courseNameField.getText(), professorField.getText());
+
+        if (course == null) {
+            return;
+        }
+
+        Stage stage = (Stage) courseNameField.getScene().getWindow();
+
+        try {
+            SceneLoader.load(stage, "home", "Home", new HomeController(user), true);
+        } catch (IOException e) {
+            AlertThrower.throwAlert(e, Alert.AlertType.ERROR);
+        }
     }
 
     public void cancel(ActionEvent actionEvent) {
