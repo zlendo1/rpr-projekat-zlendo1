@@ -7,7 +7,6 @@ import ba.unsa.etf.rpr.exception.DBHandleException;
 import javafx.scene.control.Alert;
 
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -21,7 +20,7 @@ public class ExamManager {
             List<Exam> exams = DaoFactory.examDao().getAll();
 
             for (Exam exam : exams) {
-                if (courseName != null && !exam.getCourse().getName().equals(courseName)) {
+                if (!courseName.isEmpty() && !exam.getCourse().getName().equals(courseName)) {
                     exams.remove(exam);
                 }
 
