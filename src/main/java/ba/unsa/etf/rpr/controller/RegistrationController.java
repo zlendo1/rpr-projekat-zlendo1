@@ -48,6 +48,8 @@ public class RegistrationController {
                 (observable, oldValue, newValue) -> {
                     if (!newValue.equals(passwordField.getText())) {
                         confirmPasswordErrorField.setText("Password confirmation must match password");
+                    } else {
+                        confirmPasswordErrorField.setText("");
                     }
                 }
         );
