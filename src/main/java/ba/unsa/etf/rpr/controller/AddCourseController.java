@@ -7,6 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
+import static ba.unsa.etf.rpr.auxiliary.AlertThrower.addEmptyTextFieldError;
+
 /**
  * Controller class for the course addition scene.
  *
@@ -23,7 +25,7 @@ public class AddCourseController {
     private final CourseManager manager = new CourseManager();
 
     // User bean
-    private User user;
+    private final User user;
 
     public AddCourseController(User user) {
         this.user = user;
@@ -31,6 +33,8 @@ public class AddCourseController {
 
     @FXML
     public void initialize() {
+        addEmptyTextFieldError(courseNameField, courseNameErrorField, "Course name must exist");
+        addEmptyTextFieldError(professorField, courseNameErrorField, "Professor name must exist");
     }
 
     public void add(ActionEvent actionEvent) {
