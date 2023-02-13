@@ -14,6 +14,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import static ba.unsa.etf.rpr.auxiliary.AlertThrower.addEmptyFieldError;
+
 /**
  * Controller class for the registration scene.
  *
@@ -83,16 +85,6 @@ public class RegistrationController {
         } catch (IOException e) {
             AlertThrower.throwAlert(e, Alert.AlertType.ERROR);
         }
-    }
-
-    private void addEmptyFieldError(TextField textField, Text errorField, String message) {
-        textField.textProperty().addListener(
-                (observable, oldValue, newValue) -> {
-                    if (newValue.isEmpty()) {
-                        errorField.setText(message);
-                    }
-                }
-        );
     }
 
 }
