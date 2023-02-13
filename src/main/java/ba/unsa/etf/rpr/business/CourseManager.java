@@ -20,6 +20,8 @@ public class CourseManager {
         try {
             if (DaoFactory.courseDao().searchByName(courseName) != null) {
                 new Alert(Alert.AlertType.ERROR, "Course name occupied");
+
+                return null;
             }
 
             Course course = new Course();

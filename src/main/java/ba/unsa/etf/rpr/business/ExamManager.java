@@ -50,6 +50,8 @@ public class ExamManager {
 
             if (course == null) {
                 new Alert(Alert.AlertType.ERROR, "Given course does not exist", ButtonType.OK);
+
+                return null;
             }
 
             Exam exam = new Exam();
