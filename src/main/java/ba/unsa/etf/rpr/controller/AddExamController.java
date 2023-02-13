@@ -14,6 +14,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Date;
 
 import static ba.unsa.etf.rpr.auxiliary.AlertThrower.addEmptyTextFieldError;
 
@@ -65,6 +66,15 @@ public class AddExamController {
     }
 
     public void add(ActionEvent actionEvent) {
+        manager.createExam(courseNameField.getText(), new Date(examTimeField.getValue().toEpochDay()), answerSheetField.getText());
+
+        Stage stage = (Stage) courseNameField.getScene().getWindow();
+
+        try {
+            SceneLoader.load(stage, "home", "Home", new HomeController(user), true);
+        } catch (IOException e) {
+            AlertThrower.throwAlert(e, Alert.AlertType.ERROR);
+        }
     }
 
 }
