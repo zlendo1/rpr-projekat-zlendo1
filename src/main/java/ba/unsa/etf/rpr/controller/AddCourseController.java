@@ -1,11 +1,17 @@
 package ba.unsa.etf.rpr.controller;
 
+import ba.unsa.etf.rpr.auxiliary.AlertThrower;
+import ba.unsa.etf.rpr.auxiliary.SceneLoader;
 import ba.unsa.etf.rpr.business.CourseManager;
 import ba.unsa.etf.rpr.domain.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 import static ba.unsa.etf.rpr.auxiliary.AlertThrower.addEmptyTextFieldError;
 
@@ -41,6 +47,13 @@ public class AddCourseController {
     }
 
     public void cancel(ActionEvent actionEvent) {
+        Stage stage = (Stage) courseNameField.getScene().getWindow();
+
+        try {
+            SceneLoader.load(stage, "home", "Home", new HomeController(user), true);
+        } catch (IOException e) {
+            AlertThrower.throwAlert(e, Alert.AlertType.ERROR);
+        }
     }
 
 }
