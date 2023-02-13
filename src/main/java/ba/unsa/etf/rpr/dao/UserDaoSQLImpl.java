@@ -16,7 +16,7 @@ import java.util.TreeMap;
 public class UserDaoSQLImpl extends AbstractDao<User> implements UserDao {
 
     public UserDaoSQLImpl() throws DBHandleException {
-        super("user");
+        super("users");
     }
 
     /**
@@ -73,7 +73,7 @@ public class UserDaoSQLImpl extends AbstractDao<User> implements UserDao {
     public List<User> getByFirstName(String firstName) throws DBHandleException {
         List<User> userList = new ArrayList<>();
 
-        String query = "SELECT * FROM user WHERE first_name = ?";
+        String query = "SELECT * FROM users WHERE first_name = ?";
 
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(query);
@@ -106,7 +106,7 @@ public class UserDaoSQLImpl extends AbstractDao<User> implements UserDao {
     public List<User> getByLastName(String lastName) throws DBHandleException {
         List<User> userList = new ArrayList<>();
 
-        String query = "SELECT * FROM user WHERE last_name = ?";
+        String query = "SELECT * FROM users WHERE last_name = ?";
 
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(query);
@@ -139,7 +139,7 @@ public class UserDaoSQLImpl extends AbstractDao<User> implements UserDao {
     public User getByUsername(String username) throws DBHandleException {
         User user = null;
 
-        String query = "SELECT * FROM user WHERE username = ?";
+        String query = "SELECT * FROM users WHERE username = ?";
 
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(query);
@@ -172,7 +172,7 @@ public class UserDaoSQLImpl extends AbstractDao<User> implements UserDao {
     public List<User> getByPassword(String password) throws DBHandleException {
         List<User> userList = new ArrayList<>();
 
-        String query = "SELECT * FROM user WHERE password = ?";
+        String query = "SELECT * FROM users WHERE password = ?";
 
         try {
             PreparedStatement preparedStatement = getConnection().prepareStatement(query);
