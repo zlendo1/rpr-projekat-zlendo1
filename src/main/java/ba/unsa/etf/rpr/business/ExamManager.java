@@ -71,6 +71,16 @@ public class ExamManager {
         return null;
     }
 
+    public List<Exam> getAll() {
+        try {
+            return DaoFactory.examDao().getAll();
+        } catch (DBHandleException e) {
+            AlertThrower.throwAlert(e, Alert.AlertType.ERROR);
+        }
+
+        return null;
+    }
+
     private Date localDateToDate(LocalDate localDate) {
         return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
     }
