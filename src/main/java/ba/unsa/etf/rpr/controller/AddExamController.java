@@ -1,16 +1,21 @@
 package ba.unsa.etf.rpr.controller;
 
 import ba.unsa.etf.rpr.auxiliary.AlertThrower;
+import ba.unsa.etf.rpr.auxiliary.SceneLoader;
 import ba.unsa.etf.rpr.business.ExamManager;
 import ba.unsa.etf.rpr.domain.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
-import static ba.unsa.etf.rpr.auxiliary.AlertThrower.addEmptyFieldError;
+import java.io.IOException;
+
+import static ba.unsa.etf.rpr.auxiliary.AlertThrower.addEmptyTextFieldError;
 
 /**
  * Controller class for the exam addition scene.
@@ -38,7 +43,15 @@ public class AddExamController {
 
     @FXML
     public void initialize() {
-        addEmptyFieldError(co);
+        addEmptyTextFieldError(courseNameField, courseNameFieldError, "Course name must exist");
+
+        examTimeField.valueProperty().addListener(
+                (observer, oldValue, newValue) -> {
+                    if (newValue == null) {
+                        examTimeFieldError.setText("Exam date must exist");
+                    }
+                }
+        );
     }
 
     public void cancel(ActionEvent actionEvent) {
