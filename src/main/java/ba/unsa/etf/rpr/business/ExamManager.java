@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import java.util.ListIterator;
 
 /**
  * Business layer manager for Exam.
@@ -24,13 +25,13 @@ public class ExamManager {
         try {
             List<Exam> exams = DaoFactory.examDao().getAll();
 
-            for (Exam exam : exams) {
-                if (!courseName.isEmpty() && !exam.getCourse().getName().equals(courseName)) {
-                    exams.remove(exam);
-                }
+            for (ListIterator<Exam> iter = exams.listIterator(); iter.hasNext();) {
+                Exam exam = iter.next();
 
-                if (date != null && !exam.getExamTime().equals(localDateToDate(date))) {
-                    exams.remove(exam);
+                if (!courseName.isEmpty() && !exam.getCourse().getName().equals(courseName)) {
+                    iter.remove();
+                } else if (date != null && !exam.getExamTime().equals(localDateToDate(date))) {
+                    iter.remove();
                 }
             }
 
