@@ -3,6 +3,7 @@ package ba.unsa.etf.rpr.controller;
 import ba.unsa.etf.rpr.auxiliary.AlertThrower;
 import ba.unsa.etf.rpr.auxiliary.SceneLoader;
 import ba.unsa.etf.rpr.business.ExamManager;
+import ba.unsa.etf.rpr.dao.DaoFactory;
 import ba.unsa.etf.rpr.domain.Exam;
 import ba.unsa.etf.rpr.domain.User;
 import javafx.collections.FXCollections;
@@ -50,7 +51,7 @@ public class HomeController {
         examTimeColumn.setCellValueFactory(new PropertyValueFactory<>("examTime"));
         answerSheetColumn.setCellValueFactory(new PropertyValueFactory<>("answerSheet"));
 
-        List<Exam> examList = manager.searchExam(null, null);
+        List<Exam> examList = manager.getAll();
 
         updateTable(examList);
     }
@@ -83,6 +84,8 @@ public class HomeController {
 
     private void updateTable(List<Exam> examList) {
         table.setItems(FXCollections.observableList(examList));
+
+        table.refresh();
     }
 
 }
