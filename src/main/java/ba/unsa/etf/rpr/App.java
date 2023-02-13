@@ -6,7 +6,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 /**
- * Hello world!
+ * Main class that contains the JavaFX framework of this here app
  *
  */
 public class App extends Application {
