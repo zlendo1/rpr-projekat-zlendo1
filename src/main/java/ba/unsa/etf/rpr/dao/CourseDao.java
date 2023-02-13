@@ -16,7 +16,7 @@ public interface CourseDao extends Dao<Course> {
      * @param name Course name
      * @return List of courses
      */
-    List<Course> searchByName(String name) throws DBHandleException;
+    Course searchByName(String name) throws DBHandleException;
 
     /**
      * Search for courses in DB by its professor's name.

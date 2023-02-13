@@ -67,8 +67,8 @@ public class CourseDaoSQLImpl extends AbstractDao<Course> implements CourseDao{
      * @return List of courses
      */
     @Override
-    public List<Course> searchByName(String name) throws DBHandleException {
-        List<Course> courseList = new ArrayList<>();
+    public Course searchByName(String name) throws DBHandleException {
+        Course course = null;
 
         String query = "SELECT * FROM course WHERE name = ?";
 
@@ -79,8 +79,8 @@ public class CourseDaoSQLImpl extends AbstractDao<Course> implements CourseDao{
 
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            while (resultSet.next()) {
-                courseList.add(rowToObject(resultSet));
+            if (resultSet.next()) {
+                course = rowToObject(resultSet);
             }
 
             resultSet.close();
@@ -89,7 +89,7 @@ public class CourseDaoSQLImpl extends AbstractDao<Course> implements CourseDao{
             throw new DBHandleException(e);
         }
 
-        return courseList;
+        return course;
     }
 
     /**
