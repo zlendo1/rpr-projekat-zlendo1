@@ -15,7 +15,7 @@ public class AlertThrower {
         new Alert(alertType, e.getMessage(), ButtonType.OK).show();
     }
 
-    public static void addEmptyFieldError(TextField textField, Text errorField, String message) {
+    public static void addEmptyTextFieldError(TextField textField, Text errorField, String message) {
         textField.textProperty().addListener(
                 (observable, oldValue, newValue) -> {
                     if (newValue.isEmpty()) {
