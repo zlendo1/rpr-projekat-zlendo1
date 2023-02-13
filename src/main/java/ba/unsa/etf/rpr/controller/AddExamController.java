@@ -15,7 +15,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.Date;
 
 import static ba.unsa.etf.rpr.auxiliary.AlertThrower.addEmptyTextFieldError;
 
@@ -67,7 +66,7 @@ public class AddExamController {
     }
 
     public void add(ActionEvent actionEvent) {
-        Exam exam = manager.createExam(courseNameField.getText(), examTimeField.getValue(), answerSheetField.getText());
+        Exam exam = manager.createExam(courseNameField.getText(), user, examTimeField.getValue(), answerSheetField.getText());
 
         if (exam == null) {
             return;

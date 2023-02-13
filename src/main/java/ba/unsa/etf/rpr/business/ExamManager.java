@@ -4,6 +4,7 @@ import ba.unsa.etf.rpr.auxiliary.AlertThrower;
 import ba.unsa.etf.rpr.dao.DaoFactory;
 import ba.unsa.etf.rpr.domain.Course;
 import ba.unsa.etf.rpr.domain.Exam;
+import ba.unsa.etf.rpr.domain.User;
 import ba.unsa.etf.rpr.exception.DBHandleException;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -40,7 +41,7 @@ public class ExamManager {
         return null;
     }
 
-    public Exam createExam(String courseName, LocalDate date, String answerSheet) {
+    public Exam createExam(String courseName, User user, LocalDate date, String answerSheet) {
         if (courseName.isEmpty() || date == null) {
             return null;
         }
@@ -57,6 +58,7 @@ public class ExamManager {
             Exam exam = new Exam();
 
             exam.setCourse(course);
+            exam.setUser(user);
             exam.setExamTime(new Date(date.toEpochDay()));
             exam.setAnswerSheet(answerSheet);
 
