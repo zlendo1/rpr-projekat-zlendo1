@@ -31,6 +31,11 @@ public class LoginController {
 
     @FXML
     public void initialize() {
+        passwordField.textProperty().addListener(
+                (observer, oldValue, newValue) -> {
+                    errorField.setText("");
+                }
+        );
     }
 
     public void cancel(ActionEvent actionEvent) {
