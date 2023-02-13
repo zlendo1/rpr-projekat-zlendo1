@@ -3,7 +3,6 @@ package ba.unsa.etf.rpr.controller;
 import ba.unsa.etf.rpr.auxiliary.AlertThrower;
 import ba.unsa.etf.rpr.auxiliary.SceneLoader;
 import ba.unsa.etf.rpr.business.ExamManager;
-import ba.unsa.etf.rpr.dao.DaoFactory;
 import ba.unsa.etf.rpr.domain.Exam;
 import ba.unsa.etf.rpr.domain.User;
 import javafx.collections.FXCollections;
