@@ -8,6 +8,7 @@ import ba.unsa.etf.rpr.exception.DBHandleException;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +18,7 @@ import java.util.List;
  */
 public class ExamManager {
 
-    public List<Exam> searchExam(String courseName, Date date) {
+    public List<Exam> searchExam(String courseName, LocalDate date) {
         try {
             List<Exam> exams = DaoFactory.examDao().getAll();
 
@@ -26,7 +27,7 @@ public class ExamManager {
                     exams.remove(exam);
                 }
 
-                if (date != null && !exam.getExamTime().equals(date)) {
+                if (date != null && !exam.getExamTime().equals(new Date(date.toEpochDay()))) {
                     exams.remove(exam);
                 }
             }
@@ -39,7 +40,7 @@ public class ExamManager {
         return null;
     }
 
-    public Exam createExam(String courseName, Date date, String answerSheet) {
+    public Exam createExam(String courseName, LocalDate date, String answerSheet) {
         if (courseName.isEmpty() || date == null) {
             return null;
         }
@@ -54,7 +55,7 @@ public class ExamManager {
             Exam exam = new Exam();
 
             exam.setCourse(course);
-            exam.setExamTime(date);
+            exam.setExamTime(new Date(date.toEpochDay()));
             exam.setAnswerSheet(answerSheet);
 
             return exam;

@@ -67,7 +67,7 @@ public class AddExamController {
     }
 
     public void add(ActionEvent actionEvent) {
-        Exam exam = manager.createExam(courseNameField.getText(), new Date(examTimeField.getValue().toEpochDay()), answerSheetField.getText());
+        Exam exam = manager.createExam(courseNameField.getText(), examTimeField.getValue(), answerSheetField.getText());
 
         if (exam == null) {
             return;

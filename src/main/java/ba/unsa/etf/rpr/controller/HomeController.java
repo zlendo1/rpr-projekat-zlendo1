@@ -56,7 +56,7 @@ public class HomeController {
     }
 
     public void searchExams(ActionEvent actionEvent) {
-        List<Exam> examList = manager.searchExam(courseNameSearch.getText(), new Date(examTimeSearch.getValue().toEpochDay()));
+        List<Exam> examList = manager.searchExam(courseNameSearch.getText(), examTimeSearch.getValue());
 
         updateTable(examList);
     }
