@@ -63,7 +63,7 @@ public class ExamManager {
             exam.setExamTime(localDateToDate(date));
             exam.setAnswerSheet(answerSheet);
 
-            return exam;
+            return DaoFactory.examDao().add(exam);
         } catch (DBHandleException e) {
             AlertThrower.throwAlert(e, Alert.AlertType.ERROR);
         }
