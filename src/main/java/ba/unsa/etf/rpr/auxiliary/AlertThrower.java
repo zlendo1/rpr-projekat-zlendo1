@@ -20,6 +20,8 @@ public class AlertThrower {
                 (observable, oldValue, newValue) -> {
                     if (newValue.isEmpty()) {
                         errorField.setText(message);
+                    } else {
+                        errorField.setText("");
                     }
                 }
         );
