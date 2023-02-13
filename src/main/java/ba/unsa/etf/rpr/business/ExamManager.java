@@ -10,6 +10,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class ExamManager {
                     exams.remove(exam);
                 }
 
-                if (date != null && !exam.getExamTime().equals(new Date(date.toEpochDay()))) {
+                if (date != null && !exam.getExamTime().equals(localDateToDate(date))) {
                     exams.remove(exam);
                 }
             }
@@ -59,7 +60,7 @@ public class ExamManager {
 
             exam.setCourse(course);
             exam.setUser(user);
-            exam.setExamTime(new Date(date.toEpochDay()));
+            exam.setExamTime(localDateToDate(date));
             exam.setAnswerSheet(answerSheet);
 
             return exam;
@@ -68,6 +69,10 @@ public class ExamManager {
         }
 
         return null;
+    }
+
+    private Date localDateToDate(LocalDate localDate) {
+        return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
     }
 
 }

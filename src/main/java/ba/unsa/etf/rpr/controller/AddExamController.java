@@ -68,6 +68,8 @@ public class AddExamController {
     public void add(ActionEvent actionEvent) {
         Exam exam = manager.createExam(courseNameField.getText(), user, examTimeField.getValue(), answerSheetField.getText());
 
+        System.out.println(exam);
+
         if (exam == null) {
             return;
         }
