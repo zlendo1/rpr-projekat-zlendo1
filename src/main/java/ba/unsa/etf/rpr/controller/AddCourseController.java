@@ -41,7 +41,7 @@ public class AddCourseController {
     @FXML
     public void initialize() {
         addEmptyTextFieldError(courseNameField, courseNameErrorField, "Course name must exist");
-        addEmptyTextFieldError(professorField, courseNameErrorField, "Professor name must exist");
+        addEmptyTextFieldError(professorField, professorErrorField, "Professor name must exist");
     }
 
     public void add(ActionEvent actionEvent) {
