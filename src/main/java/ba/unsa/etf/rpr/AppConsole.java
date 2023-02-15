@@ -54,4 +54,8 @@ public class AppConsole {
         return exams;
     }
 
+    public static void main(String[] args) {
+
+    }
+
 }
