@@ -22,7 +22,6 @@ class ExamManagerTest {
 
     private ExamManager examManager;
     private Exam exam;
-    private ExamDaoSQLImpl examDaoSQLMock;
     private List<Exam> exams;
     private User user;
     private Course course;
@@ -45,8 +44,6 @@ class ExamManagerTest {
         examManager = Mockito.mock(ExamManager.class);
 
         exam = new Exam(1, user, course, date, "225883 nazovi moj broj");
-
-        examDaoSQLMock = Mockito.mock(ExamDaoSQLImpl.class);
 
         exams = new ArrayList<>();
 
