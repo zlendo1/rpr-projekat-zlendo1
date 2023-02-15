@@ -16,7 +16,7 @@ public class AppConsole {
     private static final Option addExam = new Option("e", "add-exam", false, "Adding exam to the database");
     private static final Option getExams = new Option("getE", "get-exams", false, "Printing all exam solutions from the database");
 
-    public static void printFormattedOptions(Options options) {
+    private static void printFormattedOptions(Options options) {
         HelpFormatter helpFormatter = new HelpFormatter();
         PrintWriter printWriter = new PrintWriter(System.out);
 
@@ -24,6 +24,16 @@ public class AppConsole {
         helpFormatter.printOptions(printWriter, 150, options, 2, 7);
 
         printWriter.close();
+    }
+
+    private static Options addOptions() {
+        Options options = new Options();
+
+        options.addOption(addCourse);
+        options.addOption(addExam);
+        options.addOption(getExams);
+
+        return options;
     }
 
 }
