@@ -17,9 +17,7 @@ public class CourseManager {
         }
 
         if (DaoFactory.courseDao().searchByName(courseName) != null) {
-            new Alert(Alert.AlertType.ERROR, "Course name occupied");
-
-            return null;
+            throw new DBHandleException("Course name occupied");
         }
 
         Course course = new Course();

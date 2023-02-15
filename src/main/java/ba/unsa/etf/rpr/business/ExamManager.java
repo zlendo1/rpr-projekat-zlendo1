@@ -44,9 +44,7 @@ public class ExamManager {
         Course course = DaoFactory.courseDao().searchByName(courseName);
 
         if (course == null) {
-            new Alert(Alert.AlertType.ERROR, "Given course does not exist", ButtonType.OK);
-
-            return null;
+            throw new DBHandleException("Given course does not exist");
         }
 
         Exam exam = new Exam();

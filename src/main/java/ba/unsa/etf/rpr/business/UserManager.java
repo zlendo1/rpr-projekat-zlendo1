@@ -35,9 +35,7 @@ public class UserManager {
         }
 
         if (existsUser(username)) {
-            new Alert(Alert.AlertType.ERROR, "Username occupied", ButtonType.OK);
-
-            return null;
+            throw new DBHandleException("Username occupied");
         }
 
         User newUser = new User();
