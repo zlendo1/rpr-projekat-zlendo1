@@ -1,8 +1,12 @@
 package ba.unsa.etf.rpr;
 
+import ba.unsa.etf.rpr.domain.Exam;
 import org.apache.commons.cli.*;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Command line interface for our app.
@@ -34,6 +38,20 @@ public class AppConsole {
         options.addOption(getExams);
 
         return options;
+    }
+
+    private static List<Exam> searchExams(List<Exam> listOfExams, String courseName, Date examDate) {
+        List<Exam> exams = new ArrayList<>(listOfExams);
+
+        if (!courseName.isEmpty()) {
+            exams = exams.stream().filter(cat -> cat.getCourse().getName().equals(courseName)).toList();
+        }
+
+        if (examDate != null) {
+            exams = exams.stream().filter(cat -> cat.getExamTime().equals(examDate)).toList();
+        }
+
+        return exams;
     }
 
 }
