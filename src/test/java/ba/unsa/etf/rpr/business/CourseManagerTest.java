@@ -27,11 +27,7 @@ class CourseManagerTest {
     void setUp() {
         courseManager = Mockito.mock(CourseManager.class);
 
-        course = new Course();
-
-        course.setId(1);
-        course.setName("Blizzard API 101");
-        course.setProfessor("Saban Saulic");
+        course = new Course(1, "Blizzard API 101", "Saban Saulic");
 
         courseDaoSQLMock = Mockito.mock(CourseDaoSQLImpl.class);
 
