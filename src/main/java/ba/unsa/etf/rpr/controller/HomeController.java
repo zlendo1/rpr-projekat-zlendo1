@@ -5,6 +5,7 @@ import ba.unsa.etf.rpr.auxiliary.SceneLoader;
 import ba.unsa.etf.rpr.business.ExamManager;
 import ba.unsa.etf.rpr.domain.Exam;
 import ba.unsa.etf.rpr.domain.User;
+import ba.unsa.etf.rpr.exception.DBHandleException;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -50,15 +51,23 @@ public class HomeController {
         examTimeColumn.setCellValueFactory(new PropertyValueFactory<>("examTime"));
         answerSheetColumn.setCellValueFactory(new PropertyValueFactory<>("answerSheet"));
 
-        List<Exam> examList = manager.getAll();
+        try {
+            List<Exam> examList = manager.getAll();
 
-        updateTable(examList);
+            updateTable(examList);
+        } catch (DBHandleException e) {
+            AlertThrower.throwAlert(e, Alert.AlertType.ERROR);
+        }
     }
 
     public void searchExams(ActionEvent actionEvent) {
-        List<Exam> examList = manager.searchExam(courseNameSearch.getText(), examTimeSearch.getValue());
+        try {
+            List<Exam> examList = manager.searchExam(courseNameSearch.getText(), examTimeSearch.getValue());
 
-        updateTable(examList);
+            updateTable(examList);
+        } catch (DBHandleException e) {
+            AlertThrower.throwAlert(e, Alert.AlertType.ERROR);
+        }
     }
 
     public void addExam(ActionEvent actionEvent) {

@@ -5,6 +5,7 @@ import ba.unsa.etf.rpr.auxiliary.SceneLoader;
 import ba.unsa.etf.rpr.business.CourseManager;
 import ba.unsa.etf.rpr.domain.Course;
 import ba.unsa.etf.rpr.domain.User;
+import ba.unsa.etf.rpr.exception.DBHandleException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -45,17 +46,17 @@ public class AddCourseController {
     }
 
     public void add(ActionEvent actionEvent) {
-        Course course = manager.createCourse(courseNameField.getText(), professorField.getText());
-
-        if (course == null) {
-            return;
-        }
-
-        Stage stage = (Stage) courseNameField.getScene().getWindow();
-
         try {
+            Course course = manager.createCourse(courseNameField.getText(), professorField.getText());
+
+            if (course == null) {
+                return;
+            }
+
+            Stage stage = (Stage) courseNameField.getScene().getWindow();
+
             SceneLoader.load(stage, "home", "Home", new HomeController(user), true);
-        } catch (IOException e) {
+        } catch (IOException | DBHandleException e) {
             AlertThrower.throwAlert(e, Alert.AlertType.ERROR);
         }
     }

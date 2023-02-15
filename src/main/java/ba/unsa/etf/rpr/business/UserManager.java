@@ -13,33 +13,23 @@ import javafx.scene.control.ButtonType;
  */
 public class UserManager {
 
-    public User findUser(String username, String password) {
-        try {
-            User user = DaoFactory.userDao().getByUsername(username);
+    public User findUser(String username, String password) throws DBHandleException {
+        User user = DaoFactory.userDao().getByUsername(username);
 
-            if (user != null && user.getPassword().equals(password)) {
-                return user;
-            }
-        } catch (DBHandleException e) {
-            AlertThrower.throwAlert(e, Alert.AlertType.ERROR);
+        if (user != null && user.getPassword().equals(password)) {
+            return user;
         }
 
         return null;
     }
 
-    public boolean existsUser(String username) {
-        try {
-            User user = DaoFactory.userDao().getByUsername(username);
+    public boolean existsUser(String username) throws DBHandleException {
+        User user = DaoFactory.userDao().getByUsername(username);
 
-            return user != null;
-        } catch (DBHandleException e) {
-            AlertThrower.throwAlert(e, Alert.AlertType.ERROR);
-        }
-
-        return false;
+        return user != null;
     }
 
-    public User createUser(String username, String password, String firstName, String lastName) {
+    public User createUser(String username, String password, String firstName, String lastName) throws DBHandleException {
         if (username.isEmpty() || password.isEmpty() || firstName.isEmpty() || lastName.isEmpty()) {
             return null;
         }
@@ -57,13 +47,7 @@ public class UserManager {
         newUser.setFirstName(firstName);
         newUser.setLastName(lastName);
 
-        try {
-            return DaoFactory.userDao().add(newUser);
-        } catch (DBHandleException e) {
-            AlertThrower.throwAlert(e, Alert.AlertType.ERROR);
-        }
-
-        return null;
+        return DaoFactory.userDao().add(newUser);
     }
 
 }

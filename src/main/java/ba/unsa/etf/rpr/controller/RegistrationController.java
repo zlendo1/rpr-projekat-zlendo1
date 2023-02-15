@@ -4,6 +4,7 @@ import ba.unsa.etf.rpr.auxiliary.AlertThrower;
 import ba.unsa.etf.rpr.auxiliary.SceneLoader;
 import ba.unsa.etf.rpr.business.UserManager;
 import ba.unsa.etf.rpr.domain.User;
+import ba.unsa.etf.rpr.exception.DBHandleException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -66,25 +67,25 @@ public class RegistrationController {
     }
 
     public void register(ActionEvent actionEvent) {
-        manager.createUser(usernameField.getText(), passwordField.getText(), firstNameField.getText(), lastNameField.getText());
-
-        Stage stage = (Stage) usernameField.getScene().getWindow();
-
         try {
+            manager.createUser(usernameField.getText(), passwordField.getText(), firstNameField.getText(), lastNameField.getText());
+
+            Stage stage = (Stage) usernameField.getScene().getWindow();
+
             SceneLoader.load(stage, "login", "Login", new LoginController(), false);
-        } catch (IOException e) {
+        } catch (IOException | DBHandleException e) {
             AlertThrower.throwAlert(e, Alert.AlertType.ERROR);
         }
     }
 
     public void registerAndLogin(ActionEvent actionEvent) {
-        User user = manager.createUser(usernameField.getText(), passwordField.getText(), firstNameField.getText(), lastNameField.getText());
-
-        Stage stage = (Stage) usernameField.getScene().getWindow();
-
         try {
+            User user = manager.createUser(usernameField.getText(), passwordField.getText(), firstNameField.getText(), lastNameField.getText());
+
+            Stage stage = (Stage) usernameField.getScene().getWindow();
+
             SceneLoader.load(stage, "home", "Home", new HomeController(user), true);
-        } catch (IOException e) {
+        } catch (IOException | DBHandleException e) {
             AlertThrower.throwAlert(e, Alert.AlertType.ERROR);
         }
     }

@@ -4,6 +4,7 @@ import ba.unsa.etf.rpr.auxiliary.AlertThrower;
 import ba.unsa.etf.rpr.auxiliary.SceneLoader;
 import ba.unsa.etf.rpr.business.UserManager;
 import ba.unsa.etf.rpr.domain.User;
+import ba.unsa.etf.rpr.exception.DBHandleException;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -54,19 +55,19 @@ public class LoginController {
     }
 
     public void login(ActionEvent actionEvent) {
-        User user = manager.findUser(usernameField.getText(), passwordField.getText());
-
-        if (user == null) {
-            errorField.setText("User does not exist");
-
-            return;
-        }
-
-        Stage stage = (Stage) usernameField.getScene().getWindow();
-
         try {
+            User user = manager.findUser(usernameField.getText(), passwordField.getText());
+
+            if (user == null) {
+                errorField.setText("User does not exist");
+
+                return;
+            }
+
+            Stage stage = (Stage) usernameField.getScene().getWindow();
+
             SceneLoader.load(stage, "home", "Home", new HomeController(user), true);
-        } catch (IOException e) {
+        } catch (IOException | DBHandleException e) {
             AlertThrower.throwAlert(e, Alert.AlertType.ERROR);
         }
     }

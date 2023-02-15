@@ -1,6 +1,5 @@
 package ba.unsa.etf.rpr.business;
 
-import ba.unsa.etf.rpr.auxiliary.AlertThrower;
 import ba.unsa.etf.rpr.dao.DaoFactory;
 import ba.unsa.etf.rpr.domain.Course;
 import ba.unsa.etf.rpr.domain.Exam;
@@ -21,65 +20,47 @@ import java.util.ListIterator;
  */
 public class ExamManager {
 
-    public List<Exam> searchExam(String courseName, LocalDate date) {
-        try {
-            List<Exam> exams = DaoFactory.examDao().getAll();
+    public List<Exam> searchExam(String courseName, LocalDate date) throws DBHandleException {
+        List<Exam> exams = DaoFactory.examDao().getAll();
 
-            for (ListIterator<Exam> iter = exams.listIterator(); iter.hasNext();) {
-                Exam exam = iter.next();
+        for (ListIterator<Exam> iter = exams.listIterator(); iter.hasNext();) {
+            Exam exam = iter.next();
 
-                if (!courseName.isEmpty() && !exam.getCourse().getName().equals(courseName)) {
-                    iter.remove();
-                } else if (date != null && !exam.getExamTime().equals(localDateToDate(date))) {
-                    iter.remove();
-                }
+            if (!courseName.isEmpty() && !exam.getCourse().getName().equals(courseName)) {
+                iter.remove();
+            } else if (date != null && !exam.getExamTime().equals(localDateToDate(date))) {
+                iter.remove();
             }
-
-            return exams;
-        } catch (DBHandleException e) {
-            AlertThrower.throwAlert(e, Alert.AlertType.ERROR);
         }
 
-        return null;
+        return exams;
     }
 
-    public Exam createExam(String courseName, User user, LocalDate date, String answerSheet) {
+    public Exam createExam(String courseName, User user, LocalDate date, String answerSheet) throws DBHandleException {
         if (courseName.isEmpty() || date == null) {
             return null;
         }
 
-        try {
-            Course course = DaoFactory.courseDao().searchByName(courseName);
+        Course course = DaoFactory.courseDao().searchByName(courseName);
 
-            if (course == null) {
-                new Alert(Alert.AlertType.ERROR, "Given course does not exist", ButtonType.OK);
+        if (course == null) {
+            new Alert(Alert.AlertType.ERROR, "Given course does not exist", ButtonType.OK);
 
-                return null;
-            }
-
-            Exam exam = new Exam();
-
-            exam.setCourse(course);
-            exam.setUser(user);
-            exam.setExamTime(localDateToDate(date));
-            exam.setAnswerSheet(answerSheet);
-
-            return DaoFactory.examDao().add(exam);
-        } catch (DBHandleException e) {
-            AlertThrower.throwAlert(e, Alert.AlertType.ERROR);
+            return null;
         }
 
-        return null;
+        Exam exam = new Exam();
+
+        exam.setCourse(course);
+        exam.setUser(user);
+        exam.setExamTime(localDateToDate(date));
+        exam.setAnswerSheet(answerSheet);
+
+        return DaoFactory.examDao().add(exam);
     }
 
-    public List<Exam> getAll() {
-        try {
-            return DaoFactory.examDao().getAll();
-        } catch (DBHandleException e) {
-            AlertThrower.throwAlert(e, Alert.AlertType.ERROR);
-        }
-
-        return null;
+    public List<Exam> getAll() throws DBHandleException {
+        return DaoFactory.examDao().getAll();
     }
 
     private Date localDateToDate(LocalDate localDate) {
