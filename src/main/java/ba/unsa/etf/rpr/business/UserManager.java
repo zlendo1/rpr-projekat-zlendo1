@@ -13,6 +13,14 @@ import javafx.scene.control.ButtonType;
  */
 public class UserManager {
 
+    /**
+     * Searches the DB for the user with the given information.
+     *
+     * @param username Username handle of the user.
+     * @param password Unencrypted password of the user.
+     * @return Person bean with the specified information. Null if one does not exist.
+     * @throws DBHandleException In case of any DB errors.
+     */
     public User findUser(String username, String password) throws DBHandleException {
         User user = DaoFactory.userDao().getByUsername(username);
 
@@ -23,12 +31,29 @@ public class UserManager {
         return null;
     }
 
+    /**
+     * Checks for the existence of a user in the DB.
+     *
+     * @param username Username handle of the user.
+     * @return True if the user exists, false otherwise.
+     * @throws DBHandleException In case of any DB errors.
+     */
     public boolean existsUser(String username) throws DBHandleException {
         User user = DaoFactory.userDao().getByUsername(username);
 
         return user != null;
     }
 
+    /**
+     * Creates a new User and inserts them into the DB.
+     *
+     * @param username Username handle of the user.
+     * @param password Unencrypted password of the user.
+     * @param firstName First name of the user.
+     * @param lastName Last name of the user.
+     * @return Freshly created User bean with the specified information.
+     * @throws DBHandleException In case of any DB errors.
+     */
     public User createUser(String username, String password, String firstName, String lastName) throws DBHandleException {
         if (username.isEmpty() || password.isEmpty() || firstName.isEmpty() || lastName.isEmpty()) {
             return null;
