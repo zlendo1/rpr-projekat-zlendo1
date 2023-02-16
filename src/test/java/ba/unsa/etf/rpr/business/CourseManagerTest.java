@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 class CourseManagerTest {
@@ -42,8 +43,13 @@ class CourseManagerTest {
 
     @Test
     void createCourse() throws DBHandleException {
+        when(DaoFactory.courseDao().add(any())).thenReturn(
+                courses.add(any()) ? any() : null
+        );
+
         courseManager.createCourse("Osnove elektrotehnike", "Ramo Legenda");
 
+        assertEquals(4, courses.size());
         Mockito.verify(courseManager).createCourse("Osnove elektrotehnike", "Ramo Legenda");
     }
 

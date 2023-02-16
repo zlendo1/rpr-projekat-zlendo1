@@ -66,5 +66,6 @@ class UserManagerTest {
         userManager.createUser("tzdravkovic1", "ocigankomoja", "Toma", "Zdravkovic");
 
         assertEquals(3, users.size());
+        Mockito.verify(userManager).createUser("tzdravkovic1", "ocigankomoja", "Toma", "Zdravkovic");
     }
 }

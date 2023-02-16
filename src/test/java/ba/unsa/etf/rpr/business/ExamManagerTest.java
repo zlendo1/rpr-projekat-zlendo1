@@ -16,6 +16,7 @@ import java.time.ZoneId;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 class ExamManagerTest {
@@ -100,8 +101,13 @@ class ExamManagerTest {
 
     @Test
     void createExam() throws DBHandleException {
+        when(DaoFactory.examDao().add(any())).thenReturn(
+                exams.add(any()) ? any() : null
+        );
+
         examManager.createExam("Resavanje I", user, dateToLocalDate(date), "Ti me dizes, ti me dizes iz kome");
 
+        assertEquals(3, exams.size());
         Mockito.verify(examManager).createExam("Resavanje I", user, dateToLocalDate(date), "Ti me dizes, ti me dizes iz kome");
     }
     
