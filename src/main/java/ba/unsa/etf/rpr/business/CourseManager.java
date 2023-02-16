@@ -11,6 +11,14 @@ import javafx.scene.control.Alert;
  */
 public class CourseManager {
 
+    /**
+     * Manager method for creating new courses using intuitive arguments.
+     *
+     * @param courseName Name of the course
+     * @param professor Name of the professor
+     * @return Freshly created Course bean
+     * @throws DBHandleException In case of any DB exceptions
+     */
     public Course createCourse(String courseName, String professor) throws DBHandleException {
         if (courseName.isEmpty() || professor.isEmpty()) {
             return null;
