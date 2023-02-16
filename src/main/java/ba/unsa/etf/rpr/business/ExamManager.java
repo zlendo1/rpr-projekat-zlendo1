@@ -20,6 +20,14 @@ import java.util.ListIterator;
  */
 public class ExamManager {
 
+    /**
+     * Filters exams by paramaters
+     *
+     * @param courseName Name of the course the exam belongs to. If empty, will be disregarded. Must not be null.
+     * @param date Date of the exam. If null, will be disregarded.
+     * @return List of filtered Exams
+     * @throws DBHandleException In case of any DB errors
+     */
     public List<Exam> searchExam(String courseName, LocalDate date) throws DBHandleException {
         List<Exam> exams = DaoFactory.examDao().getAll();
 
@@ -36,6 +44,16 @@ public class ExamManager {
         return exams;
     }
 
+    /**
+     * Creates exam with the given arguments.
+     *
+     * @param courseName Name of the course the exam belongs to.
+     * @param user User bean of which is adding the Exam.
+     * @param date The date the exam was held.
+     * @param answerSheet The answer sheet if the exam.
+     * @return A freshly created Exam bean.
+     * @throws DBHandleException In case of any DB errors.
+     */
     public Exam createExam(String courseName, User user, LocalDate date, String answerSheet) throws DBHandleException {
         if (courseName.isEmpty() || date == null) {
             return null;
@@ -57,6 +75,12 @@ public class ExamManager {
         return DaoFactory.examDao().add(exam);
     }
 
+    /**
+     * A method for listing items from the entire DB. Very intuitive.
+     *
+     * @return List of all the exams from our DB.
+     * @throws DBHandleException In case of any DB errors.
+     */
     public List<Exam> getAll() throws DBHandleException {
         return DaoFactory.examDao().getAll();
     }
