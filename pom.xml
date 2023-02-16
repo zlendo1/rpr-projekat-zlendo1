@@ -90,7 +90,7 @@
               <manifest>
                 <addClasspath>true</addClasspath>
                 <classpathPrefix>lib/</classpathPrefix>
-                <mainClass>ba.unsa.etf.rpr.App</mainClass>
+                <mainClass>ba.unsa.etf.rpr.AppConsole</mainClass>
               </manifest>
             </archive>
           </configuration>
